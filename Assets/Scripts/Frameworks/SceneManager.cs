@@ -1,0 +1,125 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class SceneManager : SingleTonBehaviour<SceneManager> {
+
+    [System.Serializable]
+    private enum SceneState
+    {
+        MainScene,
+        GameScene,
+        Exit
+    }
+    [SerializeField]
+    private SceneState InitialState = SceneState.MainScene;
+
+    private StateMachine m_StateMachine = null;
+
+    [SerializeField]
+    public string MainSceneName = null;
+
+    [SerializeField]
+    public string[] GameSceneName = null;
+
+
+    // MonoBehaviour Framework
+
+    void Awake()
+    {
+        m_StateMachine = new StateMachine();
+        m_StateMachine.AddState(SceneState.MainScene, () =>
+        {
+            if (m_StateMachine.IsFirstUpdate())
+            {
+                Debug.Log("FlowManager: state : " + m_StateMachine.GetCurrentState());
+                MainSceneController.Inst().OnInit();
+            }
+        });
+        m_StateMachine.AddState(SceneState.GameScene, () =>
+        {
+            if (m_StateMachine.IsFirstUpdate())
+            {
+                Debug.Log("FlowManager: state : " + m_StateMachine.GetCurrentState());
+                GameSceneController.Inst().OnInit();
+            }
+        });
+        m_StateMachine.AddState(SceneState.Exit, () =>
+        {
+            if (m_StateMachine.IsFirstUpdate())
+                Debug.Log("FlowManager: state : " + m_StateMachine.GetCurrentState());
+        });
+
+        m_StateMachine.SetInitialState(InitialState);
+    }
+
+    void Start () { SetStatic(); }
+    void Update() { m_StateMachine.Update(); }
+    void LateUpdate() { m_StateMachine.LateUpdate(); }
+
+    // State Info
+
+    public SceneController GetCurrentSceneController()
+    {
+        switch ((SceneState)m_StateMachine.GetCurrentState())
+        {
+            case SceneState.MainScene:
+                return MainSceneController.Inst();
+            case SceneState.GameScene:
+                return GameSceneController.Inst();
+
+            default:
+                return null;
+        }
+    }
+
+    private void EndCurrentScene()
+    {
+        switch ((SceneState)m_StateMachine.GetCurrentState())
+        {
+            case SceneState.MainScene:
+                MainSceneController.Inst().OnDestroy();
+                break;
+            case SceneState.GameScene:
+                GameSceneController.Inst().OnDestroy();
+                break;
+        }
+    }
+
+
+    // events from others
+
+    public void LoadMainScene()
+    {
+        if ((SceneState)m_StateMachine.GetCurrentState() == SceneState.Exit)
+            return;
+
+        EndCurrentScene();
+        m_StateMachine.ChangeState(SceneState.MainScene);
+        Application.LoadLevel(MainSceneName);
+    }
+
+    public void LoadGameScene()
+    {
+        LoadGameScene(0);
+    }
+
+    public void LoadGameScene(int level)
+    {
+        if ((SceneState)m_StateMachine.GetCurrentState() == SceneState.Exit)
+            return;
+
+        EndCurrentScene();
+        m_StateMachine.ChangeState(SceneState.GameScene);
+        Application.LoadLevel(GameSceneName[level]);
+    }
+
+    public void ExitApp()
+    {
+        if ((SceneState)m_StateMachine.GetCurrentState() != SceneState.MainScene)
+            return;
+
+        m_StateMachine.ChangeState(SceneState.Exit);
+        MainSceneController.Inst().OnDestroy();
+        Application.Quit();
+    }
+}
