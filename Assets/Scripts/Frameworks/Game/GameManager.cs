@@ -6,12 +6,19 @@ public class GameManager : SingleTonBehaviour<GameManager>
     // Player
 
     [SerializeField]
-    private GameObject Player = null;
+    private GameObject m_Player = null;
+    
 
     // Heal Info
 
     [SerializeField]
     private float m_HealRange = 1.0f;
+    [SerializeField]
+    private HealType m_HealType = HealType.BLUE;
+    [SerializeField]
+    private float m_HealCoolDown = 1.0f;
+    [SerializeField]
+    private float m_HealCoolDownLeft = 0.0f;
 
 
     // Interactor Info
@@ -50,14 +57,27 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
     void Update()
     {
+        if (!GameSceneController.Inst().IsInGame())
+            return;
+
         m_InteractStateMachine.Update();
-        if (GameSceneController.Inst().IsInGame() 
-            && (InteractState)m_InteractStateMachine.GetCurrentState() == InteractState.NONE)
+        if ((InteractState)m_InteractStateMachine.GetCurrentState() == InteractState.NONE)
             CheckInteractor();
+        UpdateHealCoolDown();
+    }
+
+    void UpdateHealCoolDown()
+    {
+        m_HealCoolDownLeft -= Time.deltaTime;
+        if (m_HealCoolDownLeft < 0.0f)
+            m_HealCoolDownLeft = 0.0f;
     }
 
     void LateUpdate()
     {
+        if (!GameSceneController.Inst().IsInGame())
+            return;
+
         m_InteractStateMachine.LateUpdate();
     }
 
@@ -75,34 +95,59 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
     public GameObject GetPlayer()
     {
-        return Player;
+        return m_Player;
     }
 
     // Events
 
     public void HealArea()
     {
-        HealArea(Player.transform.position, m_HealRange);
+        HealArea(m_Player.transform.position, m_HealRange);
     }
 
     public void HealArea(Vector2 position, float radius)
     {
+        if (m_HealCoolDownLeft > 0.0f)
+            return;
+
+        Debug.Log("Healing position : " + position + " radius : " + radius);
+        m_HealCoolDownLeft = m_HealCoolDown;
+
+        // create healinfo
+        HealInfo info = new HealInfo();
+        info.type = m_HealType;
+
+        // find objects
+        var objects = Physics2D.OverlapCircleAll(position, radius);
+        foreach (var obj in objects)
+        {
+            var healables = obj.GetComponents<IHealable>();
+            foreach (var healable in healables)
+            {
+                if (healable.IsHealable())
+                    SectionManager.Inst().GetCurrentSection().OnHealed(healable, info);
+            }
+        }
 
     }
 
     public void SetPlayerHealType(HealType healtype)
     {
-
+        m_HealType = healtype;
     }
 
     public void StopInteraction()
     {
+        if ((InteractState)m_InteractStateMachine.GetCurrentState() != InteractState.STAY
+            && (InteractState)m_InteractStateMachine.GetCurrentState() != InteractState.START)
+            return;
+
         m_InteractStateMachine.ChangeState(InteractState.END);
     }
 
     public void OnPlayerHPChange()
     {
-
+        // change UI
     }
 
     public void OnEndGame(bool cleared)
