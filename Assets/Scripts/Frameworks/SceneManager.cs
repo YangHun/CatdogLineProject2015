@@ -31,22 +31,22 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
         {
             if (m_StateMachine.IsFirstUpdate())
             {
-                Debug.Log("FlowManager: state : " + m_StateMachine.GetCurrentState());
-                MainSceneController.Inst().OnInit();
+                Debug.Log("SceneManager: state : " + m_StateMachine.GetCurrentState());
+                MainSceneController.Inst().OnInitController();
             }
         });
         m_StateMachine.AddState(SceneState.GameScene, () =>
         {
             if (m_StateMachine.IsFirstUpdate())
             {
-                Debug.Log("FlowManager: state : " + m_StateMachine.GetCurrentState());
-                GameSceneController.Inst().OnInit();
+                Debug.Log("SceneManager: state : " + m_StateMachine.GetCurrentState());
+                GameSceneController.Inst().OnInitController();
             }
         });
         m_StateMachine.AddState(SceneState.Exit, () =>
         {
             if (m_StateMachine.IsFirstUpdate())
-                Debug.Log("FlowManager: state : " + m_StateMachine.GetCurrentState());
+                Debug.Log("SceneManager: state : " + m_StateMachine.GetCurrentState());
         });
 
         m_StateMachine.SetInitialState(InitialState);
@@ -77,10 +77,10 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
         switch ((SceneState)m_StateMachine.GetCurrentState())
         {
             case SceneState.MainScene:
-                MainSceneController.Inst().OnDestroy();
+                MainSceneController.Inst().OnDestroyController();
                 break;
             case SceneState.GameScene:
-                GameSceneController.Inst().OnDestroy();
+                GameSceneController.Inst().OnDestroyController();
                 break;
         }
     }
@@ -100,17 +100,22 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
 
     public void LoadGameScene()
     {
-        LoadGameScene(0);
+        LoadGameScene(1);
     }
 
     public void LoadGameScene(int level)
     {
         if ((SceneState)m_StateMachine.GetCurrentState() == SceneState.Exit)
             return;
+        if(GameSceneName.Length < level - 1 || level - 1 < 0)
+        {
+            Debug.LogError("Level " + (level - 1) + "Is not assigned");
+            return;
+        }
 
         EndCurrentScene();
         m_StateMachine.ChangeState(SceneState.GameScene);
-        Application.LoadLevel(GameSceneName[level]);
+        Application.LoadLevel(GameSceneName[level - 1]);
     }
 
     public void ExitApp()
@@ -118,8 +123,8 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
         if ((SceneState)m_StateMachine.GetCurrentState() != SceneState.MainScene)
             return;
 
+        EndCurrentScene();
         m_StateMachine.ChangeState(SceneState.Exit);
-        MainSceneController.Inst().OnDestroy();
         Application.Quit();
     }
 }

@@ -2,29 +2,75 @@
 using System.Collections;
 using System;
 
-public class GameSceneController : SingleTonBehaviour<GameSceneController>, SceneController {
-    public void IsEnabled()
+public class GameSceneController : SingleTonBehaviour<GameSceneController>, SceneController
+{
+
+    public enum GameState
     {
-        throw new NotImplementedException();
+        Disabled,
+        InGame,
+        GameMenu
+    };
+    private StateMachine m_StateMachine = null;
+
+    void Awake()
+    {
+        m_StateMachine = new StateMachine();
+        m_StateMachine.AddState(GameState.Disabled, () => { });
+        m_StateMachine.AddState(GameState.InGame, () => { });
+        m_StateMachine.AddState(GameState.GameMenu, () => { });
+        m_StateMachine.SetInitialState(GameState.Disabled);
     }
 
-    public void OnDestroy()
+    void Update() { m_StateMachine.Update(); }
+    void LateUpdate() { m_StateMachine.LateUpdate(); }
+
+    // Scene Info
+
+    public bool IsInGame()
     {
-        throw new NotImplementedException();
+        return (GameState)m_StateMachine.GetCurrentState() == GameState.InGame;
     }
 
-    public void OnInit()
+    public bool IsGameMenu()
     {
-        throw new NotImplementedException();
+        return (GameState)m_StateMachine.GetCurrentState() == GameState.GameMenu;
     }
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public bool IsEnabled()
+    {
+        return (GameState)m_StateMachine.GetCurrentState() != GameState.Disabled;
+    }
+
+    // Events
+
+    public void ChangeToGameMenu()
+    {
+        GameUIManager.Inst().OnGameMenu();
+    }
+
+    public void ChangeToInGame()
+    {
+        GameUIManager.Inst().OnIngame();
+    }
+
+    public void OnInitController()
+    {
+        Debug.Log("Initialiing GameScene");
+        m_StateMachine.ChangeState(GameState.InGame);
+
+        ChangeToInGame();
+    }
+
+    public void OnDestroyController()
+    {
+        Debug.Log("Destroying GameScene");
+        m_StateMachine.ChangeState(GameState.Disabled);
+    }
+
+    public void EndScene()
+    {
+        m_StateMachine.ChangeState(GameState.Disabled);
+        SceneManager.Inst().LoadMainScene();
+    }
 }

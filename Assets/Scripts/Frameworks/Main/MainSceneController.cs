@@ -3,28 +3,9 @@ using System.Collections;
 using System;
 
 public class MainSceneController : SingleTonBehaviour<MainSceneController>, SceneController {
-    public void IsEnabled()
-    {
-        throw new NotImplementedException();
-    }
+    private bool m_IsEnabled = false;
+    public bool IsEnabled() { return m_IsEnabled; }
 
-    public void OnDestroy()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnInit()
-    {
-        throw new NotImplementedException();
-    }
-
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void OnDestroyController() { m_IsEnabled = false; }
+    public void OnInitController() { m_IsEnabled = true; }
 }

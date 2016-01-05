@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface SceneController {
-    void OnInit();
-    void IsEnabled();
-    void OnDestroy();
+public interface SceneController
+{
+    bool IsEnabled();
+
+    void OnInitController();
+    void OnDestroyController();
 }

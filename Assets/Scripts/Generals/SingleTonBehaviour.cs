@@ -38,10 +38,11 @@ public class SingleTonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 
     protected void SetStatic()
     {
-        var tmp = s_Inst.gameObject.transform;
+        var tmp = Inst().gameObject.transform;
 
         do
         {
+            Debug.Log("GameObject : " + tmp.name + " will not be destroy on level change");
             DontDestroyOnLoad(tmp.gameObject);
             tmp = tmp.transform.parent;
         } while (tmp != null);
