@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5219c1d280a0fd248956d22499bb5c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Player: {fileID: 0}
+  m_Player: {fileID: 914170154}
   m_HealRange: 1
   m_HealType: 0
   m_HealCoolDown: 1

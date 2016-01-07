@@ -90,7 +90,7 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
 
     public void LoadMainScene()
     {
-        if ((SceneState)m_StateMachine.GetCurrentState() == SceneState.Exit)
+        if (m_StateMachine.GetCurrentState().Equals(SceneState.Exit))
             return;
 
         EndCurrentScene();
@@ -98,14 +98,9 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
         Application.LoadLevel(MainSceneName);
     }
 
-    public void LoadGameScene()
+    public void LoadGameScene(int level = 1)
     {
-        LoadGameScene(1);
-    }
-
-    public void LoadGameScene(int level)
-    {
-        if ((SceneState)m_StateMachine.GetCurrentState() == SceneState.Exit)
+        if (m_StateMachine.GetCurrentState() .Equals(SceneState.Exit))
             return;
         if(GameSceneName.Length < level - 1 || level - 1 < 0)
         {
@@ -120,7 +115,7 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
 
     public void ExitApp()
     {
-        if ((SceneState)m_StateMachine.GetCurrentState() != SceneState.MainScene)
+        if (!m_StateMachine.GetCurrentState().Equals(SceneState.MainScene))
             return;
 
         EndCurrentScene();

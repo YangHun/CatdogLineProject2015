@@ -29,28 +29,30 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
 
     public bool IsInGame()
     {
-        return (GameState)m_StateMachine.GetCurrentState() == GameState.InGame;
+        return m_StateMachine.GetCurrentState().Equals(GameState.InGame);
     }
 
     public bool IsGameMenu()
     {
-        return (GameState)m_StateMachine.GetCurrentState() == GameState.GameMenu;
+        return m_StateMachine.GetCurrentState().Equals(GameState.GameMenu);
     }
 
     public bool IsEnabled()
     {
-        return (GameState)m_StateMachine.GetCurrentState() != GameState.Disabled;
+        return !m_StateMachine.GetCurrentState().Equals(GameState.Disabled);
     }
 
     // Events
 
     public void ChangeToGameMenu()
     {
+        m_StateMachine.ChangeState(GameState.GameMenu);
         GameUIManager.Inst().OnGameMenu();
     }
 
     public void ChangeToInGame()
     {
+        m_StateMachine.ChangeState(GameState.InGame);
         GameUIManager.Inst().OnIngame();
     }
 

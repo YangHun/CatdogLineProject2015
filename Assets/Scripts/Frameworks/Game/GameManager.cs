@@ -61,7 +61,7 @@ public class GameManager : SingleTonBehaviour<GameManager>
             return;
 
         m_InteractStateMachine.Update();
-        if ((InteractState)m_InteractStateMachine.GetCurrentState() == InteractState.NONE)
+        if (m_InteractStateMachine.GetCurrentState().Equals(InteractState.NONE))
             CheckInteractor();
         UpdateHealCoolDown();
     }
