@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour, IController
     public float m_Speed = 1.0f;
     public float m_JumpForce = 100f;
     public Transform GroundPoint = null;
+    private float dir_x;
 
     private Rigidbody2D rigid = null;
     public bool m_IsGrounded = false;
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour, IController
 
     void Move()
     {
-        float dir_x = Input.GetAxis("Horizontal");
+        //dir_x = Input.GetAxis("Horizontal");
         float tmp = (dir_x * m_Speed);
 
         rigid.velocity = new Vector3(tmp, rigid.velocity.y, 0);
@@ -71,4 +72,9 @@ public class PlayerController : MonoBehaviour, IController
         yield return new WaitForSeconds(0.01f);
         m_JumpCoolDown = false;
     }
+#if UNITY_ANDROID
+    public void LeftMove() { dir_x = -1; }
+    public void RightMove() { dir_x = 1; }
+    public void StopMove() { dir_x = 0; }
+#endif
 }
