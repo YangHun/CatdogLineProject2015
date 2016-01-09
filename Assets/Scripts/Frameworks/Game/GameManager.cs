@@ -178,4 +178,9 @@ public class GameManager : SingleTonBehaviour<GameManager>
         // Save UserData
 
     }
+
+    public HealType GetHealType()
+    {
+        return m_HealType;
+    }
 }
