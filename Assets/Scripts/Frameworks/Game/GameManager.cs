@@ -75,8 +75,6 @@ public class GameManager : SingleTonBehaviour<GameManager>
             }
         }
         UpdateHealCoolDown();
-
-        Debug.Log(m_InteractStateMachine.GetCurrentState().ToString());
     }
 
     void UpdateHealCoolDown()
