@@ -178,10 +178,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 84632221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab76832c37914243b68824e82cceb03, type: 3}
+  m_Script: {fileID: 11500000, guid: 8401796a9b4cb854d91369a53340f71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OperateButton: {fileID: 962177175}
+  m_Type: 1
 --- !u!58 &84632224
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1888,11 +1888,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1290152457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14e33c5812d0b7448495674c7d53e86, type: 3}
+  m_Script: {fileID: 11500000, guid: 8401796a9b4cb854d91369a53340f71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OperateButton: {fileID: 962177175}
-  m_IsPlayerInRange: 0
+  m_Type: 0
 --- !u!212 &1290152459
 SpriteRenderer:
   m_ObjectHideFlags: 0
