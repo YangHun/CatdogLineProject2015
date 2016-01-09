@@ -12,7 +12,7 @@ public class GreenSam : MonoBehaviour {
         {
             Debug.Log("I green player!!!");
             OperateButton.SetActive(true);
-            GameUIManager.Inst().TriggeredType = Type;
+            GameManager.Inst().SetPlayerHealType(HealType.GREEN);
         }
     }
 

@@ -13,7 +13,7 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
     public GameObject MenuButton1 = null;
     public GameObject MenuButton2 = null;
     public GameObject MenuButton3 = null;
-	public HealType TriggeredType;
+    public Image HealTypeUI = null;
 
     public void OnHealButtonClick()
     {
@@ -44,10 +44,27 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 
     }
 
-	public void OnOperateButtonClick()
-	{
-		GameManager.Inst().SetPlayerHealType(TriggeredType);
-	}
+    public void OnPlayerHealTypeChange(HealType type)
+    {
+        if (HealTypeUI == null)
+            return;
+        switch(type)
+        {
+            case HealType.BLUE:
+                HealTypeUI.color = new Color(0, 0, 255);
+                break;
+            case HealType.GREEN:
+                HealTypeUI.color = new Color(0, 255, 0);
+                break;
+            case HealType.RED:
+                HealTypeUI.color = new Color(255, 0, 0);
+                break;
+            case HealType.YELLOW:
+                HealTypeUI.color = new Color(125, 125, 0);
+                break;
+        }
+    }
+
     public void OnGameMenu()
     {
         ActiveCanvas(false, true);

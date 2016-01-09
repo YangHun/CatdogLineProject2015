@@ -822,7 +822,7 @@ MonoBehaviour:
   MenuButton1: {fileID: 0}
   MenuButton2: {fileID: 0}
   MenuButton3: {fileID: 0}
-  TriggeredType: 0
+  HealTypeUI: {fileID: 966268519}
 --- !u!1 &747108912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +1237,6 @@ GameObject:
   - 224: {fileID: 966268518}
   - 222: {fileID: 966268520}
   - 114: {fileID: 966268519}
-  - 114: {fileID: 966268521}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1295,18 +1294,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 966268517}
---- !u!114 &966268521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 966268517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef94260462677df429ffbed2ea827f3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  A: {fileID: 966268519}
 --- !u!1 &988122496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,6 +1891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OperateButton: {fileID: 962177175}
+  m_IsPlayerInRange: 0
 --- !u!212 &1290152459
 SpriteRenderer:
   m_ObjectHideFlags: 0

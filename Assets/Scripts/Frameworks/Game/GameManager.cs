@@ -133,6 +133,7 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
     public void SetPlayerHealType(HealType healtype)
     {
+        GameUIManager.Inst().OnPlayerHealTypeChange(healtype);
         m_HealType = healtype;
     }
 
