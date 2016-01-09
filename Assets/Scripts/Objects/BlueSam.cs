@@ -30,12 +30,11 @@ public class BlueSam : ObjectData, IInteractor {
     public void OnInteractStart()
     {
         GameManager.Inst().SetPlayerHealType(Type);
-        GameManager.Inst().StopInteraction();
     }
 
     public void OnInteractStay()
     {
-        // do nothing
+        GameManager.Inst().StopInteraction();
     }
 
     public void OnInteractEnd()

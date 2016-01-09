@@ -14,6 +14,7 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
     public GameObject MenuButton2 = null;
     public GameObject MenuButton3 = null;
     public Image HealTypeUI = null;
+    public GameObject InteractButton = null;
 
     public void OnHealButtonClick()
     {
@@ -63,6 +64,32 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
                 HealTypeUI.color = new Color(125, 125, 0);
                 break;
         }
+    }
+
+    public void OnInteractButtonClick()
+    {
+        Debug.Log("Interact Button Clicked");
+        if (GameManager.Inst().IsInteracting())
+            GameManager.Inst().StopInteraction();
+        else
+            GameManager.Inst().StartInteraction();
+        
+    }
+
+    public void EnableInteractButton()
+    {
+        if (InteractButton == null)
+            return;
+
+        InteractButton.SetActive(true);
+    }
+
+    public void DisableInteractButton()
+    {
+        if (InteractButton == null)
+            return;
+
+        InteractButton.SetActive(false);
     }
 
     public void OnGameMenu()

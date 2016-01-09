@@ -23,6 +23,8 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
     // Interactor Info
 
+    private IInteractor[] m_Interactors = null;
+
     [SerializeField]
     private IInteractor m_Interactor = null;
     enum InteractState
@@ -62,8 +64,19 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
         m_InteractStateMachine.Update();
         if (m_InteractStateMachine.GetCurrentState().Equals(InteractState.NONE))
-            CheckInteractor();
+        {
+            if (CheckInteractor() != null)
+            {
+                GameUIManager.Inst().EnableInteractButton();
+            }
+            else
+            {
+                GameUIManager.Inst().DisableInteractButton();
+            }
+        }
         UpdateHealCoolDown();
+
+        Debug.Log(m_InteractStateMachine.GetCurrentState().ToString());
     }
 
     void UpdateHealCoolDown()
@@ -81,14 +94,25 @@ public class GameManager : SingleTonBehaviour<GameManager>
         m_InteractStateMachine.LateUpdate();
     }
 
-    void CheckInteractor()
+    IInteractor CheckInteractor()
     {
-        if (m_Interactor == null)
-        {
-            // ray cast user input
+        if (m_Interactors == null)
+            return null;
 
-            // if user touch available IInteractor, interact
+        // find interactable object
+        foreach(var tmp_interactor in m_Interactors)
+        {
+            if (tmp_interactor.IsInteractable())
+                return tmp_interactor;
         }
+
+        // if no objects are interactable
+        return null;
+    }
+
+    public void RefreshInteractorList(IInteractor[] list)
+    {
+        m_Interactors = list;
     }
 
     // Game info
@@ -137,13 +161,32 @@ public class GameManager : SingleTonBehaviour<GameManager>
         m_HealType = healtype;
     }
 
+    public void StartInteraction()
+    {
+        if (!m_InteractStateMachine.GetCurrentState().Equals(InteractState.NONE))
+            return;
+
+        var interactor = CheckInteractor();
+        if(interactor == null)
+            return;
+
+        Debug.Log("Start Interaction");
+        m_InteractStateMachine.ChangeState(InteractState.START);
+        m_Interactor = interactor;
+    }
+
     public void StopInteraction()
     {
-        if ((InteractState)m_InteractStateMachine.GetCurrentState() != InteractState.STAY
-            && (InteractState)m_InteractStateMachine.GetCurrentState() != InteractState.START)
+        if (!m_InteractStateMachine.GetCurrentState().Equals(InteractState.STAY)
+            && !m_InteractStateMachine.GetCurrentState().Equals(InteractState.START))
             return;
 
         m_InteractStateMachine.ChangeState(InteractState.END);
+    }
+
+    public bool IsInteracting()
+    {
+        return !m_InteractStateMachine.GetCurrentState().Equals(InteractState.NONE);
     }
 
     public void OnPlayerHPChange()

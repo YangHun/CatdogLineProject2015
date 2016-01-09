@@ -343,7 +343,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 246833567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.30999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1908180434}
@@ -470,7 +470,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 375171151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1908180434}
@@ -823,6 +823,7 @@ MonoBehaviour:
   MenuButton2: {fileID: 0}
   MenuButton3: {fileID: 0}
   HealTypeUI: {fileID: 966268519}
+  InteractButton: {fileID: 962177175}
 --- !u!1 &747108912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,7 +1183,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 709262136}
-        m_MethodName: OnOperateButtonClick
+        m_MethodName: OnInteractButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2848,6 +2849,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1908180434}
+  - 114: {fileID: 1908180435}
   m_Layer: 0
   m_Name: Section1
   m_TagString: Untagged
@@ -2871,6 +2873,19 @@ Transform:
   - {fileID: 577895380}
   m_Father: {fileID: 1543478451}
   m_RootOrder: 0
+--- !u!114 &1908180435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1908180433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72226205624dd64598ef3abe8e6eae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntranceZone: {fileID: 246833570}
+  ExitZone: {fileID: 375171154}
 --- !u!1 &1919356968
 GameObject:
   m_ObjectHideFlags: 0
