@@ -83,11 +83,11 @@ public class PlayerController : MonoBehaviour, IController
         yield return new WaitForSeconds(0.01f);
         m_JumpCoolDown = false;
     }
-#if UNITY_ANDROID
+//#if UNITY_ANDROID
     public void LeftMove() { dir_x = -1; }
     public void RightMove() { dir_x = 1; }
     public void StopMove() { dir_x = 0; }
-#endif
+//#endif
     void Flip()
     {
         m_FacingRight = !m_FacingRight;

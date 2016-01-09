@@ -27,14 +27,16 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
         GameSceneController.Inst().ChangeToGameMenu();
     }
 
-    public void OnMenuButton1Click()
+    public void OnContinueButtonClick()
     {
-
+		Debug.Log ("Continue Button Pressed");
+		GameSceneController.Inst().ChangeToInGame();
     }
 
-    public void OnMenuButton2Click()
+    public void OnSoundOptionButtonClick()
     {
-
+		Debug.Log ("Sound Option Button Pressed");
+		//GameSceneController.Inst().
     }
 
     public void OnMenuButton3Click()
