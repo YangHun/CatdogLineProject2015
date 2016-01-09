@@ -7,15 +7,18 @@ public class PlayerController : MonoBehaviour, IController
     public float m_Speed = 1.0f;
     public float m_JumpForce = 100f;
     public Transform GroundPoint = null;
+    private Animator anim;
     private float dir_x;
 
     private Rigidbody2D rigid = null;
     public bool m_IsGrounded = false;
     private bool m_JumpCoolDown = false;
+    private bool m_FacingRight = true;
 
     // Use this for initialization
     void Start()
     {
+        anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -40,6 +43,14 @@ public class PlayerController : MonoBehaviour, IController
             }
         }
     }
+    //Fixed Update
+    void FixedUpdate()
+    {
+        anim.SetFloat("Speed", Mathf.Abs(dir_x));
+        if(dir_x > 0 && !m_FacingRight) { Flip(); }
+        else if(dir_x < 0 && m_FacingRight) { Flip(); }
+    }
+
 
     void Move()
     {
@@ -77,4 +88,12 @@ public class PlayerController : MonoBehaviour, IController
     public void RightMove() { dir_x = 1; }
     public void StopMove() { dir_x = 0; }
 #endif
+    void Flip()
+    {
+        m_FacingRight = !m_FacingRight;
+
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 }

@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1641cf7faa729774096360426de574ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 10
+  m_Speed: 8
   m_JumpForce: 600
   GroundPoint: {fileID: 1620370346}
   m_IsGrounded: 0
