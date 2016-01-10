@@ -6,6 +6,8 @@ public class UnitData : ObjectData
     [SerializeField]private float MaxHP = 100;
     [SerializeField]private float CurrentHP = 100;
 
+    private bool Healthy = false;
+
     public void GiveDamage(float amount)
     {
         CurrentHP -= amount;
@@ -13,17 +15,24 @@ public class UnitData : ObjectData
         if (CurrentHP <= 0)
             SectionManager.Inst().GetCurrentSection().OnDie(this);
         else if (CurrentHP > MaxHP)
+        {
             CurrentHP = MaxHP;
+            Healthy = true;
+        }
     }
 
     public void GiveHeal(float amount)
     {
-        CurrentHP += amount;
+        if (!Healthy)
+            CurrentHP += amount;
 
         if (CurrentHP <= 0)
             SectionManager.Inst().GetCurrentSection().OnDie(this);
         else if (CurrentHP > MaxHP)
+        {
             CurrentHP = MaxHP;
+            Healthy = true;
+        }
     }
 
     public float GetHP()
@@ -38,5 +47,10 @@ public class UnitData : ObjectData
     public bool IsFullHealth()
     {
         return CurrentHP == MaxHP;
+    }
+
+    public bool IsHealthy()
+    {
+        return Healthy;
     }
 }
