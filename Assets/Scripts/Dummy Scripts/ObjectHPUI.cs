@@ -14,7 +14,7 @@ public class ObjectHPUI : MonoBehaviour {
         A.rectTransform.anchorMin = viewportPoint;
         A.rectTransform.anchorMax = viewportPoint; 
         A.text = B.GetHP().ToString();
-        if (B.IsHealthy())
+        if (B.IsHealthy() || B.GetHP() <= 0)
             Destroy(A.gameObject);
 	}
 }
