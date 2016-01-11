@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour, IController
     public bool m_IsGrounded = false;
     private bool m_JumpCoolDown = false;
     private bool m_FacingRight = true;
+    private Collider2D coll;
 
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -42,6 +44,11 @@ public class PlayerController : MonoBehaviour, IController
                 m_IsGrounded = true;
             }
         }
+
+        if (rigid.velocity.y > 0f)
+            coll.isTrigger= true;
+        else
+            coll.isTrigger = false;
     }
     //Fixed Update
     void FixedUpdate()
