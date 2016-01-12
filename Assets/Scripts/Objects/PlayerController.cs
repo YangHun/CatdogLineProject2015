@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour, IController
     private bool m_JumpCoolDown = false;
     private bool m_FacingRight = true;
     private Collider2D coll;
+    private Collider2D upColides;
 
     // Use this for initialization
     void Start()
@@ -30,25 +31,30 @@ public class PlayerController : MonoBehaviour, IController
         Move();
         if (m_IsGrounded)
         {
+            Physics2D.IgnoreCollision(coll, upColides, false);
             if (Input.GetKeyDown(KeyCode.Space))
+            {
                 Jump();
+                upColides = Physics2D.OverlapArea(new Vector2(GroundPoint.position.x - 0.5f, GroundPoint.position.y + 0.5f), new Vector2(GroundPoint.position.x + 0.5f, GroundPoint.position.y + 3.5f), LayerMask.GetMask("Map"));
+               
+                Debug.Log("upColides : " + upColides);
+            }
         }
         else if (!m_JumpCoolDown)
         {
-
             int layer = LayerMask.GetMask("Map");
             var collides = Physics2D.OverlapPoint(GroundPoint.position, layer);
             if (collides)
             {
                 rigid.velocity = new Vector3(rigid.velocity.x, 0.0f, 0.0f);
                 m_IsGrounded = true;
+                Debug.Log("IgnoreColl : " + Physics2D.GetIgnoreCollision(coll, upColides));
             }
+            if (rigid.velocity.y>=0 || coll.IsTouching(upColides))
+                Physics2D.IgnoreCollision(coll, upColides, true);
+            else
+                Physics2D.IgnoreCollision(coll, upColides, false);
         }
-
-        if (rigid.velocity.y > 0f)
-            coll.isTrigger= true;
-        else
-            coll.isTrigger = false;
     }
     //Fixed Update
     void FixedUpdate()
