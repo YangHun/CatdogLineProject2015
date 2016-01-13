@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class PlayerController : MonoBehaviour, IController
+public class PlayerController : UnitData, IController
 {
     public float m_Speed = 1.0f;
     public float m_JumpForce = 100f;
