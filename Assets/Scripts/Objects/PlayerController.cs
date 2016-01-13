@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IController
     private bool m_FacingRight = true;
     private Collider2D coll;
     private Collider2D upColides;
+    private Collider2D upUpColides;
 
     // Use this for initialization
     void Start()
@@ -31,29 +32,32 @@ public class PlayerController : MonoBehaviour, IController
         Move();
         if (m_IsGrounded)
         {
-            Physics2D.IgnoreCollision(coll, upColides, false);
+            Physics2D.IgnoreCollision(coll, upUpColides, false);
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Jump();
-                upColides = Physics2D.OverlapArea(new Vector2(GroundPoint.position.x - 0.5f, GroundPoint.position.y + 0.5f), new Vector2(GroundPoint.position.x + 0.5f, GroundPoint.position.y + 3.5f), LayerMask.GetMask("Map"));
-               
-                Debug.Log("upColides : " + upColides);
+                upColides = Physics2D.OverlapArea(new Vector2(GroundPoint.position.x - 8.0f, GroundPoint.position.y + 0.5f), new Vector2(GroundPoint.position.x + 8.0f, GroundPoint.position.y + 3.2f), LayerMask.GetMask("Map"));
+                upUpColides = Physics2D.OverlapArea(new Vector2(GroundPoint.position.x - 8.0f, GroundPoint.position.y + 3.2f), new Vector2(GroundPoint.position.x + 8.0f, GroundPoint.position.y + 4.5f), LayerMask.GetMask("Map"));
+                Physics2D.IgnoreCollision(coll, upColides, true);
+                Physics2D.IgnoreCollision(coll, upUpColides, true);
+                Debug.Log("upColides : " + upColides + " upUpColides : " + upUpColides);
             }
         }
         else if (!m_JumpCoolDown)
         {
             int layer = LayerMask.GetMask("Map");
-            var collides = Physics2D.OverlapPoint(GroundPoint.position, layer);
+            var collides = Physics2D.OverlapPoint(GroundPoint.position, layer) && !upColides;
             if (collides)
             {
                 rigid.velocity = new Vector3(rigid.velocity.x, 0.0f, 0.0f);
                 m_IsGrounded = true;
                 Debug.Log("IgnoreColl : " + Physics2D.GetIgnoreCollision(coll, upColides));
             }
-            if (rigid.velocity.y>=0 || coll.IsTouching(upColides))
-                Physics2D.IgnoreCollision(coll, upColides, true);
-            else
+            if (rigid.velocity.y < 0)
+            { 
                 Physics2D.IgnoreCollision(coll, upColides, false);
+                upColides = null;
+            }
         }
     }
     //Fixed Update
