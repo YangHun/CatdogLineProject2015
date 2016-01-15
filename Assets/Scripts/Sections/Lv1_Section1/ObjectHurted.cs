@@ -22,24 +22,6 @@ public class ObjectHurted : UnitData, IHealable {
         }
     }
 
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject == GameManager.Inst().GetPlayer())
-    //    {
-    //        m_IsPlayerInRange = true;
-    //        Debug.Log("Hurted : Player In Range");
-    //    }
-    //}
-
-    //void OnTriggerExit2D(Collider2D other)
-    //{
-    //    if (other.gameObject == GameManager.Inst().GetPlayer())
-    //    {
-    //        m_IsPlayerInRange = false;
-    //        Debug.Log("Hurted : Player Out of Range");
-    //    }
-    //}
-
     public void OnHealed(HealInfo heal)
     {
         if (heal.type == m_Type)
@@ -50,10 +32,7 @@ public class ObjectHurted : UnitData, IHealable {
 
     public bool IsHealable()
     {
-//        if (m_IsPlayerInRange)
-            return true;
-//        else
-//            return false;
+        return true;
     }
 
     public Vector2 GetPOS()
