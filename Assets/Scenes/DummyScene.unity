@@ -301,7 +301,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455680, guid: b1fe14849c7b00c46900768e2a30535f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 15.8900003
+      value: 15.5900002
       objectReference: {fileID: 0}
     - target: {fileID: 455680, guid: b1fe14849c7b00c46900768e2a30535f, type: 2}
       propertyPath: m_LocalPosition.z
@@ -342,6 +342,10 @@ Prefab:
     - target: {fileID: 195608, guid: b1fe14849c7b00c46900768e2a30535f, type: 2}
       propertyPath: m_TagString
       value: Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 195608, guid: b1fe14849c7b00c46900768e2a30535f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1fe14849c7b00c46900768e2a30535f, type: 2}
@@ -3184,8 +3188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 100
   CurrentHP: 90
-  player: {fileID: 1889293874}
-  playerRigid: {fileID: 1889293879}
 --- !u!61 &1678411737
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4003,7 +4005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1927582676
 RectTransform:
   m_ObjectHideFlags: 0
