@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class PlayerController : UnitData, IController
+public class PlayerController : UnitData, IController, IHealable
 {
     public float m_Speed = 1.0f;
     public float m_JumpForce = 100f;
@@ -124,5 +124,20 @@ public class PlayerController : UnitData, IController
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    public void OnHealed(HealInfo heal)
+    {
+        GiveHeal(10f);
+    }
+
+    public bool IsHealable()
+    {
+        return true;
+    }
+
+    public void OnDamaged(float damage)
+    {
+        GiveDamage(damage);
     }
 }
