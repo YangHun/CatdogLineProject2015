@@ -66,7 +66,7 @@ public class GameManager : SingleTonBehaviour<GameManager>
     {
         if (!GameSceneController.Inst().IsInGame())
             return;
-
+        Debug.Log(m_InteractStateMachine.GetCurrentState());
         m_InteractStateMachine.Update();
         if (m_InteractStateMachine.GetCurrentState().Equals(InteractState.NONE))
         {
@@ -113,6 +113,10 @@ public class GameManager : SingleTonBehaviour<GameManager>
         return null;
     }
 
+    /// <summary>
+    /// Set new IInteractor list
+    /// </summary>
+    /// <param name="list"></param>
     public void RefreshInteractorList(IInteractor[] list)
     {
         m_Interactors = list;
@@ -120,6 +124,10 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
     // Game info
 
+    /// <summary>
+    /// Get player
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetPlayer()
     {
         return m_Player;
@@ -127,11 +135,19 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
     // Events
 
+    /// <summary>
+    /// Calling this will heal area near player
+    /// </summary>
     public void HealArea()
     {
         HealArea(m_Player.transform.position, m_HealRange);
     }
 
+    /// <summary>
+    /// Calling this will heal area
+    /// </summary>
+    /// <param name="position"> center </param>
+    /// <param name="radius"> radius </param>
     public void HealArea(Vector2 position, float radius)
     {
         if (m_HealCoolDownLeft > 0.0f)
@@ -158,6 +174,10 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
     }
 
+    /// <summary>
+    /// Change HealType of player
+    /// </summary>
+    /// <param name="healtype"> new healtype </param>
     public void SetPlayerHealType(HealType healtype)
     {
         Debug.Log("Player heal type change to : " + healtype.ToString());
@@ -165,6 +185,9 @@ public class GameManager : SingleTonBehaviour<GameManager>
         m_HealType = healtype;
     }
 
+    /// <summary>
+    /// Framework Based. Start interaction
+    /// </summary>
     public void StartInteraction()
     {
         if (!m_InteractStateMachine.GetCurrentState().Equals(InteractState.NONE))
@@ -179,6 +202,9 @@ public class GameManager : SingleTonBehaviour<GameManager>
         m_Interactor = interactor;
     }
 
+    /// <summary>
+    /// Stop Current Interaction
+    /// </summary>
     public void StopInteraction()
     {
         if (!m_InteractStateMachine.GetCurrentState().Equals(InteractState.STAY)
@@ -188,16 +214,47 @@ public class GameManager : SingleTonBehaviour<GameManager>
         m_InteractStateMachine.ChangeState(InteractState.END);
     }
 
+    /// <summary>
+    /// Make player climb.
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="direction"></param>
+    public void StartPlayerClimbing(Vector2 start, Vector2 direction)
+    {
+        direction.Normalize();
+        GetPlayer().GetComponent<PlayerController>().StartClimb(start, direction);
+    }
+
+    /// <summary>
+    /// Stop player climb.
+    /// </summary>
+    public void EndPlayerClimbing()
+    {
+        GetPlayer().GetComponent<PlayerController>().EndClimb();
+    }
+
+    /// <summary>
+    /// Is player interacting
+    /// </summary>
+    /// <returns> interacting with others </returns>
     public bool IsInteracting()
     {
         return !m_InteractStateMachine.GetCurrentState().Equals(InteractState.NONE);
     }
 
+    /// <summary>
+    /// FrameworkBased. Change UI
+    /// </summary>
     public void OnPlayerHPChange()
     {
         // change UI
     }
+    
 
+    /// <summary>
+    /// FrameworkBased.
+    /// </summary>
+    /// <param name="cleared"></param>
     public void OnEndGame(bool cleared)
     {
         // Save data
@@ -205,9 +262,11 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
         // End GameScene
         GameSceneController.Inst().EndScene();
-
     }
 
+    /// <summary>
+    /// FrameworkBased.
+    /// </summary>
     public void OnEndSection()
     {
         // Auto save data

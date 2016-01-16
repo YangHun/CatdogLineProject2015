@@ -12,6 +12,8 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
         GameMenu
     };
     private StateMachine m_StateMachine = null;
+    [SerializeField]
+    private GameState m_InitialState = GameState.Disabled;
 
     void Awake()
     {
@@ -19,7 +21,7 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
         m_StateMachine.AddState(GameState.Disabled, () => { });
         m_StateMachine.AddState(GameState.InGame, () => { });
         m_StateMachine.AddState(GameState.GameMenu, () => { });
-        m_StateMachine.SetInitialState(GameState.Disabled);
+        m_StateMachine.SetInitialState(m_InitialState);
     }
 
     void Update() { m_StateMachine.Update(); }
