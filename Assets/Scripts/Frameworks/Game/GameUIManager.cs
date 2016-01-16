@@ -9,10 +9,6 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
     public GameObject GameMenuCanvas = null;
 
     public GameObject HealButton = null;
-    public GameObject PauseButton = null;
-    public GameObject MenuButton1 = null;
-    public GameObject MenuButton2 = null;
-    public GameObject MenuButton3 = null;
     public Image HealTypeUI = null;
     public GameObject InteractButton = null;
 
