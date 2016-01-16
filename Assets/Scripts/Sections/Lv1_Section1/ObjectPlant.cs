@@ -8,6 +8,11 @@ public class ObjectPlant : UnitData, IHealable {
     [SerializeField] private GameObject Leaf1;
     [SerializeField] private GameObject Leaf2;
 
+    Vector2 GetPosition()
+    {
+        return this.transform.position;
+    }
+
     public void OnHealed(HealInfo heal)
     {
         if (heal.type == m_Type)
@@ -19,7 +24,7 @@ public class ObjectPlant : UnitData, IHealable {
             Leaf1.SetActive(true);
             Leaf2.SetActive(true);
         }
-            
+
     }
 
     public bool IsHealable()

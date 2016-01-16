@@ -107,4 +107,9 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
     {
         return climbing;
     }
+
+    Vector2 GetPosition()
+    {
+        return this.transform.position;
+    }
 }

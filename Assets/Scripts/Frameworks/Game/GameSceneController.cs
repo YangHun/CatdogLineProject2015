@@ -19,7 +19,7 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
         m_StateMachine.AddState(GameState.Disabled, () => { });
         m_StateMachine.AddState(GameState.InGame, () => { });
         m_StateMachine.AddState(GameState.GameMenu, () => { });
-        m_StateMachine.SetInitialState(GameState.Disabled);
+        m_StateMachine.SetInitialState(GameState.InGame);
     }
 
     void Update() { m_StateMachine.Update(); }
