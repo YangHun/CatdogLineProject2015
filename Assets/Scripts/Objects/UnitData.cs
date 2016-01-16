@@ -35,6 +35,17 @@ public class UnitData : ObjectData
         }
     }
 
+    public void GiveGuilty(float amount) //Only Healer
+    {
+        MaxHP -= amount;
+        if (MaxHP <= 0)
+            SectionManager.Inst().GetCurrentSection().OnDie(this);
+        else if (CurrentHP > MaxHP)
+        {
+            CurrentHP = MaxHP;
+        }
+    }
+
     public float GetHP()
     {
         return CurrentHP;
