@@ -57,6 +57,11 @@ public class GameManager : SingleTonBehaviour<GameManager>
         m_InteractStateMachine.SetInitialState(InteractState.NONE);
     }
 
+    void Start()
+    {
+        SetPlayerHealType(m_HealType);
+    }
+
     void Update()
     {
         if (!GameSceneController.Inst().IsInGame())
@@ -155,6 +160,7 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
     public void SetPlayerHealType(HealType healtype)
     {
+        Debug.Log("Player heal type change to : " + healtype.ToString());
         GameUIManager.Inst().OnPlayerHealTypeChange(healtype);
         m_HealType = healtype;
     }
