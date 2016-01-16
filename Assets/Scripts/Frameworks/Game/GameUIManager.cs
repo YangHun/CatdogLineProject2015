@@ -103,12 +103,15 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
         if (GameMenuCanvas != null)
         {
             GameMenuCanvas.SetActive(gamemenu);
-            SectionManager.Inst().PauseSectionUI();
         }
         if (InGameCanvas != null)
         {
             InGameCanvas.SetActive(ingame);
-            SectionManager.Inst().ResumeSectionUI();
         }
+
+        if(gamemenu)
+            SectionManager.Inst().PauseSectionUI();
+        else
+            SectionManager.Inst().ResumeSectionUI();
     }
 }

@@ -3,89 +3,99 @@ using System.Collections;
 
 public class ObjectVine : UnitData, IInteractor, IHealable {
 
+    [SerializeField]
     private HealType m_Type = HealType.GREEN;
-    //[SerializeField] private GameObject player;
-    //private Rigidbody2D playerRigid;
-    //private Collider2D col;
-    //[SerializeField]
-    //private Colliding down;
-    //[SerializeField]
-    //private Colliding up;
-    private bool m_IsPlayerInRange = false;
-    private bool climbing = false;
-//    private bool NowInterAct = false;
-//    private int GoUp = 1;
-    //void Start()
-    //{
-    //    playerRigid = player.GetComponent<Rigidbody2D>();
-    //    col = player.GetComponent<Collider2D>();
-    //}
-    //
-    //void Update ()
-    //{
-    //    if (NowInterAct)
-    //    {
-    //        playerRigid.velocity = new Vector3(0, 5.0f * GoUp, 0);
-    //    }
-    //    if (!m_IsPlayerInRange)
-    //    {
-    //        NowInterAct = false;
-    //        playerRigid.gravityScale = 3.0f;
-    //        col.isTrigger = false;
-    //    }
-    //}
 
-    void OnTriggerEnter2D(Collider2D other)
+    [SerializeField]
+    private TriggerZone mVineDown = null;
+    [SerializeField]
+    private TriggerZone mVineUp = null;
+    
+    private bool mIsPlayerAtDown = true;
+    private bool mIsPlayerTargetDown = false;
+    private bool mIsPlayerInRange = false;
+    private bool mIsPlayerClimbing = false;
+
+    void OnPlayerEnter(GameObject zone, Collider2D col)
     {
-        if (other.gameObject == GameManager.Inst().GetPlayer())
+        if (col.gameObject != GameManager.Inst().GetPlayer())
+            return;
+        
+        mIsPlayerInRange = true;
+
+        if (zone == mVineDown.gameObject)
         {
-            m_IsPlayerInRange = true;
-            Debug.Log("Vine : Player In Range");
-        }
+            if(mIsPlayerClimbing && mIsPlayerTargetDown)
+                GameManager.Inst().StopInteraction();
+
+            mIsPlayerAtDown = true;
+        } else
+
+            mIsPlayerAtDown = false;
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnPlayerExit(GameObject zone, Collider2D col)
     {
-        if (other.gameObject == GameManager.Inst().GetPlayer())
+        if (col.gameObject != GameManager.Inst().GetPlayer())
+            return;
+
+        mIsPlayerInRange = false;
+
+
+        if (zone == mVineUp.gameObject)
         {
-            m_IsPlayerInRange = false;
-            //NowInterAct = false;
-            Debug.Log("Vine : Player Out of Range");
-            climbing = false;
+            if (mIsPlayerClimbing && !mIsPlayerTargetDown)
+                GameManager.Inst().StopInteraction();
+        }
+
+    }
+
+
+    void Start()
+    {
+        if (mVineDown != null)
+        {
+            mVineDown.AddListener(TriggerType.ENTER, OnPlayerEnter);
+            mVineDown.AddListener(TriggerType.EXIT, OnPlayerExit);
+        }
+
+        if (mVineUp != null)
+        {
+            mVineUp.AddListener(TriggerType.ENTER, OnPlayerEnter);
+            mVineUp.AddListener(TriggerType.EXIT, OnPlayerExit);
         }
     }
+    
 
     public void OnInteractStart()
     {
-        if (m_IsPlayerInRange)
+        mIsPlayerClimbing = true;
+        if (mIsPlayerAtDown)
         {
-            climbing = true;
-            //NowInterAct = true;
-            //playerRigid.gravityScale = 0.0f;
-            //col.isTrigger = true;
-            //if (down.IsCollided())
-            //    GoUp = 1;
-            //else if (up.IsCollided())
-            //    GoUp = -1;
-            //else
-            //    GoUp *= -1;
+            GameManager.Inst().StartPlayerClimbing(mVineDown.transform.position, new Vector2(0, 1));
+            mIsPlayerTargetDown = false;
         }
-            
+        else
+        {
+            GameManager.Inst().StartPlayerClimbing(mVineUp.transform.position, new Vector2(0, -1));
+            mIsPlayerTargetDown = true;
+        }
     }
 
     public void OnInteractStay()
     {
-        GameManager.Inst().StopInteraction();
+        // do nothing
     }
 
     public void OnInteractEnd()
     {
-        //do nothing
+        mIsPlayerClimbing = false;
+        GameManager.Inst().EndPlayerClimbing();
     }
 
     public bool IsInteractable()
     {
-        if (IsHealthy() && m_IsPlayerInRange)
+        if (IsFullHealth() && mIsPlayerInRange)
             return true;
         return false;
     }
@@ -101,15 +111,5 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
     public bool IsHealable()
     {
         return true;
-    }
-
-    public bool IsClimbing()
-    {
-        return climbing;
-    }
-
-    Vector2 GetPosition()
-    {
-        return this.transform.position;
     }
 }
