@@ -84,6 +84,18 @@ public class PlayerController : UnitData, IController
         StartCoroutine(DelayJump());
     }
 
+    public void StartClimb()
+    {
+        anim.SetBool("Climb", true);
+        rigid.isKinematic = false;
+    }
+
+    public void EndClimb()
+    {
+        anim.SetBool("Climb", false);
+        rigid.isKinematic = true;
+    }
+
     public void OnPause()
     {
         throw new NotImplementedException();
