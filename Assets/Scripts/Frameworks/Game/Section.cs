@@ -4,15 +4,17 @@ using System.Collections;
 public abstract class Section : MonoBehaviour
 {
 
-    public TriggerZone EntranceZone = null;
-    public TriggerZone ExitZone = null;
+    public TriggerZone mEntranceZone = null;
+    public TriggerZone mExitZone = null;
+
+    public SectionUI mSectionUI = null;
 
     public virtual void Start()
     {
-        if (EntranceZone != null)
-            EntranceZone.AddListener(TriggerType.ENTER, OnPlayerAtEntrance);
-        if (ExitZone != null)
-            ExitZone.AddListener(TriggerType.ENTER, OnPlayerAtExit);
+        if (mEntranceZone != null)
+            mEntranceZone.AddListener(TriggerType.ENTER, OnPlayerAtEntrance);
+        if (mExitZone != null)
+            mExitZone.AddListener(TriggerType.ENTER, OnPlayerAtExit);
     }
 
     public void OnPlayerAtEntrance(GameObject zone, Collider2D col)
@@ -58,7 +60,10 @@ public abstract class Section : MonoBehaviour
     }
 
 
-
+    public virtual SectionUI GetSectionUI()
+    {
+        return mSectionUI;
+    }
 
     /// <summary>
     /// Called when section start
@@ -85,5 +90,5 @@ public abstract class Section : MonoBehaviour
     /// </summary>
     /// <returns> value [0..1] </returns>
     public abstract float GetSectionScore();
-
+    
 }
