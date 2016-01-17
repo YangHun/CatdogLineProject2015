@@ -46,6 +46,12 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
 
     // Events
 
+    public void ChangeToDisabled()
+    {
+        m_StateMachine.ChangeState(GameState.Disabled);
+        GameUIManager.Inst().OnDisabled();
+    }
+
     public void ChangeToGameMenu()
     {
         m_StateMachine.ChangeState(GameState.GameMenu);

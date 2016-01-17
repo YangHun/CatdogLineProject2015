@@ -97,6 +97,10 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
     {
         ActiveCanvas(true, false);
     }
+    public void OnDisabled()
+    {
+        ActiveCanvas(false, false);
+    }
 
     private void ActiveCanvas(bool ingame, bool gamemenu)
     {
