@@ -1,18 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectHurted : UnitData, IHealable {
+public class ObjectHurted_b : UnitData, IHealable {
 
     public float DamageSecond;
+    public float DamageAmountJS;
     public float DamageAmount;
     public HealType m_Type;
     private float t = 0;
     [SerializeField]
     private Sprite Healed;
+    [SerializeField]
+    private ObjectJungSoo JS;
 
-    void Update ()
+    void Update()
     {
-        if (!IsHealthy())
+        if (!JS.IsHealthy())
+        {
+            t += Time.deltaTime;
+            if (t >= DamageSecond)
+            {
+                GiveDamage(DamageAmountJS);
+                t = 0;
+            }
+        }
+        else if (!IsHealthy())
         {
             t += Time.deltaTime;
             if (t >= DamageSecond)
@@ -29,7 +41,7 @@ public class ObjectHurted : UnitData, IHealable {
             GiveHeal(20f);
         else
             GiveHeal(3f);
-        if (IsHealthy())
+        if (IsHealthy() && JS.IsHealthy())
             this.GetComponent<SpriteRenderer>().sprite = Healed;
     }
 

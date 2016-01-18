@@ -8,10 +8,7 @@ public class ObjectJungSoo : UnitData, IHealable {
 
     public void OnHealed(HealInfo heal)
     {
-        if (heal.type == m_Type)
-            GiveHeal(20f);
-        else
-            GiveHeal(3f);
+        GiveHeal(100f);
     }
 
     public bool IsHealable()
