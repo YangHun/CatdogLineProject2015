@@ -63,6 +63,12 @@ public class InputManager : SingleTonBehaviour<InputManager>
         GameSceneController.Inst().ChangeToInGame();
     }
 
+    public void OnTitleButtonClick()
+    {
+        Debug.Log("Title Button Pressed");
+        GameManager.Inst().OnEndGame(false);
+    }
+
     public void OnSoundOptionButtonClick()
     {
         Debug.Log("Sound Option Button Pressed");

@@ -1122,6 +1122,7 @@ MonoBehaviour:
   m_Type: 1
   mVineDown: {fileID: 1861236621}
   mVineUp: {fileID: 11422565}
+  mCinematicTime: 4
 --- !u!1 &197083869
 GameObject:
   m_ObjectHideFlags: 0
@@ -7371,6 +7372,7 @@ MonoBehaviour:
   m_Type: 1
   mVineDown: {fileID: 486056303}
   mVineUp: {fileID: 491015650}
+  mCinematicTime: 3.5
 --- !u!1 &930033157
 GameObject:
   m_ObjectHideFlags: 0
@@ -11118,6 +11120,7 @@ MonoBehaviour:
   m_Type: 1
   mVineDown: {fileID: 1584372304}
   mVineUp: {fileID: 652366092}
+  mCinematicTime: 12
 --- !u!1 &1346027602
 GameObject:
   m_ObjectHideFlags: 0
@@ -11366,7 +11369,7 @@ MonoBehaviour:
   HealTypeUI: {fileID: 1569373596}
   MoveLeft: {fileID: 1729184909}
   MoveRight: {fileID: 197836633}
-  Moveump: {fileID: 97550767}
+  MoveJump: {fileID: 97550767}
   HealButton: {fileID: 1819094288}
   InteractButton: {fileID: 902170307}
 --- !u!1 &1364197619
@@ -17004,6 +17007,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44241f3b98447dc41a2c456c44b6937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LeftClicked: 0
+  RightClicked: 0
+  JumpClicked: 0
 --- !u!1 &1926175466
 GameObject:
   m_ObjectHideFlags: 0
@@ -18524,8 +18530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42397faa3326f65419ab2234724a941a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialState: 0
-  MainSceneName: 
+  InitialState: 1
+  MainSceneName: DummyMainScene
   GameSceneName: []
 --- !u!4 &2040774389
 Transform:
@@ -19157,7 +19163,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2117754838}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922970827}
+        m_MethodName: OnTitleButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2117754838
