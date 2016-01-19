@@ -7,7 +7,8 @@ public class ObjectN3 : UnitData, IHealable
     [SerializeField]
     private HealType m_Type = HealType.GREEN;
     public Transform Rock = null;
-    public Transform Plant = null;
+    [SerializeField]
+    private ObjectPlant Plant = null;
     public Transform Talk1 = null;
     public Transform Talk2 = null;
     public Transform Talk3 = null;
@@ -26,17 +27,21 @@ public class ObjectN3 : UnitData, IHealable
     void Update()
     {
        if (this.GetHP() == this.GetMaxHP())
-        {
-            if (Rock.position.y > -2.3f)
+       {
+            if(!Plant.IsOn())
             {
-                Talk1.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3f);
+                Rigid.velocity = new Vector3(-5f, 0f, 0f);
+                Talk2.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3f);
             }
             else
             {
-                Rigid.velocity = new Vector3(-5f, 0f, 0f);
                 Talk3.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3f);
             }
-        }
+       }
+       else if (Rock.position.y > -2.3f)
+       {
+            Talk1.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3f);
+       }
         
 
     }
