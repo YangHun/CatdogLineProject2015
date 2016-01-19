@@ -263,6 +263,24 @@ public class GameManager : SingleTonBehaviour<GameManager>
         GameSceneController.Inst().ChangeToCinematic(time);
     }
 
+
+    public void OnDie(UnitData unit)
+    {
+        Debug.Log("Unit died : " + unit.name);
+        if (unit.gameObject == GetPlayer())
+        {
+            OnEndGame(false);
+        }
+        else if (SectionManager.Inst().GetCurrentSection() != null)
+        {
+            SectionManager.Inst().GetCurrentSection().OnDie(unit);
+        }
+        else
+        {
+            // unit died on no section enabled
+
+        }
+    }
     
 
     /// <summary>

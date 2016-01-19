@@ -109,8 +109,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 11422563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.40999985, z: 0}
-  m_LocalScale: {x: 5.50000858, y: .412500232, z: 1}
+  m_LocalPosition: {x: 0, y: 5.67000008, z: 0}
+  m_LocalScale: {x: 5.50000858, y: .929756165, z: 1}
   m_Children: []
   m_Father: {fileID: 125391223}
   m_RootOrder: 1
@@ -161,8 +161,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 18624121}
-  m_LocalRotation: {x: 0, y: 0, z: .0886939988, w: .996058941}
-  m_LocalPosition: {x: 4.69999981, y: 3.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: .0488243438, w: .99880743}
+  m_LocalPosition: {x: 3.68000007, y: 3.50999999, z: 0}
   m_LocalScale: {x: 4.45033073, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1883559081}
@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_Type: 1
   mVineDown: {fileID: 1861236621}
   mVineUp: {fileID: 11422565}
-  mCinematicTime: 4
+  mCinematicTime: 3.4000001
 --- !u!1 &197083869
 GameObject:
   m_ObjectHideFlags: 0
@@ -4320,8 +4320,8 @@ Transform:
   m_LocalPosition: {x: 96.6999969, y: 9.40999985, z: 0}
   m_LocalScale: {x: .525000036, y: 2.33999252, z: 1}
   m_Children: []
-  m_Father: {fileID: 1162096775}
-  m_RootOrder: 75
+  m_Father: {fileID: 987252141}
+  m_RootOrder: 15
 --- !u!114 &593888181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7920,6 +7920,7 @@ Transform:
   - {fileID: 794182899}
   - {fileID: 1625481380}
   - {fileID: 1256503830}
+  - {fileID: 593888180}
   m_Father: {fileID: 720625177}
   m_RootOrder: 3
 --- !u!1 &1008987423
@@ -9561,7 +9562,6 @@ Transform:
   - {fileID: 1687990679}
   - {fileID: 394628431}
   - {fileID: 844837508}
-  - {fileID: 593888180}
   m_Father: {fileID: 720625177}
   m_RootOrder: 4
 --- !u!1 &1172385288
@@ -10679,7 +10679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1323529206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13451,10 +13451,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1595650861}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: [{m_Target: {fileID: 1922970827}, m_MethodName: OnSoundOptionButtonClick,
-          m_Mode: 1, m_Arguments: {m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: 'UnityEngine.Object,
-              UnityEngine', m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: '',
-            m_BoolArgument: 0}, m_CallState: 2}]
+      m_Calls:
+      - m_Target: {fileID: 1922970827}
+        m_MethodName: OnSoundOptionButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1595650861
