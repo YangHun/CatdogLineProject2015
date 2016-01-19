@@ -16,6 +16,8 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
     private bool mIsPlayerInRange = false;
     private bool mIsPlayerClimbing = false;
 
+    public float mCinematicTime = 3.0f;
+
     void OnPlayerEnter(GameObject zone, Collider2D col)
     {
         if (col.gameObject != GameManager.Inst().GetPlayer())
@@ -70,6 +72,7 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
     public void OnInteractStart()
     {
         mIsPlayerClimbing = true;
+        GameManager.Inst().StartCinematic(mCinematicTime);
         if (mIsPlayerAtDown)
         {
             GameManager.Inst().StartPlayerClimbing(mVineDown.transform.position, new Vector2(0, 1));
