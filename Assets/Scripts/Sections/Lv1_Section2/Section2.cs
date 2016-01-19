@@ -15,17 +15,17 @@ public class Section2 : Section
 
     public override void OnSectionPause()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnSectionResume()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnSectionEnd()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override float GetSectionScore()
