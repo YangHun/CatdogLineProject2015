@@ -17,7 +17,7 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 
     public GameObject MoveLeft = null;
     public GameObject MoveRight = null;
-    public GameObject Moveump = null;
+    public GameObject MoveJump = null;
     public GameObject HealButton = null;
     public GameObject InteractButton = null;
 
@@ -111,11 +111,20 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
         if (cinematic && ingame)
         {
             if (MoveLeft != null)
+            {
+                InputManager.Inst().OnLeftReleased();
                 MoveLeft.SetActive(false);
+            }
             if (MoveRight != null)
+            {
+                InputManager.Inst().OnRightReleased();
                 MoveRight.SetActive(false);
-            if (Moveump != null)
-                Moveump.SetActive(false);
+            }
+            if (MoveJump != null)
+            {
+                InputManager.Inst().OnJumpReleased();
+                MoveJump.SetActive(false);
+            }
             if (HealButton != null)
                 HealButton.SetActive(false);
             if (InteractButton != null)
@@ -127,8 +136,8 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
                 MoveLeft.SetActive(true);
             if (MoveRight != null)
                 MoveRight.SetActive(true);
-            if (Moveump != null)
-                Moveump.SetActive(true);
+            if (MoveJump != null)
+                MoveJump.SetActive(true);
             if (HealButton != null)
                 HealButton.SetActive(true);
             if (InteractButton != null)

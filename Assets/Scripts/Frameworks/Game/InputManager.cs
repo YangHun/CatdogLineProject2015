@@ -4,8 +4,11 @@ using System.Collections;
 public class InputManager : SingleTonBehaviour<InputManager>
 {
 
+    [SerializeField]
     private bool LeftClicked;
+    [SerializeField]
     private bool RightClicked;
+    [SerializeField]
     private bool JumpClicked;
 
     void Awake()
