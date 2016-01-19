@@ -8,4 +8,9 @@ public class MainSceneController : SingleTonBehaviour<MainSceneController>, Scen
 
     public void OnDestroyController() { m_IsEnabled = false; }
     public void OnInitController() { m_IsEnabled = true; }
+
+    void Update()
+    {
+        Application.Quit();
+    }
 }

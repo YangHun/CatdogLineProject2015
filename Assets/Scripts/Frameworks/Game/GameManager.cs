@@ -271,6 +271,8 @@ public class GameManager : SingleTonBehaviour<GameManager>
     /// <param name="cleared"></param>
     public void OnEndGame(bool cleared)
     {
+        Debug.Log("Ending Game with cleared : " + cleared);
+
         // Save data
         SaveData();
 
