@@ -13,13 +13,7 @@ public class CaveCollapse : TriggerZone {
     {
         if (IsCaveCollapse && CollapseTime > 0)
         {
-            GameSceneController.Inst().ChangeToDisabled();
             CollapseTime -= Time.deltaTime;
-        }
-        if (CollapseTime <= 0)
-        {
-            GameSceneController.Inst().ChangeToInGame();
-            DestroyObject(this);
         }
     }
 
@@ -27,6 +21,7 @@ public class CaveCollapse : TriggerZone {
     {
         if (other.gameObject == GameManager.Inst().GetPlayer())
         {
+            GameManager.Inst().StartCinematic(CollapseTime);
             IsCaveCollapse = true;
             Debug.Log("Sam : Player In Range");
             Barrier.SetActive(true);
@@ -42,8 +37,9 @@ public class CaveCollapse : TriggerZone {
         {
             c.a = f;
             Barrier.GetComponent<SpriteRenderer>().color = c;
-            yield return new WaitForSeconds(1/60f);
+            yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(1/60f));
         }
+        DestroyObject(this);
     }
 
 }

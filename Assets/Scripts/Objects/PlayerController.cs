@@ -4,12 +4,6 @@ using System;
 
 public class PlayerController : UnitData, IController, IHealable
 {
-
-    // inputs 
-    private bool m_LeftGoing = false;
-    private bool m_RightGoing = false;
-    private bool m_IsJumpPressed = false;
-
     // parameter
     public float m_Speed = 8.0f;
     public float m_JumpSpeed = 15.0f;
@@ -71,23 +65,7 @@ public class PlayerController : UnitData, IController, IHealable
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            m_IsJumpPressed = true;
         mPlayerAction.Update();
-        m_IsJumpPressed = false;
-    }
-
-    //Fixed Update
-    void FixedUpdate()
-    {
-        float dir_x = 0;
-        if (m_LeftGoing)
-            dir_x -= 1;
-        if (m_RightGoing)
-            dir_x += 1;
-        anim.SetFloat("Speed", Mathf.Abs(dir_x));
-        if(dir_x > 0 && !m_FacingRight) { Flip(); }
-        else if(dir_x < 0 && m_FacingRight) { Flip(); }
     }
 
     void LateUpdate()
@@ -114,10 +92,9 @@ public class PlayerController : UnitData, IController, IHealable
         // check falling
 
 
-        if (m_IsJumpPressed && m_IsJumpCoolDownOn)
+        if (InputManager.Inst().IsJumpClicked() && m_IsJumpCoolDownOn)
         {
             IgnoreCollision(mCollisionIgnoreColliders, false);
-            m_IsJumpPressed = false;
             mPlayerAction.ChangeState(PlayerActionState.JUMPING);
             StartCoroutine(DelayJump());
         }
@@ -200,10 +177,14 @@ public class PlayerController : UnitData, IController, IHealable
     void MoveHorizontal()
     {
         float dir_x = 0;
-        if (m_LeftGoing)
+        if (InputManager.Inst().IsLeftClicked())
             dir_x -= 1;
-        if (m_RightGoing)
+        if (InputManager.Inst().IsRightClicked())
             dir_x += 1;
+
+        anim.SetFloat("Speed", Mathf.Abs(dir_x));
+        if (dir_x > 0 && !m_FacingRight) { Flip(); }
+        else if (dir_x < 0 && m_FacingRight) { Flip(); }
 
         rigid.velocity = new Vector3(dir_x * m_Speed, rigid.velocity.y, 0);
     }
@@ -247,13 +228,6 @@ public class PlayerController : UnitData, IController, IHealable
     {
         throw new NotImplementedException();
     }
-
-    // inputs
-    public void LeftMove() { m_LeftGoing = true; }
-    public void RightMove() { m_RightGoing = true; }
-    public void StopLeftMove() { m_LeftGoing = false; }
-    public void StopRightMove() { m_RightGoing = false; }
-    public void Jump() { m_IsJumpPressed = true; }
 
     void Flip()
     {

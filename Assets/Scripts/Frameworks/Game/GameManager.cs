@@ -35,6 +35,9 @@ public class GameManager : SingleTonBehaviour<GameManager>
         END
     }
     private StateMachine m_InteractStateMachine = null;
+    private bool m_IsInteractButtonEnabled = false;
+
+
 
     void Awake()
     {
@@ -72,11 +75,11 @@ public class GameManager : SingleTonBehaviour<GameManager>
         {
             if (CheckInteractor() != null)
             {
-                GameUIManager.Inst().EnableInteractButton();
+                m_IsInteractButtonEnabled = true;
             }
             else
             {
-                GameUIManager.Inst().DisableInteractButton();
+                m_IsInteractButtonEnabled = false;
             }
         }
         UpdateHealCoolDown();
@@ -111,6 +114,11 @@ public class GameManager : SingleTonBehaviour<GameManager>
 
         // if no objects are interactable
         return null;
+    }
+
+    public bool IsInteractinButtonEnabled()
+    {
+        return m_IsInteractButtonEnabled;
     }
 
     /// <summary>
@@ -249,6 +257,12 @@ public class GameManager : SingleTonBehaviour<GameManager>
     {
         // change UI
     }
+
+    public void StartCinematic(float time)
+    {
+        GameSceneController.Inst().ChangeToCinematic(time);
+    }
+
     
 
     /// <summary>

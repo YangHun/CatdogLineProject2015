@@ -8,44 +8,36 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
     public GameObject InGameCanvas = null;
     public GameObject GameMenuCanvas = null;
 
-    public GameObject HealButton = null;
+
+
+
+    // InGame UIs
     public Image HealTypeUI = null;
+
+
+    public GameObject MoveLeft = null;
+    public GameObject MoveRight = null;
+    public GameObject Moveump = null;
+    public GameObject HealButton = null;
     public GameObject InteractButton = null;
 
-    public void OnHealButtonClick()
+
+
+    void LateUpdate()
     {
-        Debug.Log("Heal Button Pressed");
-        GameManager.Inst().HealArea();
+        var scene = GameSceneController.Inst();
+        if (scene.IsInGame() && !scene.IsCinematic())
+            if (InteractButton != null)
+                InteractButton.SetActive(GameManager.Inst().IsInteractinButtonEnabled());
     }
 
-    public void OnPauseButtonClick()
-    {
-        Debug.Log("Pause Button Pressed");
-        GameSceneController.Inst().ChangeToGameMenu();
-    }
 
-    public void OnContinueButtonClick()
-    {
-		Debug.Log ("Continue Button Pressed");
-		GameSceneController.Inst().ChangeToInGame();
-    }
-
-    public void OnSoundOptionButtonClick()
-    {
-		Debug.Log ("Sound Option Button Pressed");
-		//GameSceneController.Inst().
-    }
-
-    public void OnMenuButton3Click()
-    {
-
-    }
 
     public void OnPlayerHealTypeChange(HealType type)
     {
         if (HealTypeUI == null)
             return;
-        switch(type)
+        switch (type)
         {
             case HealType.BLUE:
                 HealTypeUI.color = new Color(0, 0, 255);
@@ -60,16 +52,6 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
                 HealTypeUI.color = new Color(125, 125, 0);
                 break;
         }
-    }
-
-    public void OnInteractButtonClick()
-    {
-        Debug.Log("Interact Button Clicked");
-        if (GameManager.Inst().IsInteracting())
-            GameManager.Inst().StopInteraction();
-        else
-            GameManager.Inst().StartInteraction();
-        
     }
 
     public void EnableInteractButton()
@@ -97,12 +79,19 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
     {
         ActiveCanvas(true, false);
     }
+
+    public void OnCinematic()
+    {
+        ActiveCanvas(true, false, true);
+    }
+
     public void OnDisabled()
     {
         ActiveCanvas(false, false);
     }
 
-    private void ActiveCanvas(bool ingame, bool gamemenu)
+    private void ActiveCanvas(bool ingame, bool gamemenu) { ActiveCanvas(ingame, gamemenu, false); }
+    private void ActiveCanvas(bool ingame, bool gamemenu, bool cinematic)
     {
         if (GameMenuCanvas != null)
         {
@@ -113,9 +102,38 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
             InGameCanvas.SetActive(ingame);
         }
 
-        if(gamemenu)
+        if (gamemenu)
             SectionManager.Inst().PauseSectionUI();
         else
             SectionManager.Inst().ResumeSectionUI();
+
+
+        if (cinematic && ingame)
+        {
+            if (MoveLeft != null)
+                MoveLeft.SetActive(false);
+            if (MoveRight != null)
+                MoveRight.SetActive(false);
+            if (Moveump != null)
+                Moveump.SetActive(false);
+            if (HealButton != null)
+                HealButton.SetActive(false);
+            if (InteractButton != null)
+                InteractButton.SetActive(false);
+        }
+        else
+        {
+            if (MoveLeft != null)
+                MoveLeft.SetActive(true);
+            if (MoveRight != null)
+                MoveRight.SetActive(true);
+            if (Moveump != null)
+                Moveump.SetActive(true);
+            if (HealButton != null)
+                HealButton.SetActive(true);
+            if (InteractButton != null)
+                InteractButton.SetActive(true);
+        }
     }
+
 }
