@@ -11369,7 +11369,7 @@ MonoBehaviour:
   HealTypeUI: {fileID: 1569373596}
   MoveLeft: {fileID: 1729184909}
   MoveRight: {fileID: 197836633}
-  MoveJump: {fileID: 0}
+  MoveJump: {fileID: 97550767}
   HealButton: {fileID: 1819094288}
   InteractButton: {fileID: 902170307}
 --- !u!1 &1364197619
