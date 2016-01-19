@@ -8,7 +8,7 @@ public class PlayerController : UnitData, IController, IHealable
     // inputs 
     private bool m_LeftGoing = false;
     private bool m_RightGoing = false;
-    public bool m_IsJumpPressed = false;
+    private bool m_IsJumpPressed = false;
 
     // parameter
     public float m_Speed = 8.0f;
