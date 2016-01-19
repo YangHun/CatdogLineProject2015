@@ -215,7 +215,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 44857999}
   - 212: {fileID: 44858000}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1529,7 +1529,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 246962107}
   - 212: {fileID: 246962108}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5281,8 +5281,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8000,7 +8000,7 @@ GameObject:
   - 114: {fileID: 1012662230}
   - 50: {fileID: 1012662229}
   - 61: {fileID: 1012662228}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: N3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8175,7 +8175,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1025166008}
   - 212: {fileID: 1025166009}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8996,7 +8996,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1116834141}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11514,7 +11514,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1379279370}
   - 212: {fileID: 1379279371}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11638,7 +11638,7 @@ GameObject:
   - 212: {fileID: 1398042534}
   - 58: {fileID: 1398042533}
   - 114: {fileID: 1398042532}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: N1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12044,7 +12044,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1471078574}
   - 212: {fileID: 1471078575}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13010,8 +13010,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -14171,7 +14171,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1675699138}
   - 212: {fileID: 1675699139}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14228,7 +14228,7 @@ GameObject:
   - 92: {fileID: 1676116407}
   - 124: {fileID: 1676116406}
   - 81: {fileID: 1676116405}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -15552,7 +15552,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1827691485}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cameras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15918,7 +15918,7 @@ GameObject:
   - 114: {fileID: 1862999587}
   - 50: {fileID: 1862999590}
   - 61: {fileID: 1862999588}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: N2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16164,7 +16164,7 @@ GameObject:
   - 50: {fileID: 1882648000}
   - 114: {fileID: 1882647999}
   - 61: {fileID: 1882647998}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Healer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -16910,7 +16910,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1916603243}
   - 212: {fileID: 1916603244}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17682,7 +17682,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1991647463}
   - 212: {fileID: 1991647464}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18021,7 +18021,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2010081109}
   - 212: {fileID: 2010081110}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Talk1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
