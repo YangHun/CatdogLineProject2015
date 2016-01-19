@@ -33,7 +33,7 @@ public class ObjectN3 : UnitData, IHealable
             }
             else
             {
-                Rigid.velocity = new Vector3(-5f, 0f, 0f);
+                StartCoroutine(Moveout());
                 Talk3.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3f);
             }
         }
@@ -51,5 +51,14 @@ public class ObjectN3 : UnitData, IHealable
     public bool IsHealable()
     {
         return true;
+    }
+
+    IEnumerator Moveout()
+    {
+        for (float x = this.transform.localPosition.x; x >= 34.82; x -= 0.1f)
+        {
+            this.transform.localPosition = new Vector3 (x,this.transform.localPosition.y);            
+            yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(1 / 60f));
+        }
     }
 }
