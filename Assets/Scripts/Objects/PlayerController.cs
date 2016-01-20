@@ -65,12 +65,14 @@ public class PlayerController : UnitData, IController, IHealable
     // Update is called once per frame
     void Update()
     {
-        mPlayerAction.Update();
+        if(GameSceneController.Inst().IsInGame())
+            mPlayerAction.Update();
     }
 
     void LateUpdate()
     {
-        mPlayerAction.LateUpdate();
+        if (GameSceneController.Inst().IsInGame())
+            mPlayerAction.LateUpdate();
     }
 
     void OnStateWalking()
@@ -80,8 +82,8 @@ public class PlayerController : UnitData, IController, IHealable
 
         IgnoreCollision(mCollisionIgnoreColliders, false);
 
-        var bottomleft = new Vector2(GroundPoint.position.x - 0.8f, GroundPoint.position.y + 0.8f);
-        var topright = new Vector2(GroundPoint.position.x + 0.8f, GroundPoint.position.y + 2.0f);
+        var bottomleft = new Vector2(GroundPoint.position.x - 0.5f, GroundPoint.position.y + 0.8f);
+        var topright = new Vector2(GroundPoint.position.x + 0.5f, GroundPoint.position.y + 2.5f);
         var mask = LayerMask.GetMask("PassableMap");
 
         mCollisionIgnoreColliders = Physics2D.OverlapAreaAll(bottomleft, topright, mask);
@@ -104,8 +106,9 @@ public class PlayerController : UnitData, IController, IHealable
     {
         if(mPlayerAction.IsFirstUpdate())
         {
-            rigid.velocity = new Vector2(rigid.velocity.x, m_JumpSpeed);
+            IgnoreCollision(mCollisionIgnoreColliders, false);
 
+            rigid.velocity = new Vector2(rigid.velocity.x, m_JumpSpeed);
 
             var bottomleft = new Vector2(GroundPoint.position.x - 8.0f, GroundPoint.position.y + 0.5f);
             var topright = new Vector2(GroundPoint.position.x + 8.0f, GroundPoint.position.y + 4.5f);
@@ -132,8 +135,10 @@ public class PlayerController : UnitData, IController, IHealable
 
         if (mPlayerAction.IsFirstUpdate())
         {
-            var bottomleft = new Vector2(GroundPoint.position.x - 0.4f, GroundPoint.position.y - 0.0f);
-            var topright = new Vector2(GroundPoint.position.x + 0.4f, GroundPoint.position.y + 2.3f);
+            IgnoreCollision(mCollisionIgnoreColliders, false);
+
+            var bottomleft = new Vector2(GroundPoint.position.x - 0.4f, GroundPoint.position.y + 0.2f);
+            var topright = new Vector2(GroundPoint.position.x + 0.4f, GroundPoint.position.y + 2.5f);
             var mask = LayerMask.GetMask("PassableMap");
 
             mCollisionIgnoreColliders = Physics2D.OverlapAreaAll(bottomleft, topright, mask);
@@ -168,6 +173,11 @@ public class PlayerController : UnitData, IController, IHealable
 
     void OnStateClimb()
     {
+        if(mPlayerAction.IsFirstUpdate())
+        {
+            IgnoreCollision(mCollisionIgnoreColliders, false);
+        }
+
         var prev_position = transform.position;
         prev_position += new Vector3(m_ClimbDirection.x, m_ClimbDirection.y, 0) * m_ClimbSpeed * Time.deltaTime;
         transform.position = prev_position;
@@ -199,7 +209,7 @@ public class PlayerController : UnitData, IController, IHealable
     IEnumerator DelayJump()
     {
         m_IsJumpCoolDownOn = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(0.2f));
         m_IsJumpCoolDownOn = true;
     }
     
