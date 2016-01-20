@@ -324,4 +324,11 @@ public class GameManager : SingleTonBehaviour<GameManager>
     {
         return m_HealType;
     }
+
+    public float GameTime()
+    {
+        if (GameSceneController.Inst().IsInGame())
+            return Time.deltaTime;
+        return 0;
+    }
 }
