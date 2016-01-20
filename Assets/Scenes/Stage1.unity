@@ -1883,7 +1883,7 @@ Transform:
   m_GameObject: {fileID: 1882647997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.33999991, y: -.569999993, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1116834141}
   - {fileID: 1827691485}
@@ -9662,7 +9662,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1116834140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .200000003, y: -.899999976, z: 0}
+  m_LocalPosition: {x: .200000003, y: -1.35000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 269488965}
@@ -16797,10 +16797,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 269488965}
   - 212: {fileID: 1882648002}
-  - 95: {fileID: 1882648001}
   - 50: {fileID: 1882648000}
   - 114: {fileID: 1882647999}
   - 61: {fileID: 1882647998}
+  - 95: {fileID: 1882648001}
   m_Layer: 10
   m_Name: Healer
   m_TagString: Player
@@ -16819,9 +16819,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .200000003, y: 0}
+  m_Offset: {x: .300000012, y: 0}
   serializedVersion: 2
-  m_Size: {x: .5, y: 1.42999995}
+  m_Size: {x: .75, y: 2}
 --- !u!114 &1882647999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16863,8 +16863,7 @@ Rigidbody2D:
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 9501690, guid: 36f206004f04fec41be430f47ed2bf6f,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1882647997}
   m_Enabled: 1
@@ -16902,7 +16901,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: acda02b24a9f57c4e8beb8684a5c0fed, type: 3}
+  m_Sprite: {fileID: 21300034, guid: c6eb95c01fa5f1d448680eac1099e981, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1883559080
 GameObject:
