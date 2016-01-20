@@ -8311,7 +8311,7 @@ MonoBehaviour:
   CurrentHP: 50
   m_Type: 1
   Rock: {fileID: 337123980}
-  Plant: {fileID: 1118720476}
+  Plant: {fileID: 581254576}
   Talk1: {fileID: 1471078574}
   Talk2: {fileID: 1675699138}
   Talk3: {fileID: 1916603243}

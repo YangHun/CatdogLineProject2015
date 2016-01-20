@@ -46,4 +46,9 @@ public class ObjectPlant_b : UnitData, IHealable {
     {
         return true;
     }
+    
+    public bool IsOn()
+    {
+        return IsHealthy();
+    }
 }
