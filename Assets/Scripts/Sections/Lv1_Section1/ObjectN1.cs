@@ -5,36 +5,41 @@ using System;
 
 public class ObjectN1 : ObjectData, IInteractor
 {
-    private bool m_IsPlayerInRange = false;
-
+    private bool mIsPlayerInRange = false;
+    [SerializeField]
+    private TriggerZone Trig = null;
     public Transform Talk1 = null;
 
     void Start()
     {
+        if (Trig != null)
+        {
+            Trig.AddListener(TriggerType.ENTER, OnPlayerEnter);
+            Trig.AddListener(TriggerType.EXIT, OnPlayerExit);
+        }
         Talk1.transform.position = new Vector2(1000f, 1000f);
     }
-    void OnTriggerEnter2D(Collider2D other)
+
+    void OnPlayerEnter(GameObject zone, Collider2D col)
     {
-        if (other.gameObject == GameManager.Inst().GetPlayer())
-        {
-            m_IsPlayerInRange = true;
-            Debug.Log("N1 : Player In Range");
-        }
+        if (col.gameObject != GameManager.Inst().GetPlayer())
+            return;
+
+        mIsPlayerInRange = true;
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnPlayerExit(GameObject zone, Collider2D col)
     {
-        if (other.gameObject == GameManager.Inst().GetPlayer())
-        {
-            m_IsPlayerInRange = false;
-            Talk1.transform.position = new Vector2(1000f, 1000f);
-            Debug.Log("N1 : Player Out of Range");
-        }
+        if (col.gameObject != GameManager.Inst().GetPlayer())
+            return;
+
+        mIsPlayerInRange = false;
+        Talk1.transform.position = new Vector2(1000f, 1000f);
     }
 
     public bool IsInteractable()
     {
-        return m_IsPlayerInRange;
+        return mIsPlayerInRange;
     }
 
     public void OnInteractEnd()
