@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class ObjectBigPlant : MonoBehaviour {
+public class ObjectBigPlant : ObjectData, IHealable
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+
+
+    public bool IsHealable()
+    {
+        return true;
+    }
+
+    public void OnHealed(HealInfo heal)
+    {
+        throw new NotImplementedException();
+    }
 }
