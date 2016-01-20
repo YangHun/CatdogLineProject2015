@@ -32,7 +32,7 @@ public class ObjectN3 : UnitData, IHealable
             {
                 Talk2.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3f);
             }
-            else if(Plant.IsPlantActivated() || this.transform.position.y <= 3f)
+            else if((Plant.IsPlantActivated() || this.transform.position.y <= 3f) && Rock.position.y < -2.3f)
             {
                 //Rigid.velocity = new Vector3(-5f, 0f, 0f);
                 StartCoroutine(Moveout());
