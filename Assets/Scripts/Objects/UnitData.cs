@@ -3,9 +3,11 @@ using System.Collections;
 
 public class UnitData : ObjectData
 {
-    [SerializeField]private float MaxHP = 100;
-    [SerializeField]private float CurrentHP = 100;
-
+    [SerializeField]
+    protected float MaxHP = 100;
+    [SerializeField]
+    protected float CurrentHP = 100;
+    [SerializeField]
     private bool Healthy = false;
 
     public void GiveDamage(float amount)
@@ -13,7 +15,7 @@ public class UnitData : ObjectData
         CurrentHP -= amount;
 
         if (CurrentHP <= 0)
-            SectionManager.Inst().GetCurrentSection().OnDie(this);
+            GameManager.Inst().OnDie(this);
         else if (CurrentHP >= MaxHP)
         {
             CurrentHP = MaxHP;
@@ -21,7 +23,6 @@ public class UnitData : ObjectData
         }
         else if (CurrentHP < MaxHP)
         {
-            CurrentHP = MaxHP;
             Healthy = false;
         }
     }
@@ -41,19 +42,7 @@ public class UnitData : ObjectData
         }
         else if (CurrentHP < MaxHP)
         {
-            CurrentHP = MaxHP;
             Healthy = false;
-        }
-    }
-
-    public void GiveGuilty(float amount) //Only Healer
-    {
-        MaxHP -= amount;
-        if (MaxHP <= 0)
-            SectionManager.Inst().GetCurrentSection().OnDie(this);
-        else if (CurrentHP > MaxHP)
-        {
-            CurrentHP = MaxHP;
         }
     }
 
