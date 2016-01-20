@@ -32,18 +32,12 @@ public class ObjectPocketPlant : UnitData, IHealable
         BackTimer -= Time.deltaTime;
         if (BackTimer <= 0)
         {
-            GiveDamage(2f);
             DisableAll();
             if (JS.IsHealthy())
                 APOff.SetActive(true);
             if (!JS.IsHealthy())
                 BPOff.SetActive(true);
         }
-    }
-
-    Vector2 GetPosition()
-    {
-        return this.transform.position;
     }
 
     public void OnHealed(HealInfo heal)

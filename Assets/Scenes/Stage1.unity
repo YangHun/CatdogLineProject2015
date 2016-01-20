@@ -6138,6 +6138,8 @@ MonoBehaviour:
   mExitZone: {fileID: 1630762173}
   mSectionUI: {fileID: 0}
   Block: {fileID: 820570887}
+  StartActivateList:
+  - {fileID: 987252140}
 --- !u!1 &728671104
 GameObject:
   m_ObjectHideFlags: 0
@@ -8458,7 +8460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &987252141
 Transform:
   m_ObjectHideFlags: 0
@@ -10537,6 +10539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 100
   CurrentHP: 98
+  Healthy: 0
   m_Type: 1
   BPOff: {fileID: 1935597128}
   BPOn: {fileID: 1893386720}
