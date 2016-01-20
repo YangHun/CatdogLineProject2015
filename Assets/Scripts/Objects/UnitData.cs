@@ -33,10 +33,11 @@ public class UnitData : ObjectData
 
         if (CurrentHP <= 0)
             SectionManager.Inst().GetCurrentSection().OnDie(this);
-        else if (CurrentHP > MaxHP)
+        else if (CurrentHP >= MaxHP)
         {
             CurrentHP = MaxHP;
             Healthy = true;
+            Debug.Log("Now Healthy");
         }
         else if (CurrentHP < MaxHP)
         {

@@ -1,12 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectPlant : UnitData, IHealable {
+public class ObjectPlant_b : UnitData, IHealable {
 
     public HealType m_Type = HealType.GREEN;
 
     public GameObject Leaf1;
     public GameObject Leaf2;
+
+    public float Timer;
+    private float BackTimer;
+
+    void Update()
+    {
+        BackTimer -= Time.deltaTime;
+        if (BackTimer <= 0)
+        {
+            Leaf1.SetActive(false);
+            Leaf2.SetActive(false);
+            GiveDamage(2f);
+        }
+    }
 
     Vector2 GetPosition()
     {
@@ -23,6 +37,7 @@ public class ObjectPlant : UnitData, IHealable {
         {
             Leaf1.SetActive(true);
             Leaf2.SetActive(true);
+            BackTimer = Timer;
         }
 
     }

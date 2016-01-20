@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectPlant : UnitData, IHealable {
+public class ObjectSeed : UnitData, IHealable {
 
     public HealType m_Type = HealType.GREEN;
 
     public GameObject Leaf1;
-    public GameObject Leaf2;
 
     Vector2 GetPosition()
     {
@@ -22,9 +21,7 @@ public class ObjectPlant : UnitData, IHealable {
         if (IsHealthy())
         {
             Leaf1.SetActive(true);
-            Leaf2.SetActive(true);
         }
-
     }
 
     public bool IsHealable()
