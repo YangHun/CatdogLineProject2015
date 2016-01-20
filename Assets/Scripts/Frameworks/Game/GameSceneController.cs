@@ -15,7 +15,7 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
     private StateMachine m_StateMachine = null;
     [SerializeField]
     private GameState m_InitialState = GameState.Disabled;
-
+    
     private bool m_CinematicEnabled = false;
 
     void Awake()
@@ -70,7 +70,7 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
         if (m_CinematicEnabled)
         {
             m_StateMachine.ChangeState(GameState.Cinematic);
-            GameUIManager.Inst().OnIngame();
+            GameUIManager.Inst().OnCinematic();
         }
         else
         {
