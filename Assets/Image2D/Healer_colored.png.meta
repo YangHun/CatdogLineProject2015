@@ -1,0 +1,254 @@
+fileFormatVersion: 2
+guid: c6eb95c01fa5f1d448680eac1099e981
+timeCreated: 1453290090
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Healer_colored6
+    21300002: Healer_colored7
+    21300004: Healer_colored_2
+    21300006: Healer_colored9
+    21300008: Healer_colored_4
+    21300010: Healer_colored8
+    21300012: Healer_colored10
+    21300014: Healer_colored_7
+    21300016: Healer_colored_8
+    21300018: Healer_colored_9
+    21300020: Healer_colored_10
+    21300022: Healer_colored_11
+    21300024: Healer_colored1
+    21300026: Healer_colored2
+    21300028: Healer_colored3
+    21300030: Healer_colored4
+    21300032: Healer_colored5
+    21300034: Healer_colored0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 150
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Healer_colored6
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 3304
+        width: 300
+        height: 292
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored7
+      rect:
+        serializedVersion: 2
+        x: 1267
+        y: 3296
+        width: 305
+        height: 292
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored_2
+      rect:
+        serializedVersion: 2
+        x: 2420
+        y: 3569
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored9
+      rect:
+        serializedVersion: 2
+        x: 2996
+        y: 3271
+        width: 289
+        height: 302
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored_4
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 3396
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored8
+      rect:
+        serializedVersion: 2
+        x: 2193
+        y: 3273
+        width: 307
+        height: 296
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored10
+      rect:
+        serializedVersion: 2
+        x: 3903
+        y: 3264
+        width: 279
+        height: 302
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored_7
+      rect:
+        serializedVersion: 2
+        x: 2504
+        y: 3381
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored_8
+      rect:
+        serializedVersion: 2
+        x: 1363
+        y: 3301
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored_9
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 3291
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored_10
+      rect:
+        serializedVersion: 2
+        x: 2355
+        y: 3264
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored_11
+      rect:
+        serializedVersion: 2
+        x: 4029
+        y: 3262
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored1
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 2535
+        width: 252
+        height: 300
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored2
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 2577
+        width: 223
+        height: 284
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored3
+      rect:
+        serializedVersion: 2
+        x: 2216
+        y: 2551
+        width: 239
+        height: 274
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored4
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 2539
+        width: 236
+        height: 291
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored5
+      rect:
+        serializedVersion: 2
+        x: 3893
+        y: 2537
+        width: 242
+        height: 288
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Healer_colored0
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 1679
+        width: 251
+        height: 314
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
