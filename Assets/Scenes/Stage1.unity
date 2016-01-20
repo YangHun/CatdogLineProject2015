@@ -2390,8 +2390,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 352996423}
-  m_LocalRotation: {x: 0, y: 0, z: -.186247632, w: .982502878}
-  m_LocalPosition: {x: 73.8300018, y: 9.97999954, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -.263822377, w: .964571297}
+  m_LocalPosition: {x: 73.3099976, y: 9.97999954, z: 0}
   m_LocalScale: {x: 2.68802404, y: .574998975, z: 1}
   m_Children: []
   m_Father: {fileID: 1162096775}
@@ -11707,8 +11707,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1364197619}
-  m_LocalRotation: {x: 0, y: 0, z: .516795576, w: .856108844}
-  m_LocalPosition: {x: 74, y: 8.52999973, z: 0}
+  m_LocalRotation: {x: .0252296291, y: .0473249145, z: .560854077, w: .826175869}
+  m_LocalPosition: {x: 73.8499985, y: 8.48999977, z: .0199999996}
   m_LocalScale: {x: 2.53424931, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1162096775}
@@ -11775,8 +11775,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1369602976}
-  m_LocalRotation: {x: 0, y: 0, z: -.198034912, w: .980194986}
-  m_LocalPosition: {x: 73.0500031, y: 10.0600004, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -.262946993, w: .964810312}
+  m_LocalPosition: {x: 72.9300003, y: 9.97999954, z: 0}
   m_LocalScale: {x: 1.29282308, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1162096775}
@@ -16563,7 +16563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 100
   CurrentHP: 100
-  m_Speed: 8
+  m_Speed: 6
   m_JumpSpeed: 15
   GroundPoint: {fileID: 1116834141}
   m_IsJumpCoolDownOn: 1
