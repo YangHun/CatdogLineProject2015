@@ -8525,7 +8525,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1012662226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 51.3100014, y: 4.03999996, z: 0}
+  m_LocalPosition: {x: 51.0099983, y: 3.36999989, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1471078574}
@@ -8544,9 +8544,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -.25}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.5}
+  m_Size: {x: 1.5, y: 2}
 --- !u!50 &1012662229
 Rigidbody2D:
   serializedVersion: 2
@@ -12325,7 +12325,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.83000004, y: 2.93000007}
+  m_Size: {x: 1.22000003, y: 1.95333338}
 --- !u!212 &1398042534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16528,7 +16528,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1862999585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.5, y: -.0399999991, z: 0}
+  m_LocalPosition: {x: 44.5, y: -.409999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 246962107}
@@ -16566,9 +16566,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -.25}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.5}
+  m_Size: {x: 1.5, y: 2}
 --- !u!212 &1862999589
 SpriteRenderer:
   m_ObjectHideFlags: 0
