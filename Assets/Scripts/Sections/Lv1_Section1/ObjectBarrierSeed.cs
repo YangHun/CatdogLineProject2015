@@ -8,16 +8,24 @@ public class ObjectBarrierSeed : MonoBehaviour {
     [SerializeField]
     private GameObject S1, S2;
 
+    private bool seedOn = false;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == N3)
         {
             S1.SetActive(true);
             S2.SetActive(true);
+            seedOn = true;
             Debug.Log("Barrier : N3 In Range");
             StartCoroutine(FadeIn(S1));
             StartCoroutine(FadeIn(S2));
         }
+    }
+
+    public bool IsOn()
+    {
+        return seedOn;
     }
 
     IEnumerator FadeIn(GameObject S)
