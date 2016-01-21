@@ -10,12 +10,13 @@ public class Section2 : Section
 
     public override void OnSectionStart()
     {
+        foreach (var obj in StartActivateList)
+            obj.SetActive(true);
+
+
         IInteractor[] tmp = GetComponentsInChildren<IInteractor>();
         GameManager.Inst().RefreshInteractorList(tmp);
         Block.gameObject.SetActive(true);
-
-        foreach (var obj in StartActivateList)
-            obj.SetActive(true);
     }
 
     public override void OnSectionPause()
