@@ -7,8 +7,6 @@ public abstract class Section : MonoBehaviour
     public TriggerZone mEntranceZone = null;
     public TriggerZone mExitZone = null;
 
-    public SectionUI mSectionUI = null;
-
     public virtual void Start()
     {
         if (mEntranceZone != null)
@@ -57,12 +55,6 @@ public abstract class Section : MonoBehaviour
     public virtual void OnDie(UnitData unit)
     {
         Destroy(unit.gameObject);
-    }
-
-
-    public virtual SectionUI GetSectionUI()
-    {
-        return mSectionUI;
     }
 
     /// <summary>

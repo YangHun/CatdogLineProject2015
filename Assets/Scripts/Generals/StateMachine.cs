@@ -92,7 +92,7 @@ public sealed class StateMachine
     // StateInfo
 
     /// <summary>
-    /// Get Previous State
+    /// Get previous State
     /// </summary>
     /// <returns> previous state </returns>
     public object GetPrevState()
@@ -101,12 +101,32 @@ public sealed class StateMachine
     }
 
     /// <summary>
-    /// Get Current State
+    /// Check previous state is equal to given state
+    /// </summary>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    public bool IsPrevState(object state)
+    {
+        return m_PrevState.Equals(state);
+    }
+
+    /// <summary>
+    /// Get current State
     /// </summary>
     /// <returns> current state </returns>
     public object GetCurrentState()
     {
         return m_CurrentState;
+    }
+
+    /// <summary>
+    /// Check current state is equal to given state
+    /// </summary>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    public bool IsCurrentState(object state)
+    {
+        return m_CurrentState.Equals(state);
     }
 
     /// <summary>
