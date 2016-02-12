@@ -102,12 +102,6 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
             InGameCanvas.SetActive(ingame);
         }
 
-        if (gamemenu)
-            SectionManager.Inst().PauseSectionUI();
-        else
-            SectionManager.Inst().ResumeSectionUI();
-
-
         if (cinematic && ingame)
         {
             if (MoveLeft != null)
