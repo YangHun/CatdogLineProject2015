@@ -6,6 +6,7 @@ class SoundManager : SingleTonBehaviour<SoundManager>
 {
 
     // info
+    [SerializeField]
     private float m_Volume = 1.0f;
     private enum SoundManagerStates
     {
