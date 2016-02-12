@@ -16,7 +16,9 @@ class SoundManager : SingleTonBehaviour<SoundManager>
     private StateMachine m_State;
 
     // sounds
+    [SerializeField]
     private List<AudioSource> m_Sounds;
+    [SerializeField]
     private AudioSource m_BGM;
 
 
