@@ -49,6 +49,18 @@ class SoundManager : SingleTonBehaviour<SoundManager>
                 sound.UnPause();
             }
         }
+
+        var removelist = new List<AudioSource>();
+        foreach (var sound in m_Sounds)
+        {
+            if (!sound.isPlaying)
+                removelist.Add(sound);
+        }
+        
+        foreach (var sound in removelist)
+        {
+            m_Sounds.Remove(sound);
+        }
     }
 
     void OnStatePause()
@@ -76,21 +88,22 @@ class SoundManager : SingleTonBehaviour<SoundManager>
 
         bool isSourceAdded = false;
 
-        // source already playing
-        if (m_Sounds.Contains(source) && playnew)
+        // check source already playing
+        if(!m_Sounds.Contains(source))
         {
-            source.Stop();
+            // play new sound
+            m_Sounds.Add(source);
             source.volume = m_Volume;
             source.Play();
 
             isSourceAdded = true;
         }
-        else
+        else if (playnew)
         {
             // play new sound
-            m_Sounds.Add(source);
+            source.Stop();
             source.volume = m_Volume;
-            m_BGM.Play();
+            source.Play();
 
             isSourceAdded = true;
         }

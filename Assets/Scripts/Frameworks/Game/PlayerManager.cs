@@ -7,6 +7,8 @@ public class PlayerManager : SingleTonBehaviour<PlayerManager>
     // Player
     [SerializeField]
     private GameObject m_Player = null;
+    [SerializeField]
+    private AudioSource m_HealingSound = null;
 
     // Heal Info
     [SerializeField]
@@ -56,6 +58,8 @@ public class PlayerManager : SingleTonBehaviour<PlayerManager>
         m_HealCoolDownLeft = m_HealCoolDown;
 
         UnitManager.Inst().HealArea(m_Player.transform.position, m_HealRange);
+        if (m_HealingSound != null)
+            SoundManager.Inst().AddSound(m_HealingSound, true);
     }
     
     /// <summary>
