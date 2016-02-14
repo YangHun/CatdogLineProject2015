@@ -7,8 +7,6 @@ public abstract class Section : MonoBehaviour
     public TriggerZone mEntranceZone = null;
     public TriggerZone mExitZone = null;
 
-    public SectionUI mSectionUI = null;
-
     public virtual void Start()
     {
         if (mEntranceZone != null)
@@ -19,13 +17,13 @@ public abstract class Section : MonoBehaviour
 
     public void OnPlayerAtEntrance(GameObject zone, Collider2D col)
     {
-        if (col.gameObject == GameManager.Inst().GetPlayer())
+        if (col.gameObject == PlayerManager.Inst().GetPlayer())
             SectionManager.Inst().OnSectionEnter(this);
     }
 
     public void OnPlayerAtExit(GameObject zone, Collider2D col)
     {
-        if (col.gameObject == GameManager.Inst().GetPlayer())
+        if (col.gameObject == PlayerManager.Inst().GetPlayer())
             SectionManager.Inst().OnSectionExit(this);
     }
 
@@ -56,13 +54,7 @@ public abstract class Section : MonoBehaviour
 
     public virtual void OnDie(UnitData unit)
     {
-        Destroy(unit.gameObject);
-    }
-
-
-    public virtual SectionUI GetSectionUI()
-    {
-        return mSectionUI;
+        unit.OnDestroyObject();
     }
 
     /// <summary>

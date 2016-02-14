@@ -10,13 +10,17 @@ public class UnitData : ObjectData
     [SerializeField]
     private bool Healthy = false;
 
+    public virtual void LateUpdate()
+    {
+        if (CurrentHP <= 0)
+            UnitManager.Inst().OnDie(this);
+    }
+
     public void GiveDamage(float amount)
     {
         CurrentHP -= amount;
 
-        if (CurrentHP <= 0)
-            GameManager.Inst().OnDie(this);
-        else if (CurrentHP >= MaxHP)
+        if (CurrentHP >= MaxHP)
         {
             CurrentHP = MaxHP;
             Healthy = true;
@@ -31,14 +35,11 @@ public class UnitData : ObjectData
     {
         if (!Healthy)
             CurrentHP += amount;
-
-        if (CurrentHP <= 0)
-            SectionManager.Inst().GetCurrentSection().OnDie(this);
-        else if (CurrentHP >= MaxHP)
+        
+        if (CurrentHP >= MaxHP)
         {
             CurrentHP = MaxHP;
             Healthy = true;
-            Debug.Log("Now Healthy");
         }
         else if (CurrentHP < MaxHP)
         {

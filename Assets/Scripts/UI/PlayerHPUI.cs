@@ -8,6 +8,5 @@ public class PlayerHPUI : MonoBehaviour {
     public Image HPbar;
 	void Update ()
     {
-        HPbar.rectTransform.localScale = new Vector3(Player.GetHP() / Player.GetMaxHP(), 1, 1);
 	}
 }

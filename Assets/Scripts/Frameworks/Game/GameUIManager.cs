@@ -7,12 +7,12 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 
     public GameObject InGameCanvas = null;
     public GameObject GameMenuCanvas = null;
-
-
-
+    
 
     // InGame UIs
     public Image HealTypeUI = null;
+    public Image PlayerHPBar = null;
+
 
 
     public GameObject MoveLeft = null;
@@ -28,7 +28,11 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
         var scene = GameSceneController.Inst();
         if (scene.IsInGame() && !scene.IsCinematic())
             if (InteractButton != null)
-                InteractButton.SetActive(GameManager.Inst().IsInteractinButtonEnabled());
+                InteractButton.SetActive(InteractionManager.Inst().IsInteractinButtonEnabled());
+
+        var player = PlayerManager.Inst().GetPlayer().GetComponent<UnitData>();
+        if(PlayerHPBar != null && player != null)
+            PlayerHPBar.rectTransform.localScale = new Vector3(player.GetHP() / player.GetMaxHP(), 1, 1);
     }
 
 
@@ -101,12 +105,6 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
         {
             InGameCanvas.SetActive(ingame);
         }
-
-        if (gamemenu)
-            SectionManager.Inst().PauseSectionUI();
-        else
-            SectionManager.Inst().ResumeSectionUI();
-
 
         if (cinematic && ingame)
         {

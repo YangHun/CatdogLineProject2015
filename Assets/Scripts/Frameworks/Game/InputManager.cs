@@ -38,7 +38,7 @@ public class InputManager : SingleTonBehaviour<InputManager>
     public void OnHealButtonClick()
     {
         Debug.Log("Heal Button Pressed");
-        GameManager.Inst().HealArea();
+        PlayerManager.Inst().HealAreaByPlayer();
     }
 
     public void OnPauseButtonClick()
@@ -50,10 +50,10 @@ public class InputManager : SingleTonBehaviour<InputManager>
     public void OnInteractButtonClick()
     {
         Debug.Log("Interact Button Clicked");
-        if (GameManager.Inst().IsInteracting())
-            GameManager.Inst().StopInteraction();
+        if (InteractionManager.Inst().IsInteracting())
+            InteractionManager.Inst().StopInteraction();
         else
-            GameManager.Inst().StartInteraction();
+            InteractionManager.Inst().StartInteraction();
 
     }
 
@@ -66,7 +66,7 @@ public class InputManager : SingleTonBehaviour<InputManager>
     public void OnTitleButtonClick()
     {
         Debug.Log("Title Button Pressed");
-        GameManager.Inst().OnEndGame(false);
+        GameSceneController.Inst().OnEndGame(false);
     }
 
     public void OnSoundOptionButtonClick()
