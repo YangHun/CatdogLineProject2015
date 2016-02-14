@@ -17,7 +17,7 @@ public class ObjectHurted_b : UnitData, IHealable {
     {
         if (!JS.IsHealthy())
         {
-            t += Time.deltaTime;
+            t += GameTime.deltaTime;
             if (t >= DamageSecond)
             {
                 GiveDamage(DamageAmountJS);
@@ -26,7 +26,7 @@ public class ObjectHurted_b : UnitData, IHealable {
         }
         else if (!IsHealthy())
         {
-            t += Time.deltaTime;
+            t += GameTime.deltaTime;
             if (t >= DamageSecond)
             {
                 GiveDamage(DamageAmount);

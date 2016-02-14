@@ -13,18 +13,13 @@ public class ObjectPlant_b : UnitData, IHealable {
 
     void Update()
     {
-        BackTimer -= Time.deltaTime;
+        BackTimer -= GameTime.deltaTime;
         if (BackTimer <= 0)
         {
             Leaf1.SetActive(false);
             Leaf2.SetActive(false);
             GiveDamage(2f);
         }
-    }
-
-    Vector2 GetPosition()
-    {
-        return this.transform.position;
     }
 
     public void OnHealed(HealInfo heal)

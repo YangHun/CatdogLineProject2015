@@ -14,7 +14,7 @@ public class ObjectHurted : UnitData, IHealable {
     {
         if (!IsHealthy())
         {
-            t += Time.deltaTime;
+            t += GameTime.deltaTime;
             if (t >= DamageSecond)
             {
                 GiveDamage(DamageAmount);

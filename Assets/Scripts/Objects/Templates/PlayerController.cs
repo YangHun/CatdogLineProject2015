@@ -180,7 +180,7 @@ public class PlayerController : UnitData, IController, IHealable
         }
 
         var prev_position = transform.position;
-        prev_position += new Vector3(m_ClimbDirection.x, m_ClimbDirection.y, 0) * m_ClimbSpeed * Time.deltaTime;
+        prev_position += new Vector3(m_ClimbDirection.x, m_ClimbDirection.y, 0) * m_ClimbSpeed * GameTime.deltaTime;
         transform.position = prev_position;
     }
 

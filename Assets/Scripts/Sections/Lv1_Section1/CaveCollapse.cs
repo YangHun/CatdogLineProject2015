@@ -13,7 +13,7 @@ public class CaveCollapse : TriggerZone {
     {
         if (IsCaveCollapse && CollapseTime > 0)
         {
-            CollapseTime -= Time.deltaTime;
+            CollapseTime -= GameTime.deltaTime;
         }
     }
 

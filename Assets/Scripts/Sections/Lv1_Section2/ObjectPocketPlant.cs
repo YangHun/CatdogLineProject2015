@@ -29,7 +29,7 @@ public class ObjectPocketPlant : UnitData, IHealable
                 APOn.SetActive(true);
             }
         }
-        BackTimer -= Time.deltaTime;
+        BackTimer -= GameTime.deltaTime;
         if (BackTimer <= 0)
         {
             DisableAll();

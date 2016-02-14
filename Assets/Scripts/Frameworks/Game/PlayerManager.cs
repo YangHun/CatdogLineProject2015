@@ -38,7 +38,7 @@ public class PlayerManager : SingleTonBehaviour<PlayerManager>
 
     void UpdateHealCoolDown()
     {
-        m_HealCoolDownLeft -= Time.deltaTime;
+        m_HealCoolDownLeft -= GameTime.deltaTime;
         if (m_HealCoolDownLeft < 0.0f)
             m_HealCoolDownLeft = 0.0f;
     }
