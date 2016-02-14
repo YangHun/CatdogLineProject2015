@@ -20451,7 +20451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42397faa3326f65419ab2234724a941a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialState: 1
+  InitialState: 2
   MainSceneName: DummyMainScene
   GameSceneName: []
 --- !u!4 &2040774389

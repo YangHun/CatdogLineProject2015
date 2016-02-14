@@ -6,6 +6,7 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
     [System.Serializable]
     private enum SceneState
     {
+        InitialScene,
         MainScene,
         GameScene,
         Exit
@@ -27,6 +28,7 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
     void Awake()
     {
         m_StateMachine = new StateMachine();
+        m_StateMachine.AddState(SceneState.InitialScene, () => { LoadMainScene(); });
         m_StateMachine.AddState(SceneState.MainScene, () =>
         {
             if (m_StateMachine.IsFirstUpdate())
@@ -62,6 +64,8 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
     {
         switch ((SceneState)m_StateMachine.GetCurrentState())
         {
+            case SceneState.InitialScene:
+                return null;
             case SceneState.MainScene:
                 return MainSceneController.Inst();
             case SceneState.GameScene:
@@ -76,6 +80,8 @@ public class SceneManager : SingleTonBehaviour<SceneManager> {
     {
         switch ((SceneState)m_StateMachine.GetCurrentState())
         {
+            case SceneState.InitialScene:
+                break;
             case SceneState.MainScene:
                 MainSceneController.Inst().OnDestroyController();
                 break;
