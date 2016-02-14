@@ -3259,7 +3259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 345817086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28f9b1aa2947f3447a5a642861e43af2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bdd449477b7a0a4a86d2a8c59136171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 100
@@ -3270,8 +3270,9 @@ MonoBehaviour:
   Healed: {fileID: 241377452}
   InitialState: 0
   ActivateTime: 1
-  ReturnToUnHealed: 0
-  ReturnHPRate: .899999976
+  ReturnToUnHealed: 1
+  ReturnTime: 2
+  ReturnHP: 100
 --- !u!61 &345817089
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10638,7 +10639,8 @@ MonoBehaviour:
   InitialState: 0
   ActivateTime: 1
   ReturnToUnHealed: 0
-  ReturnHPRate: .899999976
+  ReturnTime: 3
+  ReturnHP: 100
 --- !u!61 &1069831373
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11149,7 +11151,8 @@ MonoBehaviour:
   InitialState: 0
   ActivateTime: 1
   ReturnToUnHealed: 0
-  ReturnHPRate: .899999976
+  ReturnTime: 3
+  ReturnHP: 100
 --- !u!61 &1118720477
 BoxCollider2D:
   m_ObjectHideFlags: 0

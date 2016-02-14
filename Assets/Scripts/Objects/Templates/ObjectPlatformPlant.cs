@@ -17,7 +17,9 @@ public class ObjectPlatformPlant : UnitData, IHealable {
 
     // return
     public bool ReturnToUnHealed = false;
-    public float ReturnHPRate = 0.9f;
+    public float ReturnTime = 3.0f;
+    public float ReturnHP = 100f;
+    private float m_ReturnTimer = 0.0f;
 
     public enum PlantStates
     {
@@ -105,14 +107,24 @@ public class ObjectPlatformPlant : UnitData, IHealable {
 
     public virtual void OnStateHealed()
     {
-        if(m_PlantState.IsFirstUpdate())
+        if (m_PlantState.IsFirstUpdate())
         {
             UnHealed.SetActive(false);
             Healed.SetActive(true);
+            m_ReturnTimer = ReturnTime;
         }
 
-        if (ReturnToUnHealed && GetHP() <= GetMaxHP() * ReturnHPRate)
-            m_PlantState.ChangeState(PlantStates.Deactivating);
+        if (ReturnToUnHealed)
+        {
+            m_ReturnTimer -= GameTime.deltaTime;
+
+            if (ReturnTime < 0.0f)
+            {
+                m_PlantState.ChangeState(PlantStates.Deactivating);
+                CurrentHP = ReturnHP;
+                ReturnTime = 0.0f;
+            }
+        }
     }
 
     private void SetFading()
