@@ -69,8 +69,9 @@ public class PlayerController : UnitData, IController, IHealable
             mPlayerAction.Update();
     }
 
-    void LateUpdate()
+    public override void LateUpdate()
     {
+        base.LateUpdate();
         if (GameSceneController.Inst().IsInGame())
             mPlayerAction.LateUpdate();
     }

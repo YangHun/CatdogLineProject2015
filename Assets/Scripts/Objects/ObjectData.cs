@@ -13,4 +13,5 @@ public class ObjectData : MonoBehaviour
 {
     public virtual ObjectType GetObjectType() { return ObjectType.NONE; }
     public virtual Vector2 GetPosition() { return transform.position; }
+    public virtual void OnDestroyObject() { Destroy(gameObject); }
 }

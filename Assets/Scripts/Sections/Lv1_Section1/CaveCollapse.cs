@@ -19,9 +19,9 @@ public class CaveCollapse : TriggerZone {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == GameManager.Inst().GetPlayer())
+        if (other.gameObject == PlayerManager.Inst().GetPlayer())
         {
-            GameManager.Inst().StartCinematic(CollapseTime);
+            GameSceneController.Inst().StartCinematic(CollapseTime);
             IsCaveCollapse = true;
             Debug.Log("Sam : Player In Range");
             Barrier.SetActive(true);

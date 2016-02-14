@@ -26,7 +26,7 @@ public class Section1 : Section {
     public override void OnSectionStart()
     {
         IInteractor[] tmp = GetComponentsInChildren<IInteractor>();
-        GameManager.Inst().RefreshInteractorList(tmp);
+        InteractionManager.Inst().RefreshInteractorList(tmp);
     }
     
 }

@@ -14,7 +14,7 @@ public class ObjectJungSoo : UnitData, IHealable {
 
     public bool IsHealable()
     {
-        if (GameManager.Inst().GetHealType() == m_Type)
+        if (PlayerManager.Inst().GetPlayerHealType() == m_Type)
             return true;
         else
             return false;

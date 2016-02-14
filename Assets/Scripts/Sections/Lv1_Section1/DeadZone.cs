@@ -5,10 +5,10 @@ public class DeadZone : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        var player = GameManager.Inst().GetPlayer();
+        var player = PlayerManager.Inst().GetPlayer();
         if (other.gameObject == player)
         {
-            GameManager.Inst().OnDie(player.GetComponent<UnitData>());
+            UnitManager.Inst().OnDie(player.GetComponent<UnitData>());
         }
     }
 

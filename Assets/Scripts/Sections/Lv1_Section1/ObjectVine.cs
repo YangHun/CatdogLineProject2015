@@ -20,7 +20,7 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
 
     void OnPlayerEnter(GameObject zone, Collider2D col)
     {
-        if (col.gameObject != GameManager.Inst().GetPlayer())
+        if (col.gameObject != PlayerManager.Inst().GetPlayer())
             return;
         
         mIsPlayerInRange = true;
@@ -28,8 +28,8 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
         if (zone == mVineDown.gameObject)
         {
             if(mIsPlayerClimbing && mIsPlayerTargetDown)
-                GameManager.Inst().StopInteraction();
-
+                InteractionManager.Inst().StopInteraction();
+                
             mIsPlayerAtDown = true;
         } else
 
@@ -38,7 +38,7 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
 
     void OnPlayerExit(GameObject zone, Collider2D col)
     {
-        if (col.gameObject != GameManager.Inst().GetPlayer())
+        if (col.gameObject != PlayerManager.Inst().GetPlayer())
             return;
 
         mIsPlayerInRange = false;
@@ -47,7 +47,7 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
         if (zone == mVineUp.gameObject)
         {
             if (mIsPlayerClimbing && !mIsPlayerTargetDown)
-                GameManager.Inst().StopInteraction();
+                InteractionManager.Inst().StopInteraction();
         }
 
     }
@@ -72,15 +72,15 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
     public void OnInteractStart()
     {
         mIsPlayerClimbing = true;
-        GameManager.Inst().StartCinematic(mCinematicTime);
+        GameSceneController.Inst().StartCinematic(mCinematicTime);
         if (mIsPlayerAtDown)
         {
-            GameManager.Inst().StartPlayerClimbing(mVineDown.transform.position, new Vector2(0, 1));
+            PlayerManager.Inst().StartPlayerClimbing(mVineDown.transform.position, mVineUp.transform.position);
             mIsPlayerTargetDown = false;
         }
         else
         {
-            GameManager.Inst().StartPlayerClimbing(mVineUp.transform.position, new Vector2(0, -1));
+            PlayerManager.Inst().StartPlayerClimbing(mVineUp.transform.position, mVineDown.transform.position);
             mIsPlayerTargetDown = true;
         }
     }
@@ -93,7 +93,7 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
     public void OnInteractEnd()
     {
         mIsPlayerClimbing = false;
-        GameManager.Inst().EndPlayerClimbing();
+        PlayerManager.Inst().EndPlayerClimbing();
     }
 
     public bool IsInteractable()
