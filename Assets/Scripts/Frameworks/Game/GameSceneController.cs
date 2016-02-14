@@ -142,4 +142,51 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
         m_StateMachine.ChangeState(GameState.Disabled);
         SceneManager.Inst().LoadMainScene();
     }
+
+
+
+    public void StartCinematic(float time)
+    {
+        GameSceneController.Inst().ChangeToCinematic(time);
+    }
+
+
+
+
+    /// <summary>
+    /// FrameworkBased.
+    /// </summary>
+    /// <param name="cleared"></param>
+    public void OnEndGame(bool cleared)
+    {
+        Debug.Log("Ending Game with cleared : " + cleared);
+
+        // Save data
+        SaveData();
+
+        // End GameScene
+        GameSceneController.Inst().EndScene();
+    }
+
+    /// <summary>
+    /// FrameworkBased.
+    /// </summary>
+    public void OnEndSection()
+    {
+        // Auto save data
+        SaveData();
+    }
+
+
+    // Data Saving
+
+    void SaveData()
+    {
+        Debug.Log("Saving player data... (not implemented)");
+
+        // CreateUserData
+
+        // Save UserData
+
+    }
 }

@@ -32,7 +32,7 @@ public class SectionManager : SingleTonBehaviour<SectionManager>
         m_CurrentSection.OnSectionEnd();
         m_CurrentSection = null;
 
-        GameManager.Inst().OnEndSection();
+        GameSceneController.Inst().OnEndSection();
     }
 
 

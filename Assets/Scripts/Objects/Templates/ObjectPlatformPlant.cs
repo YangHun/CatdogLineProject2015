@@ -40,7 +40,11 @@ public class ObjectPlatformPlant : UnitData, IHealable {
     }
 
     public void Update() { m_PlantState.Update(); }
-    public void LateUpdate() { m_PlantState.LateUpdate(); }
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        m_PlantState.LateUpdate();
+    }
 
     public void OnHealed(HealInfo heal)
     {
@@ -49,7 +53,6 @@ public class ObjectPlatformPlant : UnitData, IHealable {
         else
             GiveHeal(3f);
 
-        Debug.Log(IsFullHealth());
         if (m_PlantState.GetCurrentState().Equals(PlantStates.UnHealed) && IsFullHealth())
         {
             m_PlantState.ChangeState(PlantStates.Activating);
@@ -63,7 +66,7 @@ public class ObjectPlatformPlant : UnitData, IHealable {
             m_HealedAlpha = 0;
         }
 
-        m_HealedAlpha += GameManager.Inst().GameTime() / ActivateTime;
+        m_HealedAlpha += GameTime.deltaTime / ActivateTime;
         if (m_HealedAlpha > 1)
             m_HealedAlpha = 1;
 
@@ -80,7 +83,7 @@ public class ObjectPlatformPlant : UnitData, IHealable {
             m_HealedAlpha = 1;
         }
 
-        m_HealedAlpha -= GameManager.Inst().GameTime() / ActivateTime;
+        m_HealedAlpha -= GameTime.deltaTime / ActivateTime;
         if (m_HealedAlpha < 0)
             m_HealedAlpha = 0;
 

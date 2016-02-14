@@ -11,7 +11,7 @@ public class ObjectSam : ObjectData, IInteractor {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == GameManager.Inst().GetPlayer())
+        if (other.gameObject == PlayerManager.Inst().GetPlayer())
         {
             m_IsPlayerInRange = true;
             Debug.Log("Sam : Player In Range");
@@ -20,7 +20,7 @@ public class ObjectSam : ObjectData, IInteractor {
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject == GameManager.Inst().GetPlayer())
+        if (other.gameObject == PlayerManager.Inst().GetPlayer())
         {
             m_IsPlayerInRange = false;
             Debug.Log("Sam : Player Out of Range");
@@ -29,12 +29,12 @@ public class ObjectSam : ObjectData, IInteractor {
 
     public void OnInteractStart()
     {
-        GameManager.Inst().SetPlayerHealType(m_Type);
+        PlayerManager.Inst().SetPlayerHealType(m_Type);
     }
 
     public void OnInteractStay()
     {
-        GameManager.Inst().StopInteraction();
+        InteractionManager.Inst().StopInteraction();
     }
 
     public void OnInteractEnd()

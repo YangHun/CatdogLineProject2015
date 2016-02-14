@@ -22,7 +22,7 @@ public class ObjectN1 : ObjectData, IInteractor
 
     void OnPlayerEnter(GameObject zone, Collider2D col)
     {
-        if (col.gameObject != GameManager.Inst().GetPlayer())
+        if (col.gameObject != PlayerManager.Inst().GetPlayer())
             return;
 
         mIsPlayerInRange = true;
@@ -30,7 +30,7 @@ public class ObjectN1 : ObjectData, IInteractor
 
     void OnPlayerExit(GameObject zone, Collider2D col)
     {
-        if (col.gameObject != GameManager.Inst().GetPlayer())
+        if (col.gameObject != PlayerManager.Inst().GetPlayer())
             return;
 
         mIsPlayerInRange = false;
@@ -55,6 +55,6 @@ public class ObjectN1 : ObjectData, IInteractor
 
     public void OnInteractStay()
     {
-        GameManager.Inst().StopInteraction();
+        InteractionManager.Inst().StopInteraction();
     }
 }

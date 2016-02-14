@@ -49,7 +49,7 @@ public class ObjL1S2BigPlatformPlant : UnitData, IHealable
 
         while (alpha < 1)
         {
-            alpha += GameManager.Inst().GameTime() / ActivateTime;
+            alpha += GameTime.deltaTime / ActivateTime;
 
             var color = onrenderer.color;
             color.a = alpha;
