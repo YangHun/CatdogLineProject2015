@@ -28,6 +28,8 @@ public class GameTimeManager : SingleTonBehaviour<GameTimeManager>
     private bool m_IsTimeUpdated = false;
     private float m_InGameDeltaTime = 0.0f;
 
+    void Start() { Inst(); }
+
     void LateUpdate() { m_IsTimeUpdated = false; }
     public float GetInGameDeltaTime()
     {

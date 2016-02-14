@@ -5057,7 +5057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Player: {fileID: 1882647997}
   m_HealRange: 1
-  m_HealType: 0
+  m_HealType: 1
   m_HealCoolDown: 1
   m_HealCoolDownLeft: 0
 --- !u!1 &593032272

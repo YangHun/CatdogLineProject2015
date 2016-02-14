@@ -40,7 +40,6 @@ public class UnitData : ObjectData
         {
             CurrentHP = MaxHP;
             Healthy = true;
-            Debug.Log("Now Healthy");
         }
         else if (CurrentHP < MaxHP)
         {
