@@ -93,8 +93,17 @@ public class PlayerController : UnitData, IController, IHealable
 
 
         // check falling
+        var mask2 = LayerMask.GetMask("Map", "PassableMap");
+        var collidings = Physics2D.OverlapPointAll(GroundPoint.position, mask2);
 
+        if (collidings.Length == 0)
+        {
+            // change state if falling
+            IgnoreCollision(mCollisionIgnoreColliders, false);
+            mPlayerAction.ChangeState(PlayerActionState.JUMP_FALL);
+        }
 
+        // check jumping
         if (InputManager.Inst().IsJumpClicked() && m_IsJumpCoolDownOn)
         {
             IgnoreCollision(mCollisionIgnoreColliders, false);
@@ -184,20 +193,44 @@ public class PlayerController : UnitData, IController, IHealable
         transform.position = prev_position;
     }
 
-
+    
     void MoveHorizontal()
     {
+        // get input
         float dir_x = 0;
         if (InputManager.Inst().IsLeftClicked())
             dir_x -= 1;
         if (InputManager.Inst().IsRightClicked())
             dir_x += 1;
 
-        anim.SetFloat("Speed", Mathf.Abs(dir_x));
-        if (dir_x > 0 && !m_FacingRight) { Flip(); }
-        else if (dir_x < 0 && m_FacingRight) { Flip(); }
+        // check collision with unmovable walls
+        var mask = LayerMask.GetMask("Map");
+        Vector2 current = transform.position;
+        Vector2 colcenter = current + new Vector2(dir_x * 0.80f, 0);
+        Vector2 coldelta = new Vector2(0.1f, 0.5f);
+
+        var collidings = Physics2D.OverlapAreaAll(colcenter + coldelta, colcenter - coldelta, mask);
+        if (collidings.Length != 0)
+        {
+            // stop moving if collide
+            dir_x = 0;
+        }
+
 
         rigid.velocity = new Vector3(dir_x * m_Speed, rigid.velocity.y, 0);
+
+
+        // set animation
+        anim.SetFloat("Speed", Mathf.Abs(dir_x));
+        if (dir_x > 0 && !m_FacingRight)
+        {
+            Flip();
+        }
+        else if (dir_x < 0 && m_FacingRight)
+        {
+            Flip();
+        }
+
     }
 
 
