@@ -79,6 +79,12 @@ public class PlayerController : UnitData, IController, IHealable
     // Update is called once per frame
     void Update()
     {
+
+        if (!GameSceneController.Inst().IsInGame())
+            return;
+        // update each state
+        mPlayerAction.Update();
+
         // initialize buffer
         m_IsGroundedBuffed[0] = m_IsGroundedBuffed[1];
         m_IsGroundedBuffed[1] = false;
@@ -107,9 +113,6 @@ public class PlayerController : UnitData, IController, IHealable
         // sets
         m_IsGrounded = m_IsGroundedBuffed[0] || m_IsGroundedBuffed[1];
 
-        // update each state
-        if (GameSceneController.Inst().IsInGame())
-            mPlayerAction.Update();
     }
 
     public override void LateUpdate()
@@ -204,8 +207,8 @@ public class PlayerController : UnitData, IController, IHealable
             var topright = new Vector2(transform.position.x + 1.5f, transform.position.y + 0.9f);
 
             var mask = LayerMask.GetMask("PassableMap");
-            //var overlaps = OverlapArea(transform.position, m_FallCollisionIgnore, mask);
-            var overlaps = Physics2D.OverlapAreaAll(bottomleft, topright, mask);
+            var overlaps = OverlapArea(transform.position, m_FallCollisionIgnore, mask);
+            //var overlaps = Physics2D.OverlapAreaAll(bottomleft, topright, mask);
             mCollisionIgnoreColliders = overlaps;
 
             IgnoreCollision(mCollisionIgnoreColliders, true);
