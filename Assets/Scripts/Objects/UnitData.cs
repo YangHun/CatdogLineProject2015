@@ -31,7 +31,7 @@ public class UnitData : ObjectData
         }
     }
 
-    public void GiveHeal(float amount)
+    public virtual void GiveHeal(float amount)
     {
         if (!Healthy)
             CurrentHP += amount;
@@ -64,5 +64,10 @@ public class UnitData : ObjectData
     public bool IsHealthy()
     {
         return Healthy;
+    }
+
+    public void SetHealthy(bool a)
+    {
+        Healthy = a;
     }
 }
