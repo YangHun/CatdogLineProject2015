@@ -113,6 +113,11 @@ public class ObjectMole : ObjectHurted {
         }
     }
 
+    public bool IsHide()
+    {
+        return !underground;
+    }
+
     IEnumerator AttackedHide()
     {
         for (int n = 0; n < 5; ++n)

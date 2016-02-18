@@ -102,6 +102,11 @@ public class ObjectMonkey : UnitData {
         }
     }
 
+    public bool IsHide()
+    {
+        return hide;
+    }
+
     IEnumerator ClimbUp()
     {
         float y = this.transform.localPosition.y;

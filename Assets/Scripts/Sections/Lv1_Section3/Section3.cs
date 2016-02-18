@@ -6,8 +6,14 @@ public class Section3 : Section
     [SerializeField]
     private Collider2D Block;
 
+    public GameObject[] StartActivateList = null;
+
     public override void OnSectionStart()
     {
+        foreach (var obj in StartActivateList)
+            obj.SetActive(true);
+
+
         IInteractor[] tmp = GetComponentsInChildren<IInteractor>();
         InteractionManager.Inst().RefreshInteractorList(tmp);
         Block.gameObject.SetActive(true);
