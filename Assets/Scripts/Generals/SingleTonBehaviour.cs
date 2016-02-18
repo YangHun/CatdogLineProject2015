@@ -15,6 +15,9 @@ public class SingleTonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
             if (FindObjectsOfType(typeof(T)).Length > 1)
             {
                 Debug.LogError("Multiple Singlton Exist");
+                var list = FindObjectsOfType(typeof(T));
+                foreach (var item in list)
+                    Debug.LogError("SingleTon : " + item.name);
                 return null;
             }
 
