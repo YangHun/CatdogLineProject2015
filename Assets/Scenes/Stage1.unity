@@ -20638,6 +20638,7 @@ GameObject:
   - 61: {fileID: 1882647998}
   - 95: {fileID: 1882648001}
   - 114: {fileID: 1882647999}
+  - 61: {fileID: 1882648003}
   m_Layer: 10
   m_Name: Healer
   m_TagString: Player
@@ -20679,6 +20680,26 @@ MonoBehaviour:
   m_IsJumpCoolDownOn: 1
   m_ClimbSpeed: 3
   m_ClimbDirection: {x: 0, y: 0}
+  mCollisionIgnoreColliders: []
+  m_IsGrounded: 0
+  m_JumpCollisionIgnore:
+    serializedVersion: 2
+    x: .300000012
+    y: 3
+    width: 16
+    height: 8
+  m_PassCollisionIgnore:
+    serializedVersion: 2
+    x: .300000012
+    y: .300000012
+    width: 1.20000005
+    height: 1.39999998
+  m_WallCollision:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
 --- !u!50 &1882648000
 Rigidbody2D:
   serializedVersion: 2
@@ -20740,6 +20761,19 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300034, guid: c6eb95c01fa5f1d448680eac1099e981, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!61 &1882648003
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1882647997}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: .300000012, y: 3}
+  serializedVersion: 2
+  m_Size: {x: 16, y: 8}
 --- !u!1 &1883559080
 GameObject:
   m_ObjectHideFlags: 0

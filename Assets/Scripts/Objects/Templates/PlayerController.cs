@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class PlayerController : UnitData, IController, IHealable
@@ -35,12 +36,25 @@ public class PlayerController : UnitData, IController, IHealable
     private StateMachine mPlayerAction;
 
     // jump state
+    [SerializeField]
     private Collider2D[] mCollisionIgnoreColliders = null;
-
+    [SerializeField]
+    private bool m_IsGrounded = false;
+    private bool[] m_IsGroundedBuffed = new bool[2];
+    private List<Collider2D>[] m_GroundedCollider = new List<Collider2D>[2];
 
     // physics
     private Rigidbody2D rigid = null;
     private Collider2D playerCollision;
+
+    [SerializeField]
+    private Rect m_JumpCollisionIgnore;
+    [SerializeField]
+    private Rect m_FallCollisionIgnore;
+    [SerializeField]
+    private Rect m_WalkCollisionIgnore;
+    [SerializeField]
+    private Rect m_WallCollision;
 
     void Awake()
     {
@@ -65,7 +79,36 @@ public class PlayerController : UnitData, IController, IHealable
     // Update is called once per frame
     void Update()
     {
-        if(GameSceneController.Inst().IsInGame())
+        // initialize buffer
+        m_IsGroundedBuffed[0] = m_IsGroundedBuffed[1];
+        m_IsGroundedBuffed[1] = false;
+        m_GroundedCollider[0] = m_GroundedCollider[1];
+        m_GroundedCollider[1] = new List<Collider2D>();
+
+        // overlap check
+        var mask = LayerMask.GetMask("Map", "PassableMap");
+        Vector2 ground = GroundPoint.position;
+        var collidings = Physics2D.OverlapAreaAll(ground + new Vector2(-0.3f, -0.25f),
+            ground + new Vector2(0.3f, 0.25f), mask);
+
+        if (collidings.Length != 0)
+        {
+            foreach (var colliding in collidings)
+            {
+                if (mCollisionIgnoreColliders.Length == 0
+                    || Array.Exists(mCollisionIgnoreColliders, element => element != colliding))
+                {
+                    m_IsGroundedBuffed[1] = true;
+                    m_GroundedCollider[1].Add(colliding);
+                }
+            }
+        }
+
+        // sets
+        m_IsGrounded = m_IsGroundedBuffed[0] || m_IsGroundedBuffed[1];
+
+        // update each state
+        if (GameSceneController.Inst().IsInGame())
             mPlayerAction.Update();
     }
 
@@ -75,30 +118,46 @@ public class PlayerController : UnitData, IController, IHealable
         if (GameSceneController.Inst().IsInGame())
             mPlayerAction.LateUpdate();
     }
-
+    
     void OnStateWalking()
     {
-        MoveHorizontal();
-
-
         IgnoreCollision(mCollisionIgnoreColliders, false);
 
-        var bottomleft = new Vector2(GroundPoint.position.x - 0.5f, GroundPoint.position.y + 0.8f);
-        var topright = new Vector2(GroundPoint.position.x + 0.5f, GroundPoint.position.y + 2.5f);
+        //var bottomleft = new Vector2(transform.position.x - 1.1f, transform.position.y - 0.3f);
+        //var topright = new Vector2(transform.position.x + 1.1f, transform.position.y + 1.0f);
         var mask = LayerMask.GetMask("PassableMap");
+        List<Collider2D> overlaps = new List<Collider2D>(OverlapArea(transform.position, m_WalkCollisionIgnore, mask));
 
-        mCollisionIgnoreColliders = Physics2D.OverlapAreaAll(bottomleft, topright, mask);
+        // remove grounded map objects
+        if (m_IsGrounded)
+        {
+            // remove grounded objects from collision ignores
+            foreach (var ground in m_GroundedCollider[0])
+                if (overlaps.Contains(ground))
+                    overlaps.Remove(ground);
+
+            foreach (var ground in m_GroundedCollider[1])
+                if (overlaps.Contains(ground))
+                    overlaps.Remove(ground);
+        }
+        mCollisionIgnoreColliders = overlaps.ToArray();
 
         IgnoreCollision(mCollisionIgnoreColliders, true);
 
+        MoveHorizontal();
 
         // check falling
+        if (!m_IsGrounded)
+        {
+            IgnoreCollision(mCollisionIgnoreColliders, false);
+            mPlayerAction.ChangeState(PlayerActionState.JUMP_FALL, 2);
+        }
 
-
+        // check jumping
         if (InputManager.Inst().IsJumpClicked() && m_IsJumpCoolDownOn)
         {
             IgnoreCollision(mCollisionIgnoreColliders, false);
-            mPlayerAction.ChangeState(PlayerActionState.JUMPING);
+            mPlayerAction.ChangeState(PlayerActionState.JUMPING, 1);
             StartCoroutine(DelayJump());
         }
     }
@@ -111,11 +170,11 @@ public class PlayerController : UnitData, IController, IHealable
 
             rigid.velocity = new Vector2(rigid.velocity.x, m_JumpSpeed);
 
-            var bottomleft = new Vector2(GroundPoint.position.x - 8.0f, GroundPoint.position.y + 0.5f);
-            var topright = new Vector2(GroundPoint.position.x + 8.0f, GroundPoint.position.y + 4.5f);
+            //var bottomleft = new Vector2(GroundPoint.position.x - 8.0f, GroundPoint.position.y + 0.5f);
+            //var topright = new Vector2(GroundPoint.position.x + 8.0f, GroundPoint.position.y + 4.5f);
             var mask = LayerMask.GetMask("PassableMap");
-
-            mCollisionIgnoreColliders = Physics2D.OverlapAreaAll(bottomleft, topright, mask);
+            var overlaps = OverlapArea(transform.position, m_JumpCollisionIgnore, mask);
+            mCollisionIgnoreColliders = overlaps;
 
             IgnoreCollision(mCollisionIgnoreColliders,  true);
         }
@@ -124,6 +183,7 @@ public class PlayerController : UnitData, IController, IHealable
         MoveHorizontal();
 
 
+        // check falling
         if (m_IsJumpCoolDownOn && rigid.velocity.y <= 0)
         {
             IgnoreCollision(mCollisionIgnoreColliders, false);
@@ -138,33 +198,23 @@ public class PlayerController : UnitData, IController, IHealable
         {
             IgnoreCollision(mCollisionIgnoreColliders, false);
 
-            var bottomleft = new Vector2(GroundPoint.position.x - 0.4f, GroundPoint.position.y + 0.2f);
-            var topright = new Vector2(GroundPoint.position.x + 0.4f, GroundPoint.position.y + 2.5f);
-            var mask = LayerMask.GetMask("PassableMap");
+            //var bottomleft = new Vector2(GroundPoint.position.x - 8.0f, GroundPoint.position.y + 0.5f);
+            //var topright = new Vector2(GroundPoint.position.x + 8.0f, GroundPoint.position.y + 4.5f);
+            var bottomleft = new Vector2(transform.position.x - 1.5f, transform.position.y - 1.2f);
+            var topright = new Vector2(transform.position.x + 1.5f, transform.position.y + 0.9f);
 
-            mCollisionIgnoreColliders = Physics2D.OverlapAreaAll(bottomleft, topright, mask);
+            var mask = LayerMask.GetMask("PassableMap");
+            //var overlaps = OverlapArea(transform.position, m_FallCollisionIgnore, mask);
+            var overlaps = Physics2D.OverlapAreaAll(bottomleft, topright, mask);
+            mCollisionIgnoreColliders = overlaps;
 
             IgnoreCollision(mCollisionIgnoreColliders, true);
         }
 
         MoveHorizontal();
-
-        bool grounded = false;
-        var mask2 = LayerMask.GetMask("Map", "PassableMap");
-        var collidings = Physics2D.OverlapPointAll(GroundPoint.position, mask2);
-
-        if (collidings.Length != 0)
-        {
-            foreach(var colliding in collidings)
-            {
-                if (!Array.Exists(mCollisionIgnoreColliders, element => element == colliding))
-                    grounded = true;
-            }
-        }
-
-
-
-        if (grounded)
+        
+        // check grounded
+        if (m_IsGrounded)
         {
             IgnoreCollision(mCollisionIgnoreColliders, false);
             mPlayerAction.ChangeState(PlayerActionState.WALKING);
@@ -184,22 +234,57 @@ public class PlayerController : UnitData, IController, IHealable
         transform.position = prev_position;
     }
 
-
+    
     void MoveHorizontal()
     {
+        // get input
         float dir_x = 0;
         if (InputManager.Inst().IsLeftClicked())
             dir_x -= 1;
         if (InputManager.Inst().IsRightClicked())
             dir_x += 1;
 
-        anim.SetFloat("Speed", Mathf.Abs(dir_x));
-        if (dir_x > 0 && !m_FacingRight) { Flip(); }
-        else if (dir_x < 0 && m_FacingRight) { Flip(); }
+        // check collision with unmovable walls
+        var mask = LayerMask.GetMask("Map", "PassableMap");
+        Vector2 current = transform.position;
+        Rect tmp = m_WallCollision;
+        tmp.x = tmp.x * dir_x;
+
+        var collidings = OverlapArea(transform.position, tmp, mask);
+        if (collidings.Length != 0)
+        {
+            // stop moving if collide
+            foreach (var colliding in collidings)
+            {
+                if (!Array.Exists(mCollisionIgnoreColliders, element => element == colliding))
+                    dir_x = 0;
+            }
+        }
+
 
         rigid.velocity = new Vector3(dir_x * m_Speed, rigid.velocity.y, 0);
+
+
+        // set animation
+        anim.SetFloat("Speed", Mathf.Abs(dir_x));
+        if (dir_x > 0 && !m_FacingRight)
+        {
+            Flip();
+        }
+        else if (dir_x < 0 && m_FacingRight)
+        {
+            Flip();
+        }
+
     }
 
+
+    Collider2D[] OverlapArea(Vector2 center, Rect area, int layermask)
+    {
+        Vector2 bottomleft = center + new Vector2(area.x - area.width / 2, area.y - area.height / 2);
+        Vector2 topright = center + new Vector2(area.x + area.width / 2, area.y + area.height / 2);
+        return Physics2D.OverlapAreaAll(bottomleft, topright, layermask);
+    }
 
     void IgnoreCollision(Collider2D[] colliders, bool enable = true)
     {
