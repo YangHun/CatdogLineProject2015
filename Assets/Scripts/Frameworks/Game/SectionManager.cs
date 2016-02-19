@@ -4,7 +4,7 @@ using System.Collections;
 public class SectionManager : SingleTonBehaviour<SectionManager>
 {
 
-    private Section m_CurrentSection = null;
+    public Section m_CurrentSection = null;
 
     public void OnSectionEnter(Section section)
     {

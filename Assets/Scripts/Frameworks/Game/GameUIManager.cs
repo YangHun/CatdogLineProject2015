@@ -21,7 +21,18 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
     public GameObject HealButton = null;
     public GameObject InteractButton = null;
 
+    private Section CurrentSection = null;
+    public UnitData[] Deadable;
+    public Image[] WarningUI;
+    [SerializeField]
+    private Camera MainCamera;
+    [SerializeField]
+    private Image PrefabWarning;
 
+    void Update()
+    {
+        Warning();
+    }
 
     void LateUpdate()
     {
@@ -143,4 +154,66 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
         }
     }
 
+    void Warning()
+    {
+        Section tmp = SectionManager.Inst().GetCurrentSection();
+        //if (CurrentSection != tmp)
+        //{
+        CurrentSection = tmp;
+        if (CurrentSection == null)
+            return;
+        Deadable = CurrentSection.transform.Find("Objects").Find("Deadable").GetComponentsInChildren<UnitData>();
+        if (Deadable == null)
+            return;
+        if (WarningUI.Length != Deadable.Length)
+        {
+            for (int i = 0; i < WarningUI.Length; ++i)
+            {
+                Destroy(WarningUI[i].gameObject);
+            }
+            WarningUI = new Image[Deadable.Length];
+            for (int i = 0; i < Deadable.Length; ++i)
+            {
+                WarningUI[i] = (Image)Instantiate(PrefabWarning);
+                WarningUI[i].transform.parent = InGameCanvas.transform.Find("WarningUI").transform;
+            }
+        }
+        //}
+        if (CurrentSection == null)
+            return;
+        if (WarningUI == null)
+            return;
+        for (int i = 0; i < WarningUI.Length; ++i)
+        {
+            if (Deadable[i] == null || Deadable[i].IsHealthy())
+            {
+                WarningUI[i].gameObject.SetActive(false);
+                continue;
+            }
+            Vector3 b = Deadable[i].transform.position - MainCamera.transform.position;
+            Vector3 a = MainCamera.WorldToScreenPoint(b);
+            if (Deadable[i].GetComponentInChildren<SpriteRenderer>().isVisible)
+            {
+                WarningUI[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                WarningUI[i].gameObject.SetActive(true);
+                if (Mathf.Abs(b.y / b.x) >= MainCamera.pixelHeight / (float) MainCamera.pixelWidth)
+                {
+                    if (b.y > 0)
+                        WarningUI[i].rectTransform.anchoredPosition = new Vector2(b.x / b.y * (MainCamera.pixelHeight / 2 - 5), MainCamera.pixelHeight / 2 - 5);
+                    else
+                        WarningUI[i].rectTransform.anchoredPosition = new Vector2(b.x / b.y * (-MainCamera.pixelHeight / 2 - 5), -MainCamera.pixelHeight / 2 + 5);
+                }
+                else
+                {
+                    if (b.x > 0)
+                        WarningUI[i].rectTransform.anchoredPosition = new Vector2(MainCamera.pixelWidth / 2 - 5, b.y / b.x * (MainCamera.pixelWidth / 2 - 5));
+                    else
+                        WarningUI[i].rectTransform.anchoredPosition = new Vector2(-MainCamera.pixelWidth / 2 + 5, b.y / b.x * (-MainCamera.pixelWidth / 2 - 5));
+                }
+            }
+        }
+    }
 }
