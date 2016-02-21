@@ -652,6 +652,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429d020c50d6dc04da96147417d0f26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_HealingEffectDefault: {fileID: 127164, guid: a283283732076c149af0f769daf4fc99,
+    type: 2}
+  m_HealingEffectGreen: {fileID: 177760, guid: e1b9e882e62141b428da2bc99460b87e, type: 2}
+  m_HealingEffectBlue: {fileID: 193510, guid: 4c2a852f2c17cc5458c20cca0fe8c5b1, type: 2}
 --- !u!1 &68642386
 GameObject:
   m_ObjectHideFlags: 0

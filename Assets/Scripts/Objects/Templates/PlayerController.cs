@@ -13,7 +13,7 @@ public class PlayerController : UnitData, IController, IHealable
     private Animator anim;
 
     // horizontal move
-    private bool m_FacingRight = true;
+    public bool m_FacingRight = true;
 
     // vertical move
     public Transform GroundPoint = null;

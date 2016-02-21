@@ -3,6 +3,7 @@ using System.Collections;
 
 public enum HealType
 {
+    DEFAULT,
     BLUE,
     GREEN,
     RED,

@@ -20,6 +20,8 @@ public class PlayerManager : SingleTonBehaviour<PlayerManager>
     [SerializeField]
     private float m_HealCoolDownLeft = 0.0f;
 
+    //
+
 
     // Use this for initialization
     void Start()
@@ -57,6 +59,16 @@ public class PlayerManager : SingleTonBehaviour<PlayerManager>
 
         m_HealCoolDownLeft = m_HealCoolDown;
 
+
+        Transform playertrans = PlayerManager.Inst().GetPlayer().transform;
+        EffectInfo info = new EffectInfo();
+        info.name = "HealByPlayer";
+        info.position = playertrans.position + new Vector3(0.35f, 0) * (m_Player.GetComponent<PlayerController>().m_FacingRight ? 1 : -1);
+        info.rotation = playertrans.rotation;
+        info.existtime = 2;
+        info.type = m_HealType;
+
+        EffectManager.Inst().CreateEffect(info);
         UnitManager.Inst().HealArea(m_Player.transform.position, m_HealRange);
         if (m_HealingSound != null)
             SoundManager.Inst().AddSound(m_HealingSound, true);
