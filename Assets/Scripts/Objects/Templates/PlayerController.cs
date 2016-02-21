@@ -34,6 +34,7 @@ public class PlayerController : UnitData, IController, IHealable
         CLIMBING
     }
     private StateMachine mPlayerAction;
+    private bool m_IsPaused = false;
 
     // jump state
     [SerializeField]
@@ -46,6 +47,7 @@ public class PlayerController : UnitData, IController, IHealable
     // physics
     private Rigidbody2D rigid = null;
     private Collider2D playerCollision;
+    private Vector3 m_PrevPosition = new Vector3();
 
     [SerializeField]
     private Rect m_JumpCollisionIgnore;
@@ -66,6 +68,8 @@ public class PlayerController : UnitData, IController, IHealable
         mPlayerAction.AddState(PlayerActionState.JUMP_FALL, OnStateJumpFall);
         mPlayerAction.AddState(PlayerActionState.CLIMBING, OnStateClimb);
         mPlayerAction.SetInitialState(PlayerActionState.WALKING);
+
+        m_PrevPosition = transform.position;
     }
 
     // Use this for initialization
@@ -79,12 +83,12 @@ public class PlayerController : UnitData, IController, IHealable
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(mPlayerAction.GetCurrentState());
         if (!GameSceneController.Inst().IsInGame())
+        {
             return;
-        // update each state
-        mPlayerAction.Update();
-
+        }
+        
         // initialize buffer
         m_IsGroundedBuffed[0] = m_IsGroundedBuffed[1];
         m_IsGroundedBuffed[1] = false;
@@ -92,17 +96,17 @@ public class PlayerController : UnitData, IController, IHealable
         m_GroundedCollider[1] = new List<Collider2D>();
 
         // overlap check
-        var mask = LayerMask.GetMask("Map", "PassableMap");
+        var mask = LayerMask.GetMask("Map", "PassableMap", "MovableObject");
         Vector2 ground = GroundPoint.position;
         var collidings = Physics2D.OverlapAreaAll(ground + new Vector2(-0.3f, -0.25f),
             ground + new Vector2(0.3f, 0.25f), mask);
-
+        Debug.Log(collidings.Length);
         if (collidings.Length != 0)
         {
             foreach (var colliding in collidings)
             {
                 if (mCollisionIgnoreColliders.Length == 0
-                    || Array.Exists(mCollisionIgnoreColliders, element => element != colliding))
+                    || !Array.Exists(mCollisionIgnoreColliders, element => element == colliding))
                 {
                     m_IsGroundedBuffed[1] = true;
                     m_GroundedCollider[1].Add(colliding);
@@ -113,13 +117,30 @@ public class PlayerController : UnitData, IController, IHealable
         // sets
         m_IsGrounded = m_IsGroundedBuffed[0] || m_IsGroundedBuffed[1];
 
+
+        // update each state
+        mPlayerAction.Update();
+
     }
 
     public override void LateUpdate()
     {
         base.LateUpdate();
-        if (GameSceneController.Inst().IsInGame())
-            mPlayerAction.LateUpdate();
+        if (!GameSceneController.Inst().IsInGame())
+        {
+            transform.position = m_PrevPosition;
+            anim.enabled = false;
+            m_IsPaused = true;
+            rigid.velocity = new Vector3();
+            return;
+        }
+        else if (m_IsPaused)
+        {
+            anim.enabled = true;
+        }
+
+        m_PrevPosition = transform.position;
+        mPlayerAction.LateUpdate();
     }
     
     void OnStateWalking()
@@ -249,6 +270,8 @@ public class PlayerController : UnitData, IController, IHealable
 
         // check collision with unmovable walls
         var mask = LayerMask.GetMask("Map", "PassableMap");
+        if (!mPlayerAction.IsCurrentState(PlayerActionState.WALKING))
+            mask = LayerMask.GetMask("Map", "PassableMap", "MovableObject");
         Vector2 current = transform.position;
         Rect tmp = m_WallCollision;
         tmp.x = tmp.x * dir_x;
@@ -278,6 +301,15 @@ public class PlayerController : UnitData, IController, IHealable
         {
             Flip();
         }
+
+    }
+
+    void StepUp(float dir_x)
+    {
+        // raycast available move point
+        
+        // force moving
+
 
     }
 
@@ -331,7 +363,7 @@ public class PlayerController : UnitData, IController, IHealable
     void Flip()
     {
         m_FacingRight = !m_FacingRight;
-
+        
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
@@ -363,4 +395,5 @@ public class PlayerController : UnitData, IController, IHealable
             CurrentHP = MaxHP;
         }
     }
+
 }

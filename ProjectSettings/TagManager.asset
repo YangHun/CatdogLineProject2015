@@ -18,7 +18,7 @@ TagManager:
   - PassableMap
   - Player
   - NPC
-  - 
+  - MovableObject
   - 
   - 
   - 
