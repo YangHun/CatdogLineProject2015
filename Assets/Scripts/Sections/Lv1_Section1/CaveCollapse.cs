@@ -26,6 +26,7 @@ public class CaveCollapse : TriggerZone {
             Debug.Log("Sam : Player In Range");
             Barrier.SetActive(true);
             Barrier.GetComponent<SpriteRenderer>().color = new Color(255,255,255,0);
+            Barrier.GetComponentInChildren<ParticleController>().ActivateParticle();
             StartCoroutine(FadeIn());
         }
     }
