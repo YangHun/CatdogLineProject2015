@@ -156,13 +156,14 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 
     void Warning()
     {
+        /*
         Section tmp = SectionManager.Inst().GetCurrentSection();
         //if (CurrentSection != tmp)
         //{
         CurrentSection = tmp;
         if (CurrentSection == null)
             return;
-        Deadable = CurrentSection.transform.Find("Objects").Find("Deadable").GetComponentsInChildren<UnitData>();
+        Deadable = CurrentSection.transform.Find("Objects").GetComponentsInChildren<UnitData>();
         if (Deadable == null)
             return;
         if (WarningUI.Length != Deadable.Length)
@@ -215,5 +216,6 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
                 }
             }
         }
+        */
     }
 }

@@ -13,7 +13,7 @@ public class PlayerController : UnitData, IController, IHealable
     private Animator anim;
 
     // horizontal move
-    private bool m_FacingRight = true;
+    public bool m_FacingRight = true;
 
     // vertical move
     public Transform GroundPoint = null;
@@ -83,7 +83,7 @@ public class PlayerController : UnitData, IController, IHealable
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(mPlayerAction.GetCurrentState());
+        //Debug.Log(mPlayerAction.GetCurrentState());
         if (!GameSceneController.Inst().IsInGame())
         {
             return;
@@ -100,7 +100,7 @@ public class PlayerController : UnitData, IController, IHealable
         Vector2 ground = GroundPoint.position;
         var collidings = Physics2D.OverlapAreaAll(ground + new Vector2(-0.3f, -0.25f),
             ground + new Vector2(0.3f, 0.25f), mask);
-        Debug.Log(collidings.Length);
+
         if (collidings.Length != 0)
         {
             foreach (var colliding in collidings)
@@ -288,7 +288,10 @@ public class PlayerController : UnitData, IController, IHealable
         }
 
 
-        rigid.velocity = new Vector3(dir_x * m_Speed, rigid.velocity.y, 0);
+        if (mPlayerAction.IsCurrentState(PlayerActionState.WALKING) && dir_x != 0)
+            StepUp(current + new Vector2(dir_x * (m_Speed * GameTime.deltaTime + 0.4f), -1), 0.5f);
+
+        rigid.velocity = new Vector3(dir_x * m_Speed, rigid.velocity.y, 1);
 
 
         // set animation
@@ -304,12 +307,28 @@ public class PlayerController : UnitData, IController, IHealable
 
     }
 
-    void StepUp(float dir_x)
+    void StepUp(Vector2 nextPosition, float up)
     {
-        // raycast available move point
-        
-        // force moving
+        // check stepup available
+        int mask = LayerMask.GetMask("Map", "MovableObject");
+        var overlapdown = Physics2D.OverlapPoint(nextPosition, mask);
+        var overlapup = Physics2D.OverlapPoint(nextPosition + new Vector2(0, up), mask);
+        if (overlapup != null || overlapdown == null || overlapdown.Equals(overlapup))
+            return;
 
+        // raycast available move point
+        var collide = Physics2D.Raycast(nextPosition + new Vector2(0, up), new Vector2(0, -1), 0.5f, mask);
+        var delta = collide.point - nextPosition;
+        if (Vector2.SqrMagnitude(delta) > 1)
+            return;
+
+
+        // force moving
+        Vector2 current = transform.position;
+        transform.position = current + delta;
+        rigid.velocity = new Vector2(0, 0);
+        if(Debug.isDebugBuild)
+            Debug.Log("Stepup for : " + delta.y);
 
     }
 
