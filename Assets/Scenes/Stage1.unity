@@ -372,6 +372,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 0
+  PlayEffectOnHealthy: 1
 --- !u!61 &42713835
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -656,6 +657,7 @@ MonoBehaviour:
     type: 2}
   m_HealingEffectGreen: {fileID: 177760, guid: e1b9e882e62141b428da2bc99460b87e, type: 2}
   m_HealingEffectBlue: {fileID: 193510, guid: 4c2a852f2c17cc5458c20cca0fe8c5b1, type: 2}
+  m_HeathyObject: {fileID: 197864, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
 --- !u!1 &68642386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,6 +1564,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 90
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   mVineDown: {fileID: 1861236621}
   mVineUp: {fileID: 11422565}
@@ -1761,6 +1764,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 0
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmountJS: 10
   DamageAmount: 3
@@ -2788,6 +2792,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   Leaf_1_On: {fileID: 520559936}
   Leaf_1_Off: {fileID: 201946892}
@@ -3264,6 +3269,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   UnHealed: {fileID: 31994372}
   Healed: {fileID: 241377452}
@@ -3573,6 +3579,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 1
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmount: 0
   m_Type: 1
@@ -4910,6 +4917,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
 --- !u!114 &512923519
 MonoBehaviour:
@@ -5376,6 +5384,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 0
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmountJS: 10
   DamageAmount: 3
@@ -5773,6 +5782,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 1
+  PlayEffectOnHealthy: 1
   vine: {fileID: 1938400600}
   MoveSpeed_Normal: 1
   MoveSpeed_Attacked: 2
@@ -6288,6 +6298,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 50
   Healthy: 0
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmount: 2
   m_Type: 1
@@ -6517,6 +6528,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   Leaf1: {fileID: 1053507825}
 --- !u!61 &627680314
@@ -6846,6 +6858,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   Leaf1: {fileID: 336228049}
 --- !u!1 &638789219
@@ -7263,6 +7276,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 1
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmount: 0
   m_Type: 1
@@ -8032,6 +8046,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
 --- !u!58 &794182901
 CircleCollider2D:
@@ -8631,6 +8646,52 @@ Transform:
   - {fileID: 2112916440}
   m_Father: {fileID: 1599546290}
   m_RootOrder: 4
+--- !u!1001 &885829848
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 428272, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428272, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428272, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428272, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428272, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428272, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428272, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 428272, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 197864, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a03b22e181b13114daf33e8bc216d0bd, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &887550114
 GameObject:
   m_ObjectHideFlags: 0
@@ -9277,6 +9338,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 90
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   mVineDown: {fileID: 486056303}
   mVineUp: {fileID: 491015650}
@@ -9393,6 +9455,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 0
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmount: 2
   m_Type: 0
@@ -10764,6 +10827,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   UnHealed: {fileID: 1070784331}
   Healed: {fileID: 1997531400}
@@ -11276,6 +11340,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   UnHealed: {fileID: 508761332}
   Healed: {fileID: 1960732206}
@@ -12591,6 +12656,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 0
 --- !u!212 &1126522315
 SpriteRenderer:
@@ -13102,6 +13168,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 1
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmount: 0
   m_Type: 1
@@ -13403,6 +13470,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 1
+  PlayEffectOnHealthy: 1
   vine: {fileID: 2100884465}
   MoveSpeed_Normal: 1
   MoveSpeed_Attacked: 2
@@ -13574,6 +13642,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   BPOff: {fileID: 1935597128}
   BPOn: {fileID: 1893386720}
@@ -14034,6 +14103,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 0
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmountJS: 20
   DamageAmount: 3
@@ -15178,6 +15248,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 90
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 1
   mVineDown: {fileID: 1584372304}
   mVineUp: {fileID: 652366092}
@@ -15226,6 +15297,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 0
 --- !u!58 &1346847204
 CircleCollider2D:
@@ -15310,6 +15382,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 0
 --- !u!61 &1350012131
 BoxCollider2D:
@@ -15649,6 +15722,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 1
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmount: 0
   m_Type: 1
@@ -16260,6 +16334,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 1
+  PlayEffectOnHealthy: 1
   vine: {fileID: 1350012130}
   MoveSpeed_Normal: 1
   MoveSpeed_Attacked: 2
@@ -17859,6 +17934,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 0
+  PlayEffectOnHealthy: 1
   DamageSecond: 3
   DamageAmountJS: 20
   DamageAmount: 3
@@ -18250,6 +18326,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 50
   Healthy: 0
+  PlayEffectOnHealthy: 1
   DamageSecond: 0
   DamageAmount: 0
   m_Type: 0
@@ -20032,6 +20109,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 100
   Healthy: 1
+  PlayEffectOnHealthy: 1
   vine: {fileID: 1126522314}
   MoveSpeed_Normal: 1
   MoveSpeed_Attacked: 2
@@ -20864,9 +20942,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 100
   CurrentHP: 100
-  Healthy: 0
+  Healthy: 1
+  PlayEffectOnHealthy: 0
   m_Speed: 6
   m_JumpSpeed: 15
+  m_FacingRight: 1
   GroundPoint: {fileID: 1116834141}
   m_IsJumpCoolDownOn: 1
   m_ClimbSpeed: 3
@@ -21894,6 +21974,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 0
 --- !u!212 &1938400601
 SpriteRenderer:
@@ -23654,6 +23735,7 @@ MonoBehaviour:
   MaxHP: 100
   CurrentHP: 98
   Healthy: 0
+  PlayEffectOnHealthy: 1
   m_Type: 0
 --- !u!212 &2100884466
 SpriteRenderer:
