@@ -396,4 +396,8 @@ public class PlayerController : UnitData, IController, IHealable
         }
     }
 
+    public bool IsGrounded()
+    {
+        return m_IsGrounded;
+    }
 }
