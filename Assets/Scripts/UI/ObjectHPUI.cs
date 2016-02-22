@@ -3,18 +3,16 @@ using System.Collections;
 using UnityEngine.UI;
 public class ObjectHPUI : MonoBehaviour {
 
-    public Text A;
-    public ObjectHurted B;
+    public Image A = null;
+    public UnitData Unit = null;
     private Vector2 pos;
     private Vector2 viewportPoint;
-
+    public float a;
 	void Update () {
-        pos = B.GetPOS();
-        viewportPoint = Camera.main.WorldToViewportPoint(pos);
-        A.rectTransform.anchorMin = viewportPoint;
-        A.rectTransform.anchorMax = viewportPoint; 
-        A.text = B.GetHP().ToString();
-        if (B.IsHealthy() || B.GetHP() <= 0)
-            Destroy(A.gameObject);
+        if (Unit == null)
+            return;
+        pos = Unit.transform.position;
+        viewportPoint = Camera.main.WorldToScreenPoint(pos);
+        A.rectTransform.position = new Vector2(viewportPoint.x, viewportPoint.y + a);
 	}
 }

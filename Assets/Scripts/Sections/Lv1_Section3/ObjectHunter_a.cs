@@ -3,7 +3,8 @@ using System.Collections;
 
 public class ObjectHunter_a : MonoBehaviour {
 
-    private float WaitTime = 0.0f;
+    public float WaitTime = 0.0f;
+    private bool Wait = true;
     public bool Move = false;
     public Rigidbody2D rigid;
     private float ReloadTime = 3.0f;
@@ -17,8 +18,11 @@ public class ObjectHunter_a : MonoBehaviour {
 	void Update () {
 	    if (WaitTime > 0)
             WaitTime -= GameTime.deltaTime;
-        if (WaitTime <= 0 && !Move)
+        if (WaitTime <= 0 && Wait)
+        {
             Move = true;
+            Wait = false;
+        }
         if (Move)
         {
             if (this.transform.position.x <= 128.5 && !FirstJump)

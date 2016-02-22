@@ -72,8 +72,21 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 	public GameObject HealButton = null;
 	public GameObject InteractButton = null;
 
-	private Section CurrentSection = null;
+	public Section CurrentSection = null;
 	public GameObject WarningUI = null;
+
+    [SerializeField]
+    private Image prefabHPbar = null;
+    public Image[] HPbarUI;
+    public UnitData[] Units;
+    [SerializeField]
+    private GameObject ObjectHPUI;
+
+
+    void Update()
+    {
+        ObjectHP();
+    }
 
 	void LateUpdate()
 	{
@@ -237,4 +250,31 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 			yield return null;
 		}
 	}
+
+    public void ObjectHP()
+    {
+        Section tmp = SectionManager.Inst().GetCurrentSection();
+        CurrentSection = tmp;
+        if (CurrentSection == null)
+            return;
+        Units = CurrentSection.transform.Find("Objects").Find("Deadable").GetComponentsInChildren<UnitData>();
+        if (Units == null)
+            return;
+        if (Units.Length != HPbarUI.Length)
+        {
+            for (int i = 0; i < HPbarUI.Length; ++i)
+            {
+                Destroy(HPbarUI[i].gameObject);
+            }
+            HPbarUI = new Image[Units.Length];
+            for (int i = 0; i < Units.Length; ++i)
+            {
+                HPbarUI[i] = (Image)Instantiate(prefabHPbar);
+                HPbarUI[i].GetComponent<ObjectHPUI>().Unit = Units[i];
+                HPbarUI[i].transform.parent = ObjectHPUI.transform;
+            }
+        }
+        for (int i = 0; i < HPbarUI.Length; ++i)
+            HPbarUI[i].rectTransform.localScale = new Vector2(Units[i].GetHP() / 100f, 1);
+    }
 }
