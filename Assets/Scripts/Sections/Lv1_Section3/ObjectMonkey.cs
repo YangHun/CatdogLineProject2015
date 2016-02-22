@@ -15,9 +15,10 @@ public class ObjectMonkey : UnitData {
     private bool climbing = false;
     public bool hide = false;
 
-    void Start()
-    {
-        MovingTime = Random.Range(1, 5);
+	public override void Start()
+	{
+		base.Start();
+		MovingTime = Random.Range(1, 5);
         Direction = Random.Range(1, 0);
         if (Direction == 0)
             Direction = -1;

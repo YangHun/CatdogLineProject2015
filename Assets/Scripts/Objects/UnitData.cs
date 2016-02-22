@@ -10,10 +10,27 @@ public class UnitData : ObjectData
     [SerializeField]
     private bool Healthy = false;
 
-    [SerializeField]
-    private bool PlayEffectOnHealthy = true;
+	[SerializeField]
+	private bool PlayEffectOnHealthy = true;
+	[SerializeField]
+	private bool PlayWarningOnDanger = true;
 
-    public virtual void LateUpdate()
+	private WarningManager m_WarningManager = null;
+
+	public virtual void Start()
+	{
+		if(PlayWarningOnDanger == true)
+			m_WarningManager = GameUIManager.Inst().CreateWarningManager(this, (unit) => { return unit.CurrentHP < 30; });
+	}
+
+	public override void OnDestroyObject()
+	{
+		base.OnDestroyObject();
+		if (m_WarningManager != null)
+			GameUIManager.Inst().DestroyWarningManager(m_WarningManager);
+    }
+
+	public virtual void LateUpdate()
     {
         if (CurrentHP <= 0)
             UnitManager.Inst().OnDie(this);

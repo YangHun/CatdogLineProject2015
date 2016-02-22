@@ -53,9 +53,10 @@ public class ObjectVine : UnitData, IInteractor, IHealable {
     }
 
 
-    void Start()
-    {
-        if (mVineDown != null)
+	public override void Start()
+	{
+		base.Start();
+		if (mVineDown != null)
         {
             mVineDown.AddListener(TriggerType.ENTER, OnPlayerEnter);
             mVineDown.AddListener(TriggerType.EXIT, OnPlayerExit);

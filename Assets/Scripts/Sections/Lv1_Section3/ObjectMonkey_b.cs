@@ -5,9 +5,10 @@ public class ObjectMonkey_b : UnitData {
 
     private float t = 8;
 
-    void Start()
-    {
-        StartCoroutine(ClimbUpDown());
+	public override void Start()
+	{
+		base.Start();
+		StartCoroutine(ClimbUpDown());
     }
 
     IEnumerator ClimbUpDown()

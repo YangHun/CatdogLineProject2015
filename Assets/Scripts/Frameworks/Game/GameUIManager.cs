@@ -2,16 +2,63 @@
 using UnityEngine.UI;
 using System.Collections;
 
+
+public delegate bool NeedsWarning(UnitData unit);
+
+public class WarningManager
+{
+	GameObject sign;
+	UnitData target;
+	NeedsWarning checker;
+	bool m_IsDestroyed = false;
+
+	public WarningManager(GameObject sign, UnitData unit, NeedsWarning check)
+	{
+		this.sign = sign;
+		target = unit;
+		checker = check;
+	}
+
+	public bool NeedWarning()
+	{
+		if (checker == null)
+			return false;
+		return checker(target);
+	}
+
+	public void UpdatePosition()
+	{
+		sign.transform.position = target.transform.position;
+	}
+
+	public void Destroy()
+	{
+		GameObject.Destroy(sign);
+		m_IsDestroyed = true;
+	}
+
+	public void SetEnable(bool enable)
+	{
+		sign.SetActive(enable);
+	}
+
+	public bool IsDestroyed()
+	{
+		return m_IsDestroyed;
+	}
+
+};
+
 public class GameUIManager : SingleTonBehaviour<GameUIManager>
 {
 
-    public GameObject InGameCanvas = null;
-    public GameObject GameMenuCanvas = null;
+	public GameObject InGameCanvas = null;
+	public GameObject GameMenuCanvas = null;
 
 
 	// InGame UIs
 	public Sprite TypeDefault = null;
-	public Sprite TypeBlue  = null;
+	public Sprite TypeBlue = null;
 	public Sprite TypeGreen = null;
 	public Image HealTypeUI = null;
 	public Image PlayerHPBar = null;
@@ -20,32 +67,22 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 
 
 	public GameObject MoveLeft = null;
-    public GameObject MoveRight = null;
-    public GameObject MoveJump = null;
-    public GameObject HealButton = null;
-    public GameObject InteractButton = null;
+	public GameObject MoveRight = null;
+	public GameObject MoveJump = null;
+	public GameObject HealButton = null;
+	public GameObject InteractButton = null;
 
-    private Section CurrentSection = null;
-    public UnitData[] Deadable;
-    public Image[] WarningUI;
-    [SerializeField]
-    private Camera MainCamera;
-    [SerializeField]
-    private Image PrefabWarning;
+	private Section CurrentSection = null;
+	public GameObject WarningUI = null;
 
-    void Update()
-    {
-        Warning();
-    }
+	void LateUpdate()
+	{
+		var scene = GameSceneController.Inst();
+		if (scene.IsInGame() && !scene.IsCinematic())
+			if (InteractButton != null)
+				InteractButton.SetActive(InteractionManager.Inst().IsInteractinButtonEnabled());
 
-    void LateUpdate()
-    {
-        var scene = GameSceneController.Inst();
-        if (scene.IsInGame() && !scene.IsCinematic())
-            if (InteractButton != null)
-                InteractButton.SetActive(InteractionManager.Inst().IsInteractinButtonEnabled());
-
-        var player = PlayerManager.Inst().GetPlayer().GetComponent<UnitData>();
+		var player = PlayerManager.Inst().GetPlayer().GetComponent<UnitData>();
 		if (PlayerHPBar != null && player != null)
 			PlayerHPBar.rectTransform.localScale = new Vector3(player.GetHP() / 100, 1, 1);
 		if (PlayerGuiltyBar != null && player != null)
@@ -54,172 +91,150 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 
 
 
-    public void OnPlayerHealTypeChange(HealType type)
-    {
-        if (HealTypeUI == null)
-            return;
-        switch (type)
+	public void OnPlayerHealTypeChange(HealType type)
+	{
+		if (HealTypeUI == null)
+			return;
+		switch (type)
 		{
 			case HealType.DEFAULT:
 				HealTypeUI.sprite = TypeDefault;
 				break;
 			case HealType.BLUE:
 				HealTypeUI.sprite = TypeBlue;
-                break;
-            case HealType.GREEN:
+				break;
+			case HealType.GREEN:
 				HealTypeUI.sprite = TypeGreen;
 				break;
-            case HealType.RED:
+			case HealType.RED:
 				HealTypeUI.sprite = null;
 				break;
-            case HealType.YELLOW:
+			case HealType.YELLOW:
 				HealTypeUI.sprite = null;
 				break;
-        }
+		}
+	}
+
+	public void EnableInteractButton()
+	{
+		if (InteractButton == null)
+			return;
+
+		InteractButton.SetActive(true);
+	}
+
+	public void DisableInteractButton()
+	{
+		if (InteractButton == null)
+			return;
+
+		InteractButton.SetActive(false);
+	}
+
+	public void OnGameMenu()
+	{
+		ActiveCanvas(false, true);
+	}
+
+	public void OnIngame()
+	{
+		ActiveCanvas(true, false);
+	}
+
+	public void OnCinematic()
+	{
+		ActiveCanvas(true, false, true);
+	}
+
+	public void OnDisabled()
+	{
+		ActiveCanvas(false, false);
+	}
+
+	private void ActiveCanvas(bool ingame, bool gamemenu) { ActiveCanvas(ingame, gamemenu, false); }
+	private void ActiveCanvas(bool ingame, bool gamemenu, bool cinematic)
+	{
+		if (GameMenuCanvas != null)
+		{
+			GameMenuCanvas.SetActive(gamemenu);
+		}
+		if (InGameCanvas != null)
+		{
+			InGameCanvas.SetActive(ingame);
+		}
+
+		if (cinematic && ingame)
+		{
+			if (MoveLeft != null)
+			{
+				InputManager.Inst().OnLeftReleased();
+				MoveLeft.SetActive(false);
+			}
+			if (MoveRight != null)
+			{
+				InputManager.Inst().OnRightReleased();
+				MoveRight.SetActive(false);
+			}
+			if (MoveJump != null)
+			{
+				InputManager.Inst().OnJumpReleased();
+				MoveJump.SetActive(false);
+			}
+			if (HealButton != null)
+				HealButton.SetActive(false);
+			if (InteractButton != null)
+				InteractButton.SetActive(false);
+		}
+		else
+		{
+			if (MoveLeft != null)
+				MoveLeft.SetActive(true);
+			if (MoveRight != null)
+				MoveRight.SetActive(true);
+			if (MoveJump != null)
+				MoveJump.SetActive(true);
+			if (HealButton != null)
+				HealButton.SetActive(true);
+			if (InteractButton != null)
+				InteractButton.SetActive(true);
+		}
+	}
+
+
+
+	public WarningManager CreateWarningManager(UnitData unit, NeedsWarning check = null)
+	{
+		GameObject warning = Instantiate(WarningUI) as GameObject;
+		WarningManager manager = new WarningManager(warning, unit, check);
+
+		StartCoroutine(ManageWarning(manager));
+
+		return manager;
+	}
+
+	public void DestroyWarningManager(WarningManager manager)
+	{
+		manager.Destroy();
     }
 
-    public void EnableInteractButton()
-    {
-        if (InteractButton == null)
-            return;
+	IEnumerator ManageWarning(WarningManager manager)
+	{
+		while (true)
+		{
+			if (manager.NeedWarning())
+			{
+				// destroy sign
+				manager.UpdatePosition();
+				manager.SetEnable(true);
+			}
+			else
+				manager.SetEnable(false);
 
-        InteractButton.SetActive(true);
-    }
 
-    public void DisableInteractButton()
-    {
-        if (InteractButton == null)
-            return;
+			if (manager.IsDestroyed())
+				break;
 
-        InteractButton.SetActive(false);
-    }
-
-    public void OnGameMenu()
-    {
-        ActiveCanvas(false, true);
-    }
-
-    public void OnIngame()
-    {
-        ActiveCanvas(true, false);
-    }
-
-    public void OnCinematic()
-    {
-        ActiveCanvas(true, false, true);
-    }
-
-    public void OnDisabled()
-    {
-        ActiveCanvas(false, false);
-    }
-
-    private void ActiveCanvas(bool ingame, bool gamemenu) { ActiveCanvas(ingame, gamemenu, false); }
-    private void ActiveCanvas(bool ingame, bool gamemenu, bool cinematic)
-    {
-        if (GameMenuCanvas != null)
-        {
-            GameMenuCanvas.SetActive(gamemenu);
-        }
-        if (InGameCanvas != null)
-        {
-            InGameCanvas.SetActive(ingame);
-        }
-
-        if (cinematic && ingame)
-        {
-            if (MoveLeft != null)
-            {
-                InputManager.Inst().OnLeftReleased();
-                MoveLeft.SetActive(false);
-            }
-            if (MoveRight != null)
-            {
-                InputManager.Inst().OnRightReleased();
-                MoveRight.SetActive(false);
-            }
-            if (MoveJump != null)
-            {
-                InputManager.Inst().OnJumpReleased();
-                MoveJump.SetActive(false);
-            }
-            if (HealButton != null)
-                HealButton.SetActive(false);
-            if (InteractButton != null)
-                InteractButton.SetActive(false);
-        }
-        else
-        {
-            if (MoveLeft != null)
-                MoveLeft.SetActive(true);
-            if (MoveRight != null)
-                MoveRight.SetActive(true);
-            if (MoveJump != null)
-                MoveJump.SetActive(true);
-            if (HealButton != null)
-                HealButton.SetActive(true);
-            if (InteractButton != null)
-                InteractButton.SetActive(true);
-        }
-    }
-
-    void Warning()
-    {
-        /*
-        Section tmp = SectionManager.Inst().GetCurrentSection();
-        CurrentSection = tmp;
-        if (CurrentSection == null)
-            return;
-        Deadable = CurrentSection.transform.Find("Objects").GetComponentsInChildren<UnitData>();
-        if (Deadable == null)
-            return;
-        if (WarningUI.Length != Deadable.Length)
-        {
-            for (int i = 0; i < WarningUI.Length; ++i)
-            {
-                Destroy(WarningUI[i].gameObject);
-            }
-            WarningUI = new Image[Deadable.Length];
-            for (int i = 0; i < Deadable.Length; ++i)
-            {
-                WarningUI[i] = (Image)Instantiate(PrefabWarning);
-                WarningUI[i].transform.parent = InGameCanvas.transform.Find("WarningUI").transform;
-            }
-        }
-        if (WarningUI == null)
-            return;
-        for (int i = 0; i < WarningUI.Length; ++i)
-        {
-            if (Deadable[i] == null || Deadable[i].IsHealthy())
-            {
-                WarningUI[i].gameObject.SetActive(false);
-                continue;
-            }
-            Vector3 b = Deadable[i].transform.position - MainCamera.transform.position;
-            Vector3 a = MainCamera.WorldToScreenPoint(b);
-            if (Deadable[i].GetComponentInChildren<SpriteRenderer>().isVisible)
-            {
-                WarningUI[i].gameObject.SetActive(false);
-            }
-            else
-            {
-                WarningUI[i].gameObject.SetActive(true);
-                if (Mathf.Abs(b.y / b.x) >= MainCamera.pixelHeight / (float) MainCamera.pixelWidth)
-                {
-                    if (b.y > 0)
-                        WarningUI[i].rectTransform.anchoredPosition = new Vector2(b.x / b.y * (MainCamera.pixelHeight / 2 - 5), MainCamera.pixelHeight / 2 - 5);
-                    else
-                        WarningUI[i].rectTransform.anchoredPosition = new Vector2(b.x / b.y * (-MainCamera.pixelHeight / 2 - 5), -MainCamera.pixelHeight / 2 + 5);
-                }
-                else
-                {
-                    if (b.x > 0)
-                        WarningUI[i].rectTransform.anchoredPosition = new Vector2(MainCamera.pixelWidth / 2 - 5, b.y / b.x * (MainCamera.pixelWidth / 2 - 5));
-                    else
-                        WarningUI[i].rectTransform.anchoredPosition = new Vector2(-MainCamera.pixelWidth / 2 + 5, b.y / b.x * (-MainCamera.pixelWidth / 2 - 5));
-                }
-            }
-        }
-        */
-    }
+			yield return null;
+		}
+	}
 }

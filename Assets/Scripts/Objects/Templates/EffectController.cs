@@ -1,21 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ParticleController : ObjectData {
-    public ParticleSystem m_Particle = null;
-    private bool m_IsActivated = false;
+public class EffectController : ObjectData
+{
+	public ParticleSystem m_Particle = null;
+	public SpriteRenderer m_Sprite = null;
+
+
+	public bool m_AutoActivate = false;
+	private bool m_IsActivated = false;
 
     public bool m_ShakeCamera = false;
     public float m_ShakeCameraRadius = 1;
     public float m_ShakeCameraTime = 3;
 
+	public bool m_ChangeAlpha = false;
+	public float m_AlphaDelta = 0.1f;
+
     // Use this for initialization
     void Start () {
         m_Particle = GetComponent<ParticleSystem>();
-        if (m_Particle == null)
-            Debug.LogError("No Particle System : " + name);
-
-	}
+		m_Sprite = GetComponent<SpriteRenderer>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -27,21 +33,42 @@ public class ParticleController : ObjectData {
 
         // shake camera
         if(m_ShakeCamera)
-        {
-            if(Debug.isDebugBuild)
-                Debug.Log("Shaking Camera for " + m_ShakeCameraTime + "seconds");
-            StartCoroutine(ShakeCamera(m_ShakeCameraTime, m_ShakeCameraRadius));
+		{
+			m_Particle.Play();
+			StartCoroutine(ShakeCamera(m_ShakeCameraTime, m_ShakeCameraRadius));
         }
 
+		if(m_ChangeAlpha)
+		{
+			var tmp = m_Sprite.color;
+			tmp.a -= m_AlphaDelta;
+			if (tmp.a < 0)
+			{
+				tmp.a = 0;
+				m_AlphaDelta *= -1;
+			}
+			if (tmp.a > 1)
+			{
+				tmp.a = 1;
+				m_AlphaDelta *= -1;
+			}
+
+			m_Sprite.color = tmp;
+		}
 
         m_IsActivated = false;
     }
 
-    public void ActivateParticle()
+    public void ActivateEffect()
     {
         m_IsActivated = true;
-        m_Particle.Play();
     }
+
+	void LateUpdate()
+	{
+		if (m_AutoActivate)
+			m_IsActivated = true;
+	}
 
 
 

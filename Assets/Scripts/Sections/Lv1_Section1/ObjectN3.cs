@@ -16,9 +16,10 @@ public class ObjectN3 : UnitData, IHealable
     public Transform Talk3 = null;
     public Transform Talk4 = null;
 
-    void Start()
-    {
-        Rigid = GetComponent<Rigidbody2D>();
+	public override void Start()
+	{
+		base.Start();
+		Rigid = GetComponent<Rigidbody2D>();
 
         Talk1.transform.position = new Vector2(1000f, 1000f);
         Talk2.transform.position = new Vector2(1000f, 1000f);

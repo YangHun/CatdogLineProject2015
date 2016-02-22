@@ -10,7 +10,7 @@ public class ObjectMole : ObjectHurted {
     private bool poisoning = false;
     private bool fix = false;
     [SerializeField]
-    private Breakable block;
+    public Breakable block;
     [SerializeField]
     private SpriteRenderer spriterender;
     Color PoisonedColor = new Color(0.5f, 0f, 0.5f);

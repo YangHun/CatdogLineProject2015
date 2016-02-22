@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Breakable : MonoBehaviour {
     [SerializeField]
-    private GameObject breaking;
+    public GameObject breaking;
     [SerializeField]
     private Rigidbody2D body, body2;
     private bool broken = false;

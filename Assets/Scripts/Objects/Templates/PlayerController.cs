@@ -72,9 +72,10 @@ public class PlayerController : UnitData, IController, IHealable
         m_PrevPosition = transform.position;
     }
 
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	public override void Start()
     {
+		base.Start();
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         playerCollision = GetComponent<Collider2D>();
