@@ -75,24 +75,24 @@ public class EffectController : ObjectData
     IEnumerator ShakeCamera(float time, float rad)
     {
         Camera cam = Camera.main;
-        Vector3 orig_pos = cam.transform.position;
-        Vector3 dest = orig_pos + new Vector3(Random.Range(-rad, rad), Random.Range(-rad, rad), 0);
+		Vector3 orig_pos = cam.transform.localPosition;
+        Vector3 dest = new Vector3(Random.Range(-rad, rad), Random.Range(-rad, rad), orig_pos.z);
 
         while(time > 0)
         {
-            Vector3 next = Vector3.Lerp(dest, cam.transform.position, GameTime.deltaTime);
-            cam.transform.position = next;
+            Vector3 next = Vector3.Lerp(dest, cam.transform.localPosition, GameTime.deltaTime);
+            cam.transform.localPosition = next;
 
             if (Vector3.Distance(next, dest) < 0.1f)
             {
-                dest = orig_pos + new Vector3(Random.Range(-rad, rad), Random.Range(-rad, rad), 0);
+                dest = new Vector3(Random.Range(-rad, rad), Random.Range(-rad, rad), orig_pos.z);
             }
             time -= GameTime.deltaTime;
             
             yield return null;
         }
 
-        cam.transform.position = orig_pos;
+        cam.transform.localPosition = orig_pos;
 
         yield return null;
     }
