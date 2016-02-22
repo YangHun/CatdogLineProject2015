@@ -10,6 +10,8 @@ public class InputManager : SingleTonBehaviour<InputManager>
     private bool RightClicked;
     [SerializeField]
     private bool JumpClicked;
+    [SerializeField]
+    private GameObject SoundOptionBox;
 
     void Awake()
     {
@@ -72,6 +74,13 @@ public class InputManager : SingleTonBehaviour<InputManager>
     public void OnSoundOptionButtonClick()
     {
         Debug.Log("Sound Option Button Pressed");
+        SoundOptionBox.SetActive(true);
+    }
+
+    public void OnBackToOptionButtonClick()
+    {
+        Debug.Log("Back To Option Button Pressed");
+        SoundOptionBox.SetActive(false);
     }
 
     public void OnLeftClicked() { LeftClicked = true; }
