@@ -305,7 +305,7 @@ public class PlayerController : UnitData, IController, IHealable
 
 
         if (mPlayerAction.IsCurrentState(PlayerActionState.WALKING) && dir_x != 0)
-            StepUp(current + new Vector2(dir_x * (m_Speed * GameTime.deltaTime + 0.4f), -1), 0.5f);
+            StepUp(current + new Vector2(dir_x * (m_Speed * GameTime.deltaTime + 0.375f), -1), 1f);
 
         rigid.velocity = new Vector3(dir_x * m_Speed, rigid.velocity.y, 1);
 
