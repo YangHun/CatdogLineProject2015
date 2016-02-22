@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectMole_b : MonoBehaviour {
+public class ObjectMole_b : Hideable {
 
     [SerializeField]
     private ObjectHatchDoor Door;

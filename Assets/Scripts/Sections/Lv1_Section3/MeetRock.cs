@@ -9,6 +9,7 @@ public class MeetRock : MonoBehaviour {
     private GameObject Rock1, Rock2;
     private bool a = false;
     private float t = 2.0f;
+
 	void Update () {
 	    if (a)
         {

@@ -7,8 +7,8 @@ public delegate bool NeedsWarning(UnitData unit);
 
 public class WarningManager
 {
-	GameObject sign;
-	UnitData target;
+	public GameObject sign;
+	public UnitData target;
 	NeedsWarning checker;
 	bool m_IsDestroyed = false;
 
@@ -234,7 +234,10 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 	{
 		while (true)
 		{
-			if (manager.NeedWarning())
+            if (manager.IsDestroyed())
+                break;
+
+            if (manager.NeedWarning())
 			{
 				// destroy sign
 				manager.UpdatePosition();
@@ -243,9 +246,6 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 			else
 				manager.SetEnable(false);
 
-
-			if (manager.IsDestroyed())
-				break;
 
 			yield return null;
 		}
