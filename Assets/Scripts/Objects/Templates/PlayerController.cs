@@ -305,7 +305,7 @@ public class PlayerController : UnitData, IController, IHealable
 
 
         if (mPlayerAction.IsCurrentState(PlayerActionState.WALKING) && dir_x != 0)
-            StepUp(current + new Vector2(dir_x * (m_Speed * GameTime.deltaTime + 0.375f), -1), 1f);
+            StepUp(current + new Vector2(dir_x * (m_Speed * GameTime.deltaTime + 0.4f), -1), 1f);
 
         rigid.velocity = new Vector3(dir_x * m_Speed, rigid.velocity.y, 1);
 
@@ -327,14 +327,14 @@ public class PlayerController : UnitData, IController, IHealable
     {
         // check stepup available
         int mask = LayerMask.GetMask("Map", "MovableObject");
-        var overlapdown = Physics2D.OverlapPoint(nextPosition, mask);
+		var overlapdown = Physics2D.OverlapPoint(nextPosition - new Vector2(0, 0.03f), mask);
         var overlapup = Physics2D.OverlapPoint(nextPosition + new Vector2(0, up), mask);
-        if (overlapup != null || overlapdown == null || overlapdown.Equals(overlapup))
+		Debug.Log("Info : " + overlapup + " " + overlapdown);
+		if (overlapup != null || overlapdown == null || overlapdown.Equals(overlapup))
             return;
-
         // raycast available move point
-        var collide = Physics2D.Raycast(nextPosition + new Vector2(0, up), new Vector2(0, -1), 0.5f, mask);
-        var delta = collide.point - nextPosition;
+        var collide = Physics2D.Raycast(nextPosition + new Vector2(0, up), new Vector2(0, -1), up + 0.3f, mask);
+        var delta = collide.point - nextPosition + new Vector2(0, 0.005f);
         if (Vector2.SqrMagnitude(delta) > 1)
             return;
 
