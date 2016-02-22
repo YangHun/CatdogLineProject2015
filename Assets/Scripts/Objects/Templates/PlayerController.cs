@@ -422,12 +422,15 @@ public class PlayerController : UnitData, IController, IHealable
     public void GiveGuilty(float amount)
     {
         MaxHP -= amount;
-        if (MaxHP <= 0)
-            SectionManager.Inst().GetCurrentSection().OnDie(this);
-        else if (CurrentHP > MaxHP)
-        {
-            CurrentHP = MaxHP;
-        }
+		if (MaxHP <= 0)
+		{
+			MaxHP = 0;
+		}
+		
+		if (CurrentHP > MaxHP)
+		{
+			CurrentHP = MaxHP;
+		}
     }
 
     public bool IsGrounded()

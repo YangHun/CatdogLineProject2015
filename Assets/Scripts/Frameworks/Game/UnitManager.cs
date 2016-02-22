@@ -18,11 +18,12 @@ public class UnitManager : SingleTonBehaviour<UnitManager>
         {
             // send destory message to section
             SectionManager.Inst().GetCurrentSection().OnDie(unit);
-        }
+		}
         else
         {
             // unit died on no section enabled
             unit.OnDestroyObject();
+			PlayerManager.Inst().GiveGuilty(10);
         }
     }
 

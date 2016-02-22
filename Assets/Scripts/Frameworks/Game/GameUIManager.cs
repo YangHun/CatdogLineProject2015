@@ -7,15 +7,19 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
 
     public GameObject InGameCanvas = null;
     public GameObject GameMenuCanvas = null;
-    
-
-    // InGame UIs
-    public Image HealTypeUI = null;
-    public Image PlayerHPBar = null;
 
 
+	// InGame UIs
+	public Sprite TypeDefault = null;
+	public Sprite TypeBlue  = null;
+	public Sprite TypeGreen = null;
+	public Image HealTypeUI = null;
+	public Image PlayerHPBar = null;
+	public Image PlayerGuiltyBar = null;
 
-    public GameObject MoveLeft = null;
+
+
+	public GameObject MoveLeft = null;
     public GameObject MoveRight = null;
     public GameObject MoveJump = null;
     public GameObject HealButton = null;
@@ -42,9 +46,11 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
                 InteractButton.SetActive(InteractionManager.Inst().IsInteractinButtonEnabled());
 
         var player = PlayerManager.Inst().GetPlayer().GetComponent<UnitData>();
-        if(PlayerHPBar != null && player != null)
-            PlayerHPBar.rectTransform.localScale = new Vector3(player.GetHP() / player.GetMaxHP(), 1, 1);
-    }
+		if (PlayerHPBar != null && player != null)
+			PlayerHPBar.rectTransform.localScale = new Vector3(player.GetHP() / 100, 1, 1);
+		if (PlayerGuiltyBar != null && player != null)
+			PlayerGuiltyBar.rectTransform.localScale = new Vector3(1 - player.GetMaxHP() / 100, 1, 1);
+	}
 
 
 
@@ -53,19 +59,22 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
         if (HealTypeUI == null)
             return;
         switch (type)
-        {
-            case HealType.BLUE:
-                HealTypeUI.color = new Color(0, 0, 255);
+		{
+			case HealType.DEFAULT:
+				HealTypeUI.sprite = TypeDefault;
+				break;
+			case HealType.BLUE:
+				HealTypeUI.sprite = TypeBlue;
                 break;
             case HealType.GREEN:
-                HealTypeUI.color = new Color(0, 255, 0);
-                break;
+				HealTypeUI.sprite = TypeGreen;
+				break;
             case HealType.RED:
-                HealTypeUI.color = new Color(255, 0, 0);
-                break;
+				HealTypeUI.sprite = null;
+				break;
             case HealType.YELLOW:
-                HealTypeUI.color = new Color(125, 125, 0);
-                break;
+				HealTypeUI.sprite = null;
+				break;
         }
     }
 

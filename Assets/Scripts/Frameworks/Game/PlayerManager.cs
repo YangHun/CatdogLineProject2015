@@ -104,6 +104,12 @@ public class PlayerManager : SingleTonBehaviour<PlayerManager>
         return m_Player;
     }
     
+
+	public void GiveGuilty(float amount)
+	{
+		m_Player.GetComponent<PlayerController>().GiveGuilty(amount);
+    }
+
     /// <summary>
     /// Make player climb.
     /// </summary>

@@ -53,8 +53,9 @@ public abstract class Section : MonoBehaviour
     }
 
     public virtual void OnDie(UnitData unit)
-    {
-        unit.OnDestroyObject();
+	{
+		PlayerManager.Inst().GiveGuilty(10);
+		unit.OnDestroyObject();
     }
 
     /// <summary>
