@@ -54,12 +54,10 @@ public class ParticleController : ObjectData {
         while(time > 0)
         {
             Vector3 next = Vector3.Lerp(dest, cam.transform.position, GameTime.deltaTime);
-            Debug.Log(next);
             cam.transform.position = next;
 
             if (Vector3.Distance(next, dest) < 0.1f)
             {
-                Debug.Log(time);
                 dest = orig_pos + new Vector3(Random.Range(-rad, rad), Random.Range(-rad, rad), 0);
             }
             time -= GameTime.deltaTime;
@@ -68,7 +66,6 @@ public class ParticleController : ObjectData {
         }
 
         cam.transform.position = orig_pos;
-        Debug.Log("ASDF");
 
         yield return null;
     }

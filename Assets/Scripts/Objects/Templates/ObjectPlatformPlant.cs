@@ -113,16 +113,16 @@ public class ObjectPlatformPlant : UnitData, IHealable {
             Healed.SetActive(true);
             m_ReturnTimer = ReturnTime;
         }
-
+        
         if (ReturnToUnHealed)
         {
             m_ReturnTimer -= GameTime.deltaTime;
 
-            if (ReturnTime < 0.0f)
+            if (m_ReturnTimer < 0.0f)
             {
                 m_PlantState.ChangeState(PlantStates.Deactivating);
                 CurrentHP = ReturnHP;
-                ReturnTime = 0.0f;
+                m_ReturnTimer = 0.0f;
             }
         }
     }

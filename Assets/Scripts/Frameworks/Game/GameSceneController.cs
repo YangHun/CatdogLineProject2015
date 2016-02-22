@@ -15,6 +15,8 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
     private StateMachine m_StateMachine = null;
     [SerializeField]
     private GameState m_InitialState = GameState.Disabled;
+
+    public AudioSource m_BGM = null;
     
     private bool m_CinematicEnabled = false;
 
@@ -28,6 +30,12 @@ public class GameSceneController : SingleTonBehaviour<GameSceneController>, Scen
         m_StateMachine.SetInitialState(m_InitialState);
 
         m_CinematicEnabled = false;
+    }
+
+    void Start()
+    {
+        if (m_BGM != null)
+            SoundManager.Inst().SetBGM(m_BGM);
     }
 
     void Update() { m_StateMachine.Update(); }

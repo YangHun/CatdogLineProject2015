@@ -120,6 +120,7 @@ public class PlayerController : UnitData, IController, IHealable
 
         // update each state
         mPlayerAction.Update();
+        SetJumpAnimation();
 
     }
 
@@ -145,6 +146,7 @@ public class PlayerController : UnitData, IController, IHealable
     
     void OnStateWalking()
     {
+        //anim.SetBool("IsJump", false);
         IgnoreCollision(mCollisionIgnoreColliders, false);
 
         //var bottomleft = new Vector2(transform.position.x - 1.1f, transform.position.y - 0.3f);
@@ -155,6 +157,7 @@ public class PlayerController : UnitData, IController, IHealable
         // remove grounded map objects
         if (m_IsGrounded)
         {
+            //anim.SetBool("IsJump", false);
             // remove grounded objects from collision ignores
             foreach (var ground in m_GroundedCollider[0])
                 if (overlaps.Contains(ground))
@@ -180,6 +183,7 @@ public class PlayerController : UnitData, IController, IHealable
         // check jumping
         if (InputManager.Inst().IsJumpClicked() && m_IsJumpCoolDownOn)
         {
+            
             IgnoreCollision(mCollisionIgnoreColliders, false);
             mPlayerAction.ChangeState(PlayerActionState.JUMPING, 1);
             StartCoroutine(DelayJump());
@@ -188,7 +192,7 @@ public class PlayerController : UnitData, IController, IHealable
 
     void OnStateJumping()
     {
-        if(mPlayerAction.IsFirstUpdate())
+        if (mPlayerAction.IsFirstUpdate())
         {
             IgnoreCollision(mCollisionIgnoreColliders, false);
 
@@ -256,6 +260,17 @@ public class PlayerController : UnitData, IController, IHealable
         var prev_position = transform.position;
         prev_position += new Vector3(m_ClimbDirection.x, m_ClimbDirection.y, 0) * m_ClimbSpeed * GameTime.deltaTime;
         transform.position = prev_position;
+    }
+
+    void SetJumpAnimation()
+    {
+        bool isjump = false;
+        if(mPlayerAction.IsFirstUpdate())
+        {
+            if (mPlayerAction.IsCurrentState(PlayerActionState.JUMPING))
+                isjump = true;
+        }
+        anim.SetBool("IsJump", isjump);
     }
 
     
