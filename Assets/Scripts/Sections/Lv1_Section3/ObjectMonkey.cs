@@ -14,6 +14,9 @@ public class ObjectMonkey : UnitData {
     private float WaitingTime;
     private bool climbing = false;
     public bool hide = false;
+    [SerializeField]
+    private GameSceneController Scene;
+
     void Start()
     {
         MovingTime = Random.Range(1, 5);
@@ -23,53 +26,58 @@ public class ObjectMonkey : UnitData {
     }
     void Update()
     {
-        if (!climbing)
+        if (!Scene.IsInGame())
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2();
+        else
         {
-            if (vine.IsHealthy())
+            if (!climbing)
             {
-                if (vine.transform.localPosition.x - this.transform.localPosition.x > 0)
+                if (vine.IsHealthy())
                 {
-                    this.transform.localPosition = new Vector3(this.transform.localPosition.x + 0.1f * MoveSpeed_Attacked, this.transform.localPosition.y);
+                    if (vine.transform.localPosition.x - this.transform.localPosition.x > 0)
+                    {
+                        this.transform.localPosition = new Vector3(this.transform.localPosition.x + 0.1f * MoveSpeed_Attacked, this.transform.localPosition.y);
+                    }
+                    else
+                    {
+                        this.transform.localPosition = new Vector3(this.transform.localPosition.x - 0.1f * MoveSpeed_Attacked, this.transform.localPosition.y);
+                    }
                 }
-                else
-                {
-                    this.transform.localPosition = new Vector3(this.transform.localPosition.x - 0.1f * MoveSpeed_Attacked, this.transform.localPosition.y);
-                }
-            }
 
-            if (!vine.IsHealthy())
-            {
-                if (!waiting)
+                if (!vine.IsHealthy())
                 {
-                    MovingTime -= GameTime.deltaTime;
-                    if (MovingTime <= 0)
+                    if (!waiting)
                     {
-                        MovingTime = Random.Range(1, 5);
-                        Direction *= -1;
-                    }
-                    if (MovingTime > 0)
-                    {
-                        if (attacked)
+                        MovingTime -= GameTime.deltaTime;
+                        if (MovingTime <= 0)
                         {
-                            this.transform.localPosition = new Vector3(this.transform.localPosition.x - 0.1f * MoveSpeed_Attacked * Direction, this.transform.localPosition.y);
+                            MovingTime = Random.Range(1, 5);
+                            Direction *= -1;
                         }
-                        else
+                        if (MovingTime > 0)
                         {
-                            this.transform.localPosition = new Vector3(this.transform.localPosition.x - 0.1f * MoveSpeed_Normal * Direction, this.transform.localPosition.y);
+                            if (attacked)
+                            {
+                                this.transform.localPosition = new Vector3(this.transform.localPosition.x - 0.1f * MoveSpeed_Attacked * Direction, this.transform.localPosition.y);
+                            }
+                            else
+                            {
+                                this.transform.localPosition = new Vector3(this.transform.localPosition.x - 0.1f * MoveSpeed_Normal * Direction, this.transform.localPosition.y);
+                            }
+                        }
+                        if (this.transform.localPosition.x <= 78.6 || this.transform.localPosition.x >= 98.87)
+                        {
+                            waiting = true;
+                            WaitingTime = 0.5f;
+                            MovingTime = 0;
                         }
                     }
-                    if (this.transform.localPosition.x <= 78.6 || this.transform.localPosition.x >= 98.87)
+                    if (waiting)
                     {
-                        waiting = true;
-                        WaitingTime = 0.5f;
-                        MovingTime = 0;
+                        WaitingTime -= GameTime.deltaTime;
+                        if (WaitingTime <= 0)
+                            waiting = false;
                     }
-                }
-                if (waiting)
-                {
-                    WaitingTime -= GameTime.deltaTime;
-                    if (WaitingTime <= 0)
-                        waiting = false;
                 }
             }
         }

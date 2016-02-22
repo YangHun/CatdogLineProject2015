@@ -157,8 +157,6 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
     void Warning()
     {
         Section tmp = SectionManager.Inst().GetCurrentSection();
-        //if (CurrentSection != tmp)
-        //{
         CurrentSection = tmp;
         if (CurrentSection == null)
             return;
@@ -178,9 +176,6 @@ public class GameUIManager : SingleTonBehaviour<GameUIManager>
                 WarningUI[i].transform.parent = InGameCanvas.transform.Find("WarningUI").transform;
             }
         }
-        //}
-        if (CurrentSection == null)
-            return;
         if (WarningUI == null)
             return;
         for (int i = 0; i < WarningUI.Length; ++i)
