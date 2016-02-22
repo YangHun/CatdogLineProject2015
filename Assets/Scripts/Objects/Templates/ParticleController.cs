@@ -66,7 +66,6 @@ public class ParticleController : ObjectData {
         }
 
         cam.transform.position = orig_pos;
-        Debug.Log("ASDF");
 
         yield return null;
     }

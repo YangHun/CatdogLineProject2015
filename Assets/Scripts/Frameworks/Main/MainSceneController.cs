@@ -35,6 +35,8 @@ public class MainSceneController : SingleTonBehaviour<MainSceneController>, Scen
         m_StateMachine.AddState(MainSceneStates.DEVLEOPER, OnStateDevelop);
         m_StateMachine.AddState(MainSceneStates.EXITING, OnStateExiting);
         m_StateMachine.SetInitialState(MainSceneStates.TITLE);
+
+        SoundManager.Inst().SetBGM(null);
     }
 
     void Update() { m_StateMachine.Update(); }
