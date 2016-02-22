@@ -42,9 +42,8 @@ public class UnitData : ObjectData
         if (CurrentHP >= MaxHP)
         {
             CurrentHP = MaxHP;
-            Healthy = true;
 
-            if (PlayEffectOnHealthy)
+            if (PlayEffectOnHealthy && !Healthy)
             {
                 EffectInfo info = new EffectInfo();
                 info.name = "Healthy";
@@ -54,6 +53,8 @@ public class UnitData : ObjectData
 
                 EffectManager.Inst().CreateEffect(info);
             }
+
+            Healthy = true;
         }
         else if (CurrentHP < MaxHP)
         {

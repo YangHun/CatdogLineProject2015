@@ -1,0 +1,309 @@
+fileFormatVersion: 2
+guid: 59a9e83270daac946af4001b696f4b3f
+timeCreated: 1456137670
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: "\uC810\uD504_0"
+    21300002: "\uC810\uD504_1"
+    21300004: "\uC810\uD504_2"
+    21300006: "\uC810\uD504_3"
+    21300008: "\uC810\uD504_4"
+    21300010: "\uC810\uD504_5"
+    21300012: "\uC810\uD504_6"
+    21300014: "\uC810\uD504_7"
+    21300016: "\uC810\uD504_8"
+    21300018: "\uC810\uD504_9"
+    21300020: "\uC810\uD504_10"
+    21300022: "\uC810\uD504_11"
+    21300024: "\uC810\uD504_12"
+    21300026: "\uC810\uD504_13"
+    21300028: "\uC810\uD504_14"
+    21300030: "\uC810\uD504_15"
+    21300032: "\uC810\uD504_16"
+    21300034: "\uC810\uD504_17"
+    21300036: "\uC810\uD504_18"
+    21300038: "\uC810\uD504_19"
+    21300040: "\uC810\uD504_20"
+    21300042: "\uC810\uD504_21"
+    21300044: "\uC810\uD504_22"
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 150
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: "\uC810\uD504_0"
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 1307
+        width: 223
+        height: 323
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_1"
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 1311
+        width: 242
+        height: 322
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_2"
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 1325
+        width: 204
+        height: 293
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_3"
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 1335
+        width: 178
+        height: 279
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_4"
+      rect:
+        serializedVersion: 2
+        x: 1716
+        y: 1336
+        width: 204
+        height: 293
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_5"
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 916
+        width: 244
+        height: 293
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_6"
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 1127
+        width: 38
+        height: 25
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_7"
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 919
+        width: 230
+        height: 307
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_8"
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 1145
+        width: 38
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_9"
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 927
+        width: 248
+        height: 295
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_10"
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 921
+        width: 240
+        height: 320
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_11"
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 921
+        width: 225
+        height: 310
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_12"
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 1070
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_13"
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 476
+        width: 267
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_14"
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 479
+        width: 298
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_15"
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 496
+        width: 267
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_16"
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 496
+        width: 277
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_17"
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 511
+        width: 300
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_18"
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 64
+        width: 293
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_19"
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 93
+        width: 234
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_20"
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 76
+        width: 259
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_21"
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 71
+        width: 298
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\uC810\uD504_22"
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 84
+        width: 296
+        height: 281
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
