@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ObjectN2 : UnitData, IHealable
 {
+    private Animator anim;
     private Rigidbody2D Rigid = null;
     [SerializeField]
     private HealType m_Type = HealType.GREEN;
@@ -16,6 +17,7 @@ public class ObjectN2 : UnitData, IHealable
 	{
 		base.Start();
 		Rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
         Talk1.transform.position = new Vector2(1000f, 1000f);
         Talk2.transform.position = new Vector2(1000f, 1000f);
@@ -38,11 +40,15 @@ public class ObjectN2 : UnitData, IHealable
             Talk3.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3f);
             if (this.transform.position.x < 37f)
             {
+                anim.SetBool("IsWalking", false);
                 Rigid.velocity = new Vector3(0f, 0f, 0f);
                 Talk4.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3f);
             }
             else
+            {
+                anim.SetBool("IsWalking", true);
                 Rigid.velocity = new Vector3(-5f, 0f, 0f);
+            }
         }
 
     }
