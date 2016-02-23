@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectMonkey : UnitData {
+public class ObjectMonkey : Hideable {
     public ObjectSickVine vine;
     [SerializeField]
     private float MoveSpeed_Normal;
@@ -13,7 +13,6 @@ public class ObjectMonkey : UnitData {
     private bool waiting = false;
     private float WaitingTime;
     private bool climbing = false;
-    public bool hide = false;
 
 	public override void Start()
 	{
@@ -109,11 +108,6 @@ public class ObjectMonkey : UnitData {
         }
     }
 
-    public bool IsHide()
-    {
-        return hide;
-    }
-
     IEnumerator ClimbUp()
     {
         float y = this.transform.localPosition.y;
@@ -122,6 +116,6 @@ public class ObjectMonkey : UnitData {
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, y + x);
             yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(1 / 60f));
         }
-        hide = true;
+        Sethide(true);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectMonkey_b : UnitData {
+public class ObjectMonkey_b : Hideable {
 
     private float t = 8;
 
@@ -21,7 +21,9 @@ public class ObjectMonkey_b : UnitData {
                 this.transform.localPosition = new Vector3(this.transform.localPosition.x, y + x);
                 yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(1 / 60f));
             }
+            Sethide(true);
             yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(2));
+            Sethide(false);
             y = this.transform.localPosition.y;
             for (float x = 0; x < 5; x += 5 / 120f)
             {

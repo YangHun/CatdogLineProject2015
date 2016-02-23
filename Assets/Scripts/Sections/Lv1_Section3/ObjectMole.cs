@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectMole : ObjectHurted {
+public class ObjectMole : Hideable {
 
     public float waiting;
     public float PoisonWaitTime;
@@ -13,6 +13,8 @@ public class ObjectMole : ObjectHurted {
     public Breakable block;
     [SerializeField]
     private SpriteRenderer spriterender;
+    [SerializeField]
+    private float DamageAmount, DamageSecond;
     Color PoisonedColor = new Color(0.5f, 0f, 0.5f);
     private float t;
 
@@ -90,6 +92,7 @@ public class ObjectMole : ObjectHurted {
 
     IEnumerator Appear()
     {
+        Sethide(false);
         for (int n = 0; n < 20; ++n)
         {
             this.transform.position += new Vector3(0,1.57f/20);
@@ -101,21 +104,17 @@ public class ObjectMole : ObjectHurted {
             this.transform.position -= new Vector3(0, 1.57f / 20);
             yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(1 / 60f));
         }
-        underground = true;
+        Sethide(true);
     }
 
     IEnumerator AppearFixed()
     {
+        Sethide(true);
         for (int n = 0; n < 20; ++n)
         {
             this.transform.position += new Vector3(0, 1.57f / 20);
             yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(1 / 60f));
         }
-    }
-
-    public bool IsHide()
-    {
-        return !underground;
     }
 
     IEnumerator AttackedHide()
@@ -125,5 +124,6 @@ public class ObjectMole : ObjectHurted {
             this.transform.position -= new Vector3(0, 1.57f / 5);
             yield return StartCoroutine(GameSceneController.Inst().WaitOnInGame(1 / 60f));
         }
+        Sethide(true);
     }
 }

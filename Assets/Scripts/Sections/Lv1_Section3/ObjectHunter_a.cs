@@ -10,12 +10,18 @@ public class ObjectHunter_a : MonoBehaviour {
     private float ReloadTime = 3.0f;
     private bool Reload = false;
     private bool FirstJump = false;
+    [SerializeField]
+    private GameObject Attackable;
+    public GameObject foo;
     void Start () {
         rigid = this.GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
+        if (ReloadTime > 0)
+            ReloadTime -= GameTime.deltaTime;
+        if (ReloadTime < 0 && !Move)
+            Move = true;
 	    if (WaitTime > 0)
             WaitTime -= GameTime.deltaTime;
         if (WaitTime <= 0 && Wait)
@@ -36,4 +42,26 @@ public class ObjectHunter_a : MonoBehaviour {
          //   rigid.AddForce(new Vector2(0.02f, 0));
         }
 	}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        foo = other.gameObject;
+        if (other.transform.parent.gameObject == Attackable && ReloadTime <= 0 && !other.GetComponent<Hideable>().IsHide())
+        {
+            ReloadTime = 3.0f;
+            Move = false;
+            other.GetComponent<UnitData>().GiveDamage(40);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        foo = other.gameObject;
+        if (other.transform.parent.gameObject == Attackable && ReloadTime <= 0 && !other.GetComponent<Hideable>().IsHide())
+        {
+            ReloadTime = 3.0f;
+            Move = false;
+            other.GetComponent<UnitData>().GiveDamage(40);
+        }
+    }
 }

@@ -5516,15 +5516,13 @@ MonoBehaviour:
   Healthy: 1
   PlayEffectOnHealthy: 1
   PlayWarningOnDanger: 1
-  DamageSecond: 3
-  DamageAmount: 0
-  m_Type: 1
-  Healed: {fileID: 0}
   waiting: 5
   PoisonWaitTime: 3
   PoisonTime: 10
   block: {fileID: 1794838123}
   spriterender: {fileID: 408429660}
+  DamageAmount: 0
+  DamageSecond: 3
 --- !u!212 &408429660
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7791,7 +7789,6 @@ MonoBehaviour:
   vine: {fileID: 1909378254}
   MoveSpeed_Normal: 1
   MoveSpeed_Attacked: 2
-  hide: 0
 --- !u!61 &563510009
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9652,15 +9649,13 @@ MonoBehaviour:
   Healthy: 1
   PlayEffectOnHealthy: 1
   PlayWarningOnDanger: 1
-  DamageSecond: 3
-  DamageAmount: 0
-  m_Type: 1
-  Healed: {fileID: 0}
   waiting: 0
   PoisonWaitTime: 3
   PoisonTime: 10
   block: {fileID: 1794838123}
   spriterender: {fileID: 663993311}
+  DamageAmount: 0
+  DamageSecond: 3
 --- !u!212 &663993311
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10522,8 +10517,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 737693341}
-  m_LocalRotation: {x: 0, y: 0, z: .999127626, w: -.0417619459}
-  m_LocalPosition: {x: 118.32, y: -14.6599998, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: .99873507, w: -.0502819568}
+  m_LocalPosition: {x: 118.32, y: -14.5799999, z: 0}
   m_LocalScale: {x: 13.0788727, y: 1.316625, z: 1}
   m_Children: []
   m_Father: {fileID: 884970721}
@@ -12150,7 +12145,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 6.4577179
+  m_Radius: 5.25941467
 --- !u!61 &901392965
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12219,7 +12214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitTime: 0
   Move: 0
-  rigid: {fileID: 0}
+  rigid: {fileID: 901392966}
+  Attackable: {fileID: 395762710}
+  foo: {fileID: 0}
 --- !u!1 &902170307
 GameObject:
   m_ObjectHideFlags: 0
@@ -15816,6 +15813,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca72324564343a4692af2060750fd9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHP: 100
+  CurrentHP: 100
+  Healthy: 0
+  PlayEffectOnHealthy: 1
+  PlayWarningOnDanger: 1
   Door: {fileID: 1293525025}
 --- !u!212 &1131135114
 SpriteRenderer:
@@ -16234,15 +16236,13 @@ MonoBehaviour:
   Healthy: 1
   PlayEffectOnHealthy: 1
   PlayWarningOnDanger: 1
-  DamageSecond: 3
-  DamageAmount: 0
-  m_Type: 1
-  Healed: {fileID: 0}
   waiting: 15
   PoisonWaitTime: 3
   PoisonTime: 10
   block: {fileID: 1794838123}
   spriterender: {fileID: 1184918157}
+  DamageAmount: 0
+  DamageSecond: 3
 --- !u!212 &1184918157
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16472,7 +16472,6 @@ MonoBehaviour:
   vine: {fileID: 946489649}
   MoveSpeed_Normal: 1
   MoveSpeed_Attacked: 2
-  hide: 0
 --- !u!61 &1204585009
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18802,15 +18801,13 @@ MonoBehaviour:
   Healthy: 1
   PlayEffectOnHealthy: 1
   PlayWarningOnDanger: 1
-  DamageSecond: 3
-  DamageAmount: 0
-  m_Type: 1
-  Healed: {fileID: 0}
   waiting: 10
   PoisonWaitTime: 3
   PoisonTime: 10
   block: {fileID: 1794838123}
   spriterender: {fileID: 1373657461}
+  DamageAmount: 0
+  DamageSecond: 3
 --- !u!212 &1373657461
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19334,7 +19331,6 @@ MonoBehaviour:
   vine: {fileID: 1350012130}
   MoveSpeed_Normal: 1
   MoveSpeed_Attacked: 2
-  hide: 0
 --- !u!61 &1451657969
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21107,9 +21103,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -1.467453, y: -1.19432354}
+  m_Offset: {x: -.747375488, y: -.104222298}
   serializedVersion: 2
-  m_Size: {x: 2.05237103, y: .655205011}
+  m_Size: {x: .612243176, y: 1.75530696}
 --- !u!114 &1625943265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22242,7 +22238,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1734285141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 119.559998, y: -11.96, z: 0}
+  m_LocalPosition: {x: 108.199997, y: -13.8999996, z: 0}
   m_LocalScale: {x: 1.14750016, y: 1.04413998, z: 1}
   m_Children: []
   m_Father: {fileID: 2119258082}
@@ -23283,7 +23279,6 @@ MonoBehaviour:
   vine: {fileID: 1132018942}
   MoveSpeed_Normal: 1
   MoveSpeed_Attacked: 2
-  hide: 0
 --- !u!61 &1806910571
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26820,7 +26815,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2119258082
 Transform:
   m_ObjectHideFlags: 0
